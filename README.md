@@ -8,6 +8,8 @@
   width="100%"
 >
 
+# Bruno Freitas Vicco
+
 ### Senior Generative AI Engineer
 **AI Platforms · RAG · Agents · LLMOps · Governance · Regulated Environments**
 

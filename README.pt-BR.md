@@ -2,6 +2,12 @@
 
 🇧🇷 **Português** &nbsp;|&nbsp; 🇺🇸 [English](README.md)
 
+<img
+  src="./assets/social/github-profile-cover.png"
+  alt="Bruno Freitas Vicco — Engenharia de IA"
+  width="100%"
+>
+
 # Bruno Freitas Vicco
 
 ### Engenheiro Sênior de IA Generativa
