@@ -28,8 +28,8 @@ jobs:
             --include-mail=false
             --exclude-loopback
             README.md
-            README.pt-br.md
+            README.pt-BR.md
             PORTFOLIO_ARCHITECTURE.md
-            PORTFOLIO_ARCHITECTURE.pt-br.md
+            PORTFOLIO_ARCHITECTURE.pt-BR.md
             docs/**/*.md
           fail: true

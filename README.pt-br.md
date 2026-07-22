@@ -74,7 +74,7 @@ Os repositórios formam um único ecossistema de engenharia, e não uma coleçã
 ## Projetos em destaque
 
 | Projeto | O que demonstra |
-|---|---|
+| --- | --- |
 | [**RAGForge**](https://github.com/brunovicco/ragforge) | Benchmark reproduzível de estratégias de RAG regulatório sobre documentos financeiros e jurídicos brasileiros, com chunking estrutural, julgamentos de relevância e avaliação de recuperação. |
 | [**Alicerce**](https://github.com/brunovicco/alicerce) | Fundação confiável para loops de engenharia determinísticos, auditáveis e baseados em evidências, com workspaces controlados, sandbox, estado e evidência canônica. |
 | [**Open Finance BR MCP**](https://github.com/brunovicco/openfinance-br-mcp) | Ferramentas MCP tipadas, jornadas de consentimento, padrões de segurança FAPI-BR, execução mock-first e limites explícitos de validação para o Open Finance Brasil. |
