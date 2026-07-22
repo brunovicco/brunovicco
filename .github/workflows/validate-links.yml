@@ -27,6 +27,7 @@ jobs:
             --accept 200,206,429
             --include-mail=false
             --exclude-loopback
+            --exclude '^https://(www\.)?linkedin\.com/'
             README.md
             README.pt-BR.md
             PORTFOLIO_ARCHITECTURE.md

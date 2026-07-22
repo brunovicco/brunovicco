@@ -1,6 +1,6 @@
 <div align="center">
 
-🇺🇸 **English** &nbsp;|&nbsp; 🇧🇷 [Português](README.pt-br.md)
+🇺🇸 **English** &nbsp;|&nbsp; 🇧🇷 [Português](README.pt-BR.md)
 
 # Bruno Freitas Vicco
 
