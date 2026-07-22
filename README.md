@@ -2,7 +2,11 @@
 
 🇺🇸 **English** &nbsp;|&nbsp; 🇧🇷 [Português](README.pt-BR.md)
 
-# Bruno Freitas Vicco
+<img
+  src="./assets/social/github-profile-cover.png"
+  alt="Bruno Freitas Vicco — AI Engineering"
+  width="100%"
+>
 
 ### Senior Generative AI Engineer
 **AI Platforms · RAG · Agents · LLMOps · Governance · Regulated Environments**
