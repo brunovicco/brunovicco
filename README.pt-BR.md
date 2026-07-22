@@ -3,7 +3,7 @@
 🇧🇷 **Português** &nbsp;|&nbsp; 🇺🇸 [English](README.md)
 
 <img
-  src="./assets/social/github-profile-cover.png"
+  src="https://github.com/brunovicco/brunovicco/blob/main/assets/social/github-profile-cover.png?raw=true"
   alt="Bruno Freitas Vicco — Engenharia de IA"
   width="100%"
 >
