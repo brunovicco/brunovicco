@@ -2,11 +2,7 @@
 
 🇧🇷 **Português** &nbsp;|&nbsp; 🇺🇸 [English](README.md)
 
-<img
-  src="https://github.com/brunovicco/brunovicco/blob/main/assets/social/github-profile-cover.png?raw=true"
-  alt="Bruno Freitas Vicco — Engenharia de IA"
-  width="100%"
->
+![Bruno Freitas Vicco — Engenharia de IA](https://raw.githubusercontent.com/brunovicco/brunovicco/main/assets/social/github-profile-cover.png)
 
 # Bruno Freitas Vicco
 
