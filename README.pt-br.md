@@ -4,9 +4,8 @@
 
 # Bruno Freitas Vicco
 
-### Engenheiro Sênior de IA Generativa | Plataformas, Adoção Corporativa e Governança de IA
-
-### IA em Produção, Sistemas Agênticos, Segurança e Observabilidade para Ambientes Regulados
+### Engenheiro Sênior de IA Generativa
+**Plataformas de IA · RAG · Agentes · LLMOps · Governança · Ambientes Regulados**
 
 📍 São Paulo, Brasil &nbsp;|&nbsp; 🌍 Aberto a oportunidades internacionais e relocação
 
@@ -19,219 +18,138 @@
 
 ## Sobre mim
 
-Sou Engenheiro de IA Generativa com atuação hands-on na construção, evolução e governança de sistemas de IA em produção para ambientes regulados.
+Engenheiro Sênior de IA Generativa com foco em plataformas corporativas de IA, engenharia de software assistida por IA e sistemas governados em produção.
 
-Meu trabalho combina engenharia de LLMs, arquitetura de IA, plataformas corporativas, adoção em escala, segurança, observabilidade e governança. Transformo requisitos regulatórios e de segurança em controles verificáveis implementados no código da aplicação, na infraestrutura, nos pipelines de CI/CD e nos processos operacionais.
+Meu trabalho combina arquitetura, engenharia de LLMs, observabilidade, segurança e governança para construir sistemas confiáveis em ambientes regulados.
 
-Tenho mais de 22 anos de experiência no setor financeiro, incluindo 17 anos na Caixa Econômica Federal, com atuação em banking corporativo, crédito, tesouraria, risco e operações financeiras. Posteriormente, migrei para engenharia de software e inteligência artificial, participando de iniciativas no BTG Pactual, Banco do Brasil por meio da Cast Group, Itaú Unibanco e ASA SCFI.
+Tenho mais de 22 anos de experiência entre serviços financeiros e tecnologia, com passagens por Caixa, BTG Pactual, Banco do Brasil, Itaú Unibanco e ASA SCFI.
 
-No ASA, fui o primeiro profissional dedicado exclusivamente à IA Generativa. Minha atuação envolveu assistentes de produção, plataformas corporativas de IA, produtividade de desenvolvedores, adoção por áreas de negócio, segurança e estruturação da função de governança de IA da companhia.
+---
 
-> **Aberto a oportunidades:** Engenheiro Sênior, Staff ou Principal de IA Generativa; Engenheiro de Plataforma de IA; AI Enablement Lead; Arquiteto de IA Generativa; Arquiteto de Governança de IA; e Arquiteto de Segurança de IA.
->
-> Tenho interesse especial em posições que combinem engenharia hands-on, arquitetura, adoção corporativa, segurança e governança.
+## Ecossistema de Engenharia de IA
+
+Os repositórios formam um único ecossistema de engenharia, e não uma coleção de demonstrações isoladas.
+
+<picture>
+  <source
+    media="(prefers-color-scheme: dark)"
+    srcset="./assets/architecture/ai-engineering-ecosystem-dark.svg"
+  >
+  <source
+    media="(prefers-color-scheme: light)"
+    srcset="./assets/architecture/ai-engineering-ecosystem-light.svg"
+  >
+  <img
+    alt="Mapa da arquitetura do ecossistema de engenharia de IA"
+    src="./assets/architecture/ai-engineering-ecosystem-light.svg"
+  >
+</picture>
+
+[Explore a arquitetura completa, as relações entre os projetos e o mapa de maturidade](./PORTFOLIO_ARCHITECTURE.pt-BR.md)
 
 ---
 
 ## Principais resultados
 
-- Liderei a evolução de um assistente bancário conversacional e transacional de prova de conceito para produção, com runtime unificado, checkpointing em Redis, isolamento de sessões, memória de longo prazo, observabilidade e controles de compliance incorporados à arquitetura.
+- Construí e governei sistemas de IA em produção para instituições financeiras reguladas, incluindo assistentes conversacionais, pipelines RAG, fluxos agênticos, observabilidade e controles de compliance.
+- Liderei a adoção corporativa de IA para aproximadamente **400 usuários**, incluindo Claude Code para cerca de **250 desenvolvedores** e Claude Enterprise para aproximadamente **150 profissionais de negócio**.
+- Reduzi o contexto médio de um assistente de investimentos de aproximadamente **70 mil para 3 mil tokens** por meio de injeção condicional de conhecimento, melhorando precisão e reduzindo latência e custo.
+- Estruturei uma função de governança de IA com políticas de uso, processos de aprovação, allowlists de MCP, avaliação de riscos, auditabilidade, resposta a incidentes e adoção corporativa por fases.
 
-- Projetei um subgrafo especializado em investimentos com roteamento semântico sensível a exemplos negativos, detecção de ambiguidade, contratos de saída com DSPy e Pydantic, autocorreção orientada por compliance e validação de suitability antes da exposição dos produtos ao modelo de linguagem.
+---
 
-- Conduzi a adoção corporativa de IA para aproximadamente 400 usuários, incluindo Claude Code para cerca de 250 desenvolvedores e Claude Enterprise para aproximadamente 150 profissionais de áreas administrativas e de negócio.
+## Métricas profissionais
 
-- Estruturei uma plataforma de engenharia assistida por IA com Spec-Driven Development, scaffolds para diferentes stacks, plugins internos, integrações MCP governadas, hooks de segurança, aplicação de políticas e gates de qualidade em CI/CD.
-
-- Estabeleci a função de governança de IA da companhia, abrangendo políticas de uso, processos de aprovação, allowlists de servidores MCP, avaliações de risco, resposta a incidentes, auditabilidade, continuidade de negócio e adoção por fases.
-
-- No Itaú Unibanco, reduzi o contexto médio de um assistente de investimentos de aproximadamente 70 mil para 3 mil tokens por meio da injeção condicional de conhecimento, melhorando precisão e reduzindo latência e custo de inferência.
-
-- Implementei tracing distribuído com Datadog em um fluxo agêntico, substituindo o monitoramento baseado apenas em logs por visibilidade ponta a ponta sobre latência, chamadas aos modelos, execução de ferramentas e comportamento em runtime.
-
-### Princípios de engenharia
-
-- Segurança e autorização aplicadas em código, nunca delegadas ao modelo de linguagem
-- Controles fail-closed para operações sensíveis
-- Saídas estruturadas e validação determinística
-- Princípio do menor privilégio para ferramentas e dados
-- Execução de agentes observável e auditável
-- Aprovação humana para ações de alto impacto
-- Governança implementada como arquitetura, não apenas como documentação
+<table>
+  <tr>
+    <td align="center"><strong>22+</strong><br>Anos em serviços financeiros e tecnologia</td>
+    <td align="center"><strong>17</strong><br>Anos de atuação bancária na Caixa</td>
+    <td align="center"><strong>400+</strong><br>Usuários corporativos habilitados em IA</td>
+    <td align="center"><strong>250+</strong><br>Desenvolvedores integrados à engenharia assistida por IA</td>
+  </tr>
+</table>
 
 ---
 
 ## Projetos em destaque
 
-### [openfinance-br-mcp](https://github.com/brunovicco/openfinance-br-mcp)
+| Projeto | O que demonstra |
+|---|---|
+| [**RAGForge**](https://github.com/brunovicco/ragforge) | Benchmark reproduzível de estratégias de RAG regulatório sobre documentos financeiros e jurídicos brasileiros, com chunking estrutural, julgamentos de relevância e avaliação de recuperação. |
+| [**Alicerce**](https://github.com/brunovicco/alicerce) | Fundação confiável para loops de engenharia determinísticos, auditáveis e baseados em evidências, com workspaces controlados, sandbox, estado e evidência canônica. |
+| [**Open Finance BR MCP**](https://github.com/brunovicco/openfinance-br-mcp) | Ferramentas MCP tipadas, jornadas de consentimento, padrões de segurança FAPI-BR, execução mock-first e limites explícitos de validação para o Open Finance Brasil. |
+| [**Meridian**](https://github.com/brunovicco/meridian) | Plataforma interna de conhecimento com roteamento semântico, controle de acesso durante a recuperação, consultas estruturadas, respostas fundamentadas e providers determinísticos. |
+| [**Claude Python Engineering Harness**](https://github.com/brunovicco/claude-python-engineering-harness) | Engenharia de software assistida por IA com instruções pertencentes ao repositório, hooks determinísticos, fronteiras arquiteturais, quality gates e políticas MCP. |
+| [**Multi-Agent Credit Desk**](https://github.com/brunovicco/multi-agent-credit-desk) | Arquitetura multiagente incremental para análise auditável de crédito PJ, com decisões determinísticas, fronteiras MCP/A2A e narrativas opcionais por LLM. |
 
-Servidor open source baseado no Model Context Protocol para o ecossistema brasileiro de Open Finance.
-
-O projeto expõe contas, saldos, transações, cartões de crédito, PIX, investimentos, gestão de consentimento e iniciação de pagamentos por meio de interfaces controladas para agentes de IA.
-
-Principais áreas:
-
-- 12 ferramentas MCP cobrindo as fases 2, 3 e 4 do Open Finance Brasil
-- Padrões de segurança FAPI-BR
-- `private_key_jwt`, PAR, JAR, PKCE e mTLS
-- Ciclo de consentimento e autorização
-- Validação de entradas com Pydantic v2
-- Adapters para múltiplas instituições financeiras
-- Execução de ferramentas auditável e orientada por permissões
-
-> As integrações financeiras reais estão documentadas como experimentais e não são certificadas para uso em produção.
+Outras fundações: [engineering-loop-schemas](https://github.com/brunovicco/engineering-loop-schemas), [a2a-otel-kit](https://github.com/brunovicco/a2a-otel-kit), [Policy Model Router](https://github.com/brunovicco/policy-model-router) e [Codex Python Engineering Harness](https://github.com/brunovicco/codex-python-engineering-harness).
 
 ---
 
-### [meridian](https://github.com/brunovicco/meridian)
+## Princípios de engenharia
 
-Arquitetura de referência para assistentes corporativos de conhecimento com recuperação consciente de autorização.
-
-O projeto demonstra:
-
-- RAG filtrado por ACL
-- Segurança em nível de linha aplicada durante a recuperação
-- Roteamento semântico validado com DSPy
-- Consultas estruturadas no RediSearch
-- Modelagem de dados fat e slim no Redis
-- Respostas fundamentadas com citações
-- Clean Architecture e princípios Twelve-Factor
-- Testes automatizados para autorização e recuperação
-
-> O controle de acesso é aplicado antes que o contexto chegue ao modelo de linguagem.
-
----
-
-### [claude-python-engineering-harness](https://github.com/brunovicco/claude-python-engineering-harness)
-
-Harness reutilizável para desenvolvimento Python governado com Claude Code.
-
-Inclui:
-
-- Scaffolds de instruções para projetos e agentes
-- Templates de `CLAUDE.md` e `AGENTS.md`
-- Fluxos de Spec-Driven Development
-- Hooks de segurança fail-closed
-- Proteção contra comandos perigosos
-- Governança opcional de servidores MCP
-- Logging estruturado
-- Aplicação de políticas por CI
-- Gates de qualidade e segurança para Python
-
-> Instrução não é controle. Requisitos que precisam ser sempre garantidos devem existir em hooks determinísticos, no código da aplicação e nos gates de CI.
-
----
-
-### [codex-python-engineering-harness](https://github.com/brunovicco/codex-python-engineering-harness)
-
-Harness reutilizável para desenvolvimento Python estruturado e governado com agentes de código.
-
-O projeto aborda:
-
-- Instruções operacionais para agentes
-- Fluxos orientados por especificação
-- Automação de segurança e qualidade
-- Scaffolding reproduzível de projetos
-- Aplicação determinística de políticas
-- Integração com revisão de código e CI
-
----
-
-### [claude-code-crypto-lab](https://github.com/brunovicco/claude-code-crypto-lab)
-
-Laboratório prático para desenvolvimento agêntico seguro com Claude Code.
-
-Tópicos abordados:
-
-- Subagentes e skills reutilizáveis
-- Hooks determinísticos
-- Bloqueio de comandos perigosos
-- Integração com servidor MCP local
-- Limites de permissão para ferramentas
-- Integração com CI/CD
-- Documentação bilíngue em inglês e português
+- Decisões críticas de negócio permanecem determinísticas e auditáveis.
+- Segurança e autorização são aplicadas em código, nunca delegadas ao modelo de linguagem.
+- Provedores, servidores MCP, ferramentas, telemetria e dados recuperados são tratados como fronteiras de confiança.
+- Saídas estruturadas, contratos explícitos e validação fail-closed limitam o comportamento generativo.
+- Evidências devem ser verificáveis de forma independente; o autorrelato do modelo não é prova.
+- Promoção, merge, deploy e ações de alto impacto permanecem sob autoridade humana explícita.
 
 ---
 
 ## Competências principais
 
-### Engenharia de IA Generativa
+**Engenharia de IA Generativa**
+RAG · sistemas agênticos · arquiteturas multiagente · roteamento semântico e de modelos · saídas estruturadas · tool calling · avaliação de LLMs · guardrails
 
-Engenharia de aplicações com LLMs · RAG · sistemas agênticos · arquiteturas multiagente · roteamento semântico · roteamento de modelos · saídas estruturadas · tool calling · function calling · memória conversacional · avaliação de LLMs · prompt security · guardrails
+**Plataformas e adoção corporativa de IA**
+Plataformas corporativas · produtividade de desenvolvedores · engenharia assistida por IA · ferramentas internas · rollout · adoção · capacitação técnica
 
-### Plataformas e adoção corporativa de IA
+**Arquitetura, segurança e governança**
+Clean Architecture · Arquitetura Hexagonal · MCP · A2A · menor privilégio · proteção contra prompt injection · gestão de riscos · auditabilidade · human-in-the-loop
 
-Plataformas de IA · AI Enablement · produtividade de desenvolvedores · engenharia de software assistida por IA · rollout corporativo · ferramentas internas · programas de capacitação · governança de adoção · avaliações de maturidade · modelos operacionais de IA
+**LLMOps e observabilidade**
+OpenTelemetry · Datadog · Langfuse · tracing distribuído · logging estruturado · percentis de latência · pipelines de avaliação · testes de regressão · observabilidade de custos e tokens
 
-### Arquitetura de IA
+<details>
+<summary><strong>Stack tecnológica</strong></summary>
 
-LangGraph · DSPy · LangChain · LlamaIndex · Model Context Protocol · padrões Agent-to-Agent · Clean Architecture · Arquitetura Hexagonal · SOLID · Twelve-Factor · arquiteturas orientadas a eventos
+<br>
 
-### Governança e segurança de IA
+**Linguagens e backend:** Python, FastAPI, Pydantic, TypeScript, Node.js, APIs REST, sistemas assíncronos e orientados a eventos
 
-Governança de IA · IA Responsável · gestão de riscos de IA · proteção contra prompt injection · isolamento de sessões · segurança em nível de linha · governança de MCP · menor privilégio · human-in-the-loop · trilhas de auditoria · resposta a incidentes
+**Frameworks e plataformas de IA:** LangGraph, DSPy, LangChain, LlamaIndex, LiteLLM, Azure OpenAI, Azure AI Foundry, Amazon Bedrock, Anthropic Claude, Gemini
 
-### LLMOps e observabilidade
+**Dados e recuperação:** Redis Stack, RediSearch, RedisJSON, PostgreSQL, pgvector, OpenSearch, busca vetorial e recuperação híbrida
 
-Datadog · Langfuse · OpenTelemetry · logging estruturado · tracing distribuído · percentis de latência · pipelines de avaliação · testes de regressão · monitoramento de modelos · observabilidade de custos e tokens
+**Cloud e engenharia de plataforma:** Azure, AWS, GCP, Docker, Kubernetes, OpenShift, Azure DevOps, GitHub Actions, GitLab CI e Argo CD
 
----
+**Engenharia Python:** uv, Ruff, Mypy/Pyright strict, Pytest, Bandit, pip-audit, testes de arquitetura e quality gates em CI
 
-## Stack tecnológica
+</details>
 
-### Linguagens e backend
+<details>
+<summary><strong>Experiência financeira, regulatória e de governança</strong></summary>
 
-![Python](https://img.shields.io/badge/-Python-3776AB?style=flat&logo=python&logoColor=white)
-![FastAPI](https://img.shields.io/badge/-FastAPI-009688?style=flat&logo=fastapi&logoColor=white)
-![TypeScript](https://img.shields.io/badge/-TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)
+<br>
 
-Python · FastAPI · Pydantic · JavaScript · TypeScript · Node.js · NestJS · APIs REST · processamento assíncrono · arquiteturas orientadas a eventos
+Experiência na tradução de requisitos e controles de BACEN, CMN, LGPD, CVM, ANBIMA, DORA, NIST AI RMF, ISO/IEC 42001, NIST SP 800-53, CIS Controls, MITRE ATLAS e orientações OWASP para LLMs e sistemas agênticos.
 
-### Frameworks e plataformas de IA
+A trajetória inclui banking corporativo, crédito, risco, tesouraria, operações financeiras, engenharia de software, IA em produção, adoção corporativa e governança de IA.
 
-![LangGraph](https://img.shields.io/badge/-LangGraph-1C3C3C?style=flat)
-![DSPy](https://img.shields.io/badge/-DSPy-blue?style=flat)
-![Azure OpenAI](https://img.shields.io/badge/-Azure_OpenAI-0089D6?style=flat&logo=microsoftazure&logoColor=white)
-![AWS Bedrock](https://img.shields.io/badge/-AWS_Bedrock-232F3E?style=flat&logo=amazonaws&logoColor=white)
+</details>
 
-LangGraph · DSPy · LangChain · LlamaIndex · LiteLLM · Mem0 · Azure OpenAI · Azure AI Foundry · Amazon Bedrock · Claude · Gemini · Llama
+<details>
+<summary><strong>Certificações</strong></summary>
 
-### Dados e recuperação
-
-![Redis](https://img.shields.io/badge/-Redis_Stack-DC382D?style=flat&logo=redis&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/-PostgreSQL-4169E1?style=flat&logo=postgresql&logoColor=white)
-
-Redis Stack · RediSearch · RedisJSON · PostgreSQL · pgvector · Qdrant · MongoDB · SQL · SQLAlchemy · busca vetorial · recuperação híbrida
-
-### Cloud, DevOps e engenharia de plataforma
-
-![Azure](https://img.shields.io/badge/-Azure-0089D6?style=flat&logo=microsoftazure&logoColor=white)
-![AWS](https://img.shields.io/badge/-AWS-232F3E?style=flat&logo=amazonaws&logoColor=white)
-![Docker](https://img.shields.io/badge/-Docker-2496ED?style=flat&logo=docker&logoColor=white)
-![Kubernetes](https://img.shields.io/badge/-Kubernetes-326CE5?style=flat&logo=kubernetes&logoColor=white)
-
-Azure · AWS · GCP · Docker · Kubernetes · OpenShift · Azure DevOps · GitHub Actions · GitLab CI · Argo CD · Jenkins · API gateways · infraestrutura baseada em VPC
-
-### Engenharia Python
-
-`uv` · `ruff` · `mypy --strict` · `pytest` · `import-linter` · `bandit` · `pip-audit` · `Semgrep` · injeção de dependências · processamento idempotente · logging estruturado
-
----
-
-## Escopo regulatório e de governança
-
-Experiência na tradução de requisitos e controles de:
-
-BACEN e CMN · LGPD · CVM · ANBIMA · EU AI Act · DORA · NIST AI RMF 1.0 · ISO/IEC 42001 · NIST SP 800-53 · CIS Controls · MITRE ATLAS · OWASP Top 10 para aplicações com LLMs · orientações OWASP para sistemas agênticos
-
----
-
-## Certificações
+<br>
 
 - AWS Certified AI Practitioner
 - AWS Certified Cloud Practitioner
 - Microsoft Certified: Azure Fundamentals
 - CPA-20 ANBIMA
+
+</details>
 
 ---
 
@@ -239,11 +157,9 @@ BACEN e CMN · LGPD · CVM · ANBIMA · EU AI Act · DORA · NIST AI RMF 1.0 · 
 
 ### Vamos conversar
 
-📫 **[bfvicco@gmail.com](mailto:bfvicco@gmail.com)**  
-💼 **[linkedin.com/in/brunovicco](https://linkedin.com/in/brunovicco)**
+[LinkedIn](https://linkedin.com/in/brunovicco) · [E-mail](mailto:bfvicco@gmail.com)
 
 </div>
 
-<!-- Métricas privadas do perfil -->
-
+<!-- Private profile analytics -->
 <img src="https://u8views.com/api/v1/github/profiles/38844444/views/day-week-month-total-count.svg" width="1" height="1" alt="">

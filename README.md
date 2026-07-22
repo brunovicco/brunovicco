@@ -4,9 +4,8 @@
 
 # Bruno Freitas Vicco
 
-### Senior Generative AI Engineer | Enterprise AI Enablement, AI Platforms & Governance
-
-### Production AI, Agentic Systems, Security, and Observability for Regulated Environments
+### Senior Generative AI Engineer
+**AI Platforms · RAG · Agents · LLMOps · Governance · Regulated Environments**
 
 📍 São Paulo, Brazil &nbsp;|&nbsp; 🌍 Open to international opportunities and relocation
 
@@ -17,221 +16,140 @@
 
 ---
 
-## About Me
+## About
 
-I am a hands-on Generative AI Engineer focused on building, scaling, and governing production AI systems in regulated environments.
+Senior Generative AI Engineer focused on enterprise AI platforms, AI-assisted software engineering, and governed production AI systems.
 
-My work combines LLM engineering, AI architecture, enterprise AI enablement, security, observability, and governance. I translate regulatory and security requirements into enforceable controls implemented in application code, infrastructure, CI/CD pipelines, and operational processes.
+My work combines architecture, LLM engineering, observability, security, and governance to build reliable systems for regulated environments.
 
-I have more than 22 years of experience in financial services, including 17 years at Caixa Econômica Federal in corporate banking, treasury, credit, risk, and financial operations. I later moved into software engineering and artificial intelligence, working on initiatives for BTG Pactual, Banco do Brasil through Cast Group, Itaú Unibanco, and ASA SCFI.
+I bring more than 22 years of experience across financial services and software engineering, including Caixa, BTG Pactual, Banco do Brasil, Itaú Unibanco, and ASA SCFI.
 
-At ASA, I was the first professional dedicated exclusively to Generative AI. My responsibilities covered production assistants, enterprise AI platforms, developer productivity, corporate adoption, security, and the establishment of the company's AI governance function.
+---
 
-> **Open to opportunities:** Senior, Staff, or Principal Generative AI Engineer; AI Platform Engineer; AI Enablement Lead; Generative AI Architect; AI Governance Architect; and AI Security Architect.
->
-> Particularly interested in roles that combine hands-on engineering, architecture, enterprise adoption, security, and governance.
+## AI Engineering Ecosystem
+
+These repositories are designed as one engineering ecosystem rather than isolated demos.
+
+<picture>
+  <source
+    media="(prefers-color-scheme: dark)"
+    srcset="./assets/architecture/ai-engineering-ecosystem-dark.svg"
+  >
+  <source
+    media="(prefers-color-scheme: light)"
+    srcset="./assets/architecture/ai-engineering-ecosystem-light.svg"
+  >
+  <img
+    alt="AI Engineering Ecosystem architecture map"
+    src="./assets/architecture/ai-engineering-ecosystem-light.svg"
+  >
+</picture>
+
+[Explore the complete portfolio architecture, project relationships, and maturity map](./PORTFOLIO_ARCHITECTURE.md)
 
 ---
 
 ## Selected Impact
 
-- Led the evolution of a conversational and transactional banking assistant from proof of concept to production, with a unified runtime, Redis checkpointing, session isolation, long-term memory, observability, and compliance controls embedded in the architecture.
+- Built and governed production AI systems for regulated financial institutions, including conversational assistants, RAG pipelines, agent workflows, observability, and compliance controls.
+- Led enterprise AI adoption for approximately **400 users**, including Claude Code for around **250 developers** and Claude Enterprise for approximately **150 business users**.
+- Reduced the average context of an investment assistant from approximately **70,000 to 3,000 tokens** through conditional knowledge injection, improving accuracy while reducing latency and inference cost.
+- Established an AI governance function covering usage policies, approval processes, MCP allowlists, risk assessment, auditability, incident response, and phased enterprise adoption.
 
-- Designed a specialized investment-agent subgraph with negative-aware semantic routing, ambiguity detection, DSPy and Pydantic output contracts, compliance-driven self-correction, and suitability validation before products were exposed to the language model.
+---
 
-- Led enterprise AI enablement for approximately 400 users, including Claude Code for around 250 software developers and Claude Enterprise for around 150 business and administrative users.
+## Career Metrics
 
-- Built an AI-assisted engineering platform with Spec-Driven Development, multi-stack scaffolds, internal plugins, governed MCP integrations, security hooks, policy enforcement, and CI/CD quality gates.
-
-- Established an AI governance function from scratch, covering usage policies, approval processes, MCP allowlists, risk assessments, incident response, auditability, business continuity, and phased adoption.
-
-- At Itaú Unibanco, reduced the average context of an investment assistant from approximately 70,000 to 3,000 tokens through conditional knowledge injection, improving accuracy while reducing latency and inference cost.
-
-- Introduced distributed tracing with Datadog across an agent workflow, replacing log-only monitoring with end-to-end visibility into latency, model calls, tool execution, and runtime behavior.
-
-### Engineering Principles
-
-- Security and authorization enforced in code, never delegated to the language model
-- Fail-closed controls for sensitive operations
-- Structured outputs and deterministic validation
-- Least-privilege access to tools and data
-- Observable and auditable agent execution
-- Human approval for high-impact actions
-- Governance implemented as architecture, not documentation alone
+<table>
+  <tr>
+    <td align="center"><strong>22+</strong><br>Years in financial services and technology</td>
+    <td align="center"><strong>17</strong><br>Years in banking at Caixa</td>
+    <td align="center"><strong>400+</strong><br>Enterprise AI users enabled</td>
+    <td align="center"><strong>250+</strong><br>Developers onboarded to AI-assisted engineering</td>
+  </tr>
+</table>
 
 ---
 
 ## Featured Projects
 
-### [openfinance-br-mcp](https://github.com/brunovicco/openfinance-br-mcp)
+| Project | What it demonstrates |
+|---|---|
+| [**RAGForge**](https://github.com/brunovicco/ragforge) | Reproducible benchmarking of regulatory RAG strategies over Brazilian financial and legal documents, with structural chunking, relevance judgments, and retrieval evaluation. |
+| [**Alicerce**](https://github.com/brunovicco/alicerce) | Trusted execution foundation for deterministic, auditable, evidence-gated engineering loops with controlled workspaces, sandboxing, state, and canonical evidence. |
+| [**Open Finance BR MCP**](https://github.com/brunovicco/openfinance-br-mcp) | Typed MCP tools, consent journeys, FAPI-BR security patterns, mock-first execution, and explicit validation boundaries for Brazilian Open Finance. |
+| [**Meridian**](https://github.com/brunovicco/meridian) | Internal knowledge platform with semantic routing, retrieval-time access control, structured queries, grounded answers, and zero-setup deterministic providers. |
+| [**Claude Python Engineering Harness**](https://github.com/brunovicco/claude-python-engineering-harness) | Governed AI-assisted software engineering with repository-owned instructions, deterministic hooks, architecture boundaries, quality gates, and MCP policy. |
+| [**Multi-Agent Credit Desk**](https://github.com/brunovicco/multi-agent-credit-desk) | Incremental multi-agent architecture for auditable corporate credit analysis with deterministic decisions, MCP/A2A boundaries, and optional LLM narratives. |
 
-Open-source Model Context Protocol server for the Brazilian Open Finance ecosystem.
-
-The project exposes accounts, balances, transactions, credit cards, PIX, investments, consent management, and payment initiation capabilities through controlled interfaces designed for AI agents.
-
-Key areas include:
-
-- 12 MCP tools covering Open Finance Brasil phases 2, 3, and 4
-- FAPI-BR security patterns
-- `private_key_jwt`, PAR, JAR, PKCE, and mTLS
-- Consent and authorization lifecycle
-- Pydantic v2 input validation
-- Adapters for multiple financial institutions
-- Auditable and permission-aware tool execution
-
-> Real financial integrations are documented as experimental and are not certified for production use.
+Additional foundations: [engineering-loop-schemas](https://github.com/brunovicco/engineering-loop-schemas), [a2a-otel-kit](https://github.com/brunovicco/a2a-otel-kit), [Policy Model Router](https://github.com/brunovicco/policy-model-router), and [Codex Python Engineering Harness](https://github.com/brunovicco/codex-python-engineering-harness).
 
 ---
 
-### [meridian](https://github.com/brunovicco/meridian)
+## Engineering Principles
 
-Reference architecture for enterprise knowledge assistants with authorization-aware retrieval.
-
-The project demonstrates:
-
-- ACL-filtered RAG
-- Row-level security enforced during retrieval
-- DSPy-validated semantic routing
-- Structured RediSearch queries
-- Redis fat and slim data models
-- Grounded answers with citations
-- Clean Architecture and Twelve-Factor principles
-- Automated testing for authorization and retrieval behavior
-
-> Access control is enforced before context reaches the language model.
-
----
-
-### [claude-python-engineering-harness](https://github.com/brunovicco/claude-python-engineering-harness)
-
-Reusable Claude Code engineering harness for governed Python development.
-
-It includes:
-
-- Project and agent instruction scaffolds
-- `CLAUDE.md` and `AGENTS.md` templates
-- Spec-Driven Development workflows
-- Fail-closed security hooks
-- Dangerous-command protection
-- Optional MCP governance
-- Structured logging
-- CI-based policy enforcement
-- Python quality and security gates
-
-> Instruction is not control. Requirements that must always hold belong in deterministic hooks, application code, and CI gates.
-
----
-
-### [codex-python-engineering-harness](https://github.com/brunovicco/codex-python-engineering-harness)
-
-Reusable engineering harness for structured and governed Python development with coding agents.
-
-The project focuses on:
-
-- Agent operating instructions
-- Specification-driven workflows
-- Security and quality automation
-- Reproducible project scaffolding
-- Deterministic policy enforcement
-- Code review and CI integration
-
----
-
-### [claude-code-crypto-lab](https://github.com/brunovicco/claude-code-crypto-lab)
-
-Hands-on laboratory for safe agentic software development with Claude Code.
-
-Topics include:
-
-- Subagents and reusable skills
-- Deterministic hooks
-- Dangerous-command blocking
-- Local MCP server integration
-- Tool permission boundaries
-- CI/CD integration
-- Bilingual documentation in English and Portuguese
+- Critical business decisions remain deterministic and auditable.
+- Security and authorization are enforced in code, never delegated to the language model.
+- Model providers, MCP servers, tools, telemetry, and retrieved data are treated as trust boundaries.
+- Structured outputs, explicit contracts, and fail-closed validation constrain generative behavior.
+- Evidence must be independently verifiable; model self-reports are not proof.
+- Promotion, merge, deployment, and high-impact actions remain under explicit human authority.
 
 ---
 
 ## Core Expertise
 
-### Generative AI Engineering
+**Generative AI Engineering**
+RAG · agentic systems · multi-agent architectures · semantic and model routing · structured outputs · tool calling · LLM evaluation · guardrails
 
-LLM application engineering · RAG · agentic systems · multi-agent architectures · semantic routing · model routing · structured outputs · tool and function calling · conversation memory · LLM evaluation · prompt security · guardrails
+**AI Platforms and Enablement**
+Enterprise AI platforms · developer productivity · AI-assisted software engineering · internal tooling · rollout and adoption · technical enablement
 
-### Enterprise AI Enablement
+**Architecture, Security, and Governance**
+Clean Architecture · Hexagonal Architecture · MCP · A2A · least privilege · prompt injection protection · AI risk management · auditability · human-in-the-loop
 
-AI platforms · developer productivity · AI-assisted software engineering · enterprise rollout · internal tooling · enablement programs · adoption governance · technical training · maturity assessment · AI operating models
+**LLMOps and Observability**
+OpenTelemetry · Datadog · Langfuse · distributed tracing · structured logging · latency percentiles · evaluation pipelines · regression testing · cost and token observability
 
-### AI Architecture
+<details>
+<summary><strong>Technology stack</strong></summary>
 
-LangGraph · DSPy · LangChain · LlamaIndex · Model Context Protocol · Agent-to-Agent patterns · Clean Architecture · Hexagonal Architecture · SOLID · Twelve-Factor · event-driven systems
+<br>
 
-### AI Governance and Security
+**Languages and backend:** Python, FastAPI, Pydantic, TypeScript, Node.js, REST APIs, asynchronous and event-driven systems
 
-AI governance · Responsible AI · AI risk management · prompt injection protection · session isolation · row-level security · MCP governance · least privilege · human-in-the-loop controls · audit trails · incident response
+**AI frameworks and platforms:** LangGraph, DSPy, LangChain, LlamaIndex, LiteLLM, Azure OpenAI, Azure AI Foundry, Amazon Bedrock, Anthropic Claude, Gemini
 
-### LLMOps and Observability
+**Data and retrieval:** Redis Stack, RediSearch, RedisJSON, PostgreSQL, pgvector, OpenSearch, vector search, hybrid retrieval
 
-Datadog · Langfuse · OpenTelemetry · structured logging · distributed tracing · latency percentiles · evaluation pipelines · regression testing · model monitoring · cost and token observability
+**Cloud and platform engineering:** Azure, AWS, GCP, Docker, Kubernetes, OpenShift, Azure DevOps, GitHub Actions, GitLab CI, Argo CD
 
----
+**Python engineering:** uv, Ruff, Mypy/Pyright strict, Pytest, Bandit, pip-audit, architecture tests, CI quality gates
 
-## Technology Stack
+</details>
 
-### Languages and Backend
+<details>
+<summary><strong>Financial services, regulatory, and governance background</strong></summary>
 
-![Python](https://img.shields.io/badge/-Python-3776AB?style=flat&logo=python&logoColor=white)
-![FastAPI](https://img.shields.io/badge/-FastAPI-009688?style=flat&logo=fastapi&logoColor=white)
-![TypeScript](https://img.shields.io/badge/-TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)
+<br>
 
-Python · FastAPI · Pydantic · JavaScript · TypeScript · Node.js · NestJS · REST APIs · asynchronous processing · event-driven architectures
+Experience translating requirements and controls from BACEN, CMN, LGPD, CVM, ANBIMA, DORA, NIST AI RMF, ISO/IEC 42001, NIST SP 800-53, CIS Controls, MITRE ATLAS, and OWASP guidance for LLM and agentic systems.
 
-### AI Frameworks and Platforms
+Professional background includes corporate banking, credit, risk, treasury, financial operations, software engineering, production AI, enterprise enablement, and AI governance.
 
-![LangGraph](https://img.shields.io/badge/-LangGraph-1C3C3C?style=flat)
-![DSPy](https://img.shields.io/badge/-DSPy-blue?style=flat)
-![Azure OpenAI](https://img.shields.io/badge/-Azure_OpenAI-0089D6?style=flat&logo=microsoftazure&logoColor=white)
-![AWS Bedrock](https://img.shields.io/badge/-AWS_Bedrock-232F3E?style=flat&logo=amazonaws&logoColor=white)
+</details>
 
-LangGraph · DSPy · LangChain · LlamaIndex · LiteLLM · Mem0 · Azure OpenAI · Azure AI Foundry · Amazon Bedrock · Claude · Gemini · Llama
+<details>
+<summary><strong>Certifications</strong></summary>
 
-### Data and Retrieval
-
-![Redis](https://img.shields.io/badge/-Redis_Stack-DC382D?style=flat&logo=redis&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/-PostgreSQL-4169E1?style=flat&logo=postgresql&logoColor=white)
-
-Redis Stack · RediSearch · RedisJSON · PostgreSQL · pgvector · Qdrant · MongoDB · SQL · SQLAlchemy · vector search · hybrid retrieval
-
-### Cloud, DevOps, and Platform Engineering
-
-![Azure](https://img.shields.io/badge/-Azure-0089D6?style=flat&logo=microsoftazure&logoColor=white)
-![AWS](https://img.shields.io/badge/-AWS-232F3E?style=flat&logo=amazonaws&logoColor=white)
-![Docker](https://img.shields.io/badge/-Docker-2496ED?style=flat&logo=docker&logoColor=white)
-![Kubernetes](https://img.shields.io/badge/-Kubernetes-326CE5?style=flat&logo=kubernetes&logoColor=white)
-
-Azure · AWS · GCP · Docker · Kubernetes · OpenShift · Azure DevOps · GitHub Actions · GitLab CI · Argo CD · Jenkins · API gateways · VPC-based infrastructure
-
-### Python Engineering
-
-`uv` · `ruff` · `mypy --strict` · `pytest` · `import-linter` · `bandit` · `pip-audit` · `Semgrep` · dependency injection · idempotent processing · structured logging
-
----
-
-## Regulatory and Governance Scope
-
-Experience translating requirements and controls from:
-
-BACEN and CMN · LGPD · CVM · ANBIMA · EU AI Act · DORA · NIST AI RMF 1.0 · ISO/IEC 42001 · NIST SP 800-53 · CIS Controls · MITRE ATLAS · OWASP Top 10 for LLM Applications · OWASP guidance for agentic systems
-
----
-
-## Certifications
+<br>
 
 - AWS Certified AI Practitioner
 - AWS Certified Cloud Practitioner
 - Microsoft Certified: Azure Fundamentals
 - CPA-20 ANBIMA
+
+</details>
 
 ---
 
@@ -239,11 +157,9 @@ BACEN and CMN · LGPD · CVM · ANBIMA · EU AI Act · DORA · NIST AI RMF 1.0 �
 
 ### Let's Connect
 
-📫 **[bfvicco@gmail.com](mailto:bfvicco@gmail.com)**  
-💼 **[linkedin.com/in/brunovicco](https://linkedin.com/in/brunovicco)**
+[LinkedIn](https://linkedin.com/in/brunovicco) · [Email](mailto:bfvicco@gmail.com)
 
 </div>
 
 <!-- Private profile analytics -->
-
 <img src="https://u8views.com/api/v1/github/profiles/38844444/views/day-week-month-total-count.svg" width="1" height="1" alt="">
