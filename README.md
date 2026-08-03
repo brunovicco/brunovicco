@@ -7,7 +7,7 @@
 # Bruno Freitas Vicco
 
 ### Senior Generative AI Engineer
-**AI Platforms · RAG · Agents · LLMOps · Governance · Regulated Environments**
+**AI Platforms · RAG · Agents · LLMOps · Verifiable AI Governance · Regulated Environments**
 
 📍 São Paulo, Brazil &nbsp;|&nbsp; 🌍 Open to international opportunities and relocation
 
@@ -30,7 +30,7 @@ I bring more than 22 years of experience across financial services and software 
 
 ## AI Engineering Ecosystem
 
-These repositories are designed as one engineering ecosystem rather than isolated demos.
+These repositories are designed as one engineering ecosystem rather than isolated demos. The portfolio spans domain systems, shared services, AI-assisted engineering, and a governance plane that connects business context, risk, controls, evidence, approvals, and runtime enforcement.
 
 <picture>
   <source
@@ -57,6 +57,7 @@ These repositories are designed as one engineering ecosystem rather than isolate
 - Led enterprise AI adoption for approximately **400 users**, including Claude Code for around **250 developers** and Claude Enterprise for approximately **150 business users**.
 - Reduced the average context of an investment assistant from approximately **70,000 to 3,000 tokens** through conditional knowledge injection, improving accuracy while reducing latency and inference cost.
 - Established an AI governance function covering usage policies, approval processes, MCP allowlists, risk assessment, auditability, incident response, and phased enterprise adoption.
+- Translated governance requirements into a verifiable implementation with deterministic controls, segregation of duties, evidence-bound decisions, runtime enforcement, and tamper-evident audit history.
 
 ---
 
@@ -77,6 +78,7 @@ These repositories are designed as one engineering ecosystem rather than isolate
 
 | Project | What it demonstrates |
 |---|---|
+| [**Verifiable AI Governance**](https://github.com/brunovicco/verifiable-ai-governance) | Reference platform for operational AI governance with deterministic risk classification, versioned controls, independent approvals, verified evidence, runtime enforcement, and tamper-evident audit trails. [Live demo](https://vaigov-app.duckdns.org). |
 | [**RAGForge**](https://github.com/brunovicco/ragforge) | Reproducible benchmarking of regulatory RAG strategies over Brazilian financial and legal documents, with structural chunking, relevance judgments, and retrieval evaluation. |
 | [**Alicerce**](https://github.com/brunovicco/alicerce) | Trusted execution foundation for deterministic, auditable, evidence-gated engineering loops with controlled workspaces, sandboxing, state, and canonical evidence. |
 | [**Open Finance BR MCP**](https://github.com/brunovicco/openfinance-br-mcp) | Typed MCP tools, consent journeys, FAPI-BR security patterns, mock-first execution, and explicit validation boundaries for Brazilian Open Finance. |
@@ -95,22 +97,23 @@ Additional foundations: [engineering-loop-schemas](https://github.com/brunovicco
 - Model providers, MCP servers, tools, telemetry, and retrieved data are treated as trust boundaries.
 - Structured outputs, explicit contracts, and fail-closed validation constrain generative behavior.
 - Evidence must be independently verifiable; model self-reports are not proof.
+- Approvals remain bound to the exact reviewed scope, and material changes trigger reassessment.
 - Promotion, merge, deployment, and high-impact actions remain under explicit human authority.
 
 ---
 
 ## Core Expertise
 
-**Generative AI Engineering**
+**Generative AI Engineering**  
 RAG · agentic systems · multi-agent architectures · semantic and model routing · structured outputs · tool calling · LLM evaluation · guardrails
 
-**AI Platforms and Enablement**
+**AI Platforms and Enablement**  
 Enterprise AI platforms · developer productivity · AI-assisted software engineering · internal tooling · rollout and adoption · technical enablement
 
-**Architecture, Security, and Governance**
-Clean Architecture · Hexagonal Architecture · MCP · A2A · least privilege · prompt injection protection · AI risk management · auditability · human-in-the-loop
+**Architecture, Security, and Governance**  
+Clean Architecture · Hexagonal Architecture · MCP · A2A · least privilege · prompt injection protection · AI risk management · model and agent assurance · auditability · human-in-the-loop
 
-**LLMOps and Observability**
+**LLMOps and Observability**  
 OpenTelemetry · Datadog · Langfuse · distributed tracing · structured logging · latency percentiles · evaluation pipelines · regression testing · cost and token observability
 
 <details>

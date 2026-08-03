@@ -10,15 +10,20 @@ Os projetos exploram como construir, operar, avaliar, observar e governar sistem
 - colocar LLMs atrás de contratos explícitos e responsabilidades limitadas;
 - tratar agentes, servidores MCP, provedores de modelos e telemetria como fronteiras de confiança;
 - incorporar segurança, avaliação, proveniência e auditabilidade à arquitetura;
+- vincular aprovações ao escopo exato revisado;
 - usar agentes de código sob controles pertencentes ao repositório.
 
 ## Mapa do ecossistema
 
 ```mermaid
 flowchart TB
+    subgraph GOVERNANCE["Plano de Governança e Assurance de IA"]
+        direction LR
+        VAG["Verifiable AI Governance<br/><small>Inventário, risco, controles, aprovações,<br/>evidências, enforcement e auditoria</small>"]
+    end
+
     subgraph CONTROL["Plano de Controle da Engenharia Assistida por IA"]
         direction LR
-
         LS["engineering-loop-schemas<br/><small>Contratos, evidências e veredictos canônicos</small>"]
         AL["Alicerce<br/><small>Execução confiável e loops baseados em evidências</small>"]
         CH["Claude Python<br/>Engineering Harness"]
@@ -33,19 +38,26 @@ flowchart TB
 
     subgraph PLATFORM["Serviços Compartilhados da Plataforma de IA"]
         direction LR
-
         PMR["Policy Model Router<br/><small>Seleção determinística de modelos</small>"]
         OTEL["a2a-otel-kit<br/><small>Observabilidade segura para A2A e MCP</small>"]
     end
 
     subgraph APPS["Sistemas de IA de Domínio"]
         direction LR
-
         RF["RAGForge<br/><small>Benchmark regulatório de RAG</small>"]
         ME["Meridian<br/><small>Plataforma interna de conhecimento</small>"]
         OF["Open Finance BR MCP<br/><small>Ferramentas financeiras tipadas e consentimento</small>"]
         CD["Multi-Agent Credit Desk<br/><small>Análise auditável de crédito PJ</small>"]
     end
+
+    VAG -->|"define controles e gates"| RF
+    VAG -->|"define controles e gates"| ME
+    VAG -->|"define controles e gates"| OF
+    VAG -->|"define controles e gates"| CD
+    VAG -->|"restringe escopo permitido"| PMR
+    PMR -->|"decisão de roteamento"| VAG
+    OTEL -->|"telemetria e eventos"| VAG
+    AL -->|"evidências de engenharia"| VAG
 
     CH -->|"governa desenvolvimento"| RF
     CH -->|"governa desenvolvimento"| CD
@@ -55,29 +67,19 @@ flowchart TB
     PMR -->|"roteia modelos"| CD
     OTEL -->|"telemetria A2A"| CD
     OTEL -->|"telemetria MCP"| OF
-
     OF -.->|"fronteira financeira"| CD
     OTEL -.->|"adaptador de observabilidade"| AL
 
     subgraph PRINCIPLES["Princípios Transversais"]
         direction LR
-
         P1["Núcleo<br/>determinístico"]
         P2["Neutralidade<br/>de provedor"]
         P3["Segurança<br/>fail-closed"]
         P4["Evidência e<br/>proveniência"]
-        P5["Promoção sob<br/>controle humano"]
+        P5["Autoridade<br/>humana explícita"]
     end
 
-    P1 ~~~ P2
-    P2 ~~~ P3
-    P3 ~~~ P4
-    P4 ~~~ P5
-
-    CONTROL ~~~ PLATFORM
-    PLATFORM ~~~ APPS
-    APPS ~~~ PRINCIPLES
-
+    classDef governance fill:#3F1D5C,stroke:#D8B4FE,color:#FAF5FF,stroke-width:2px;
     classDef control fill:#172554,stroke:#60A5FA,color:#EFF6FF,stroke-width:1.5px;
     classDef platform fill:#134E4A,stroke:#5EEAD4,color:#F0FDFA,stroke-width:1.5px;
     classDef domain fill:#3B0764,stroke:#C084FC,color:#FAF5FF,stroke-width:1.5px;
@@ -85,22 +87,54 @@ flowchart TB
     classDef schema fill:#1E3A8A,stroke:#93C5FD,color:#FFFFFF,stroke-width:2px;
     classDef runtime fill:#7C2D12,stroke:#FDBA74,color:#FFF7ED,stroke-width:2px;
 
+    class VAG governance;
     class CH,CX control;
     class LS schema;
     class AL runtime;
     class PMR,OTEL platform;
     class RF,ME,OF,CD domain;
     class P1,P2,P3,P4,P5 principle;
-
-    style CONTROL fill:#EFF6FF,stroke:#3B82F6,stroke-width:2px,color:#172554
-    style PLATFORM fill:#F0FDFA,stroke:#14B8A6,stroke-width:2px,color:#134E4A
-    style APPS fill:#FAF5FF,stroke:#A855F7,stroke-width:2px,color:#3B0764
-    style PRINCIPLES fill:#FAFAF9,stroke:#78716C,stroke-width:2px,color:#292524
 ```
 
 ## Camadas arquiteturais
 
-### 1. Sistemas de IA de domínio
+### 1. Plano de Governança e Assurance de IA
+
+#### [Verifiable AI Governance](https://github.com/brunovicco/verifiable-ai-governance)
+
+Plataforma de referência neutra de fornecedor que transforma requisitos de governança em controles executáveis e evidências verificáveis.
+
+Seu papel no portfólio é conectar:
+
+```text
+Contexto de negócio
+    → inventário de iniciativas e sistemas
+    → classificação de risco e impacto
+    → controles aplicáveis
+    → avaliações e aprovações independentes
+    → evidências verificadas
+    → assurance de modelos e agentes
+    → enforcement em runtime
+    → monitoramento, incidentes e revisão
+```
+
+As capacidades demonstradas incluem:
+
+- inventário de iniciativas, sistemas, modelos e agentes;
+- classificação preliminar de risco por motor determinístico e versionado;
+- avaliações de impacto de IA, privacidade e processamento internacional;
+- controles declarativos, versionados e com aplicabilidade explicável;
+- segregação de funções, gates condicionais e rodadas de revisão imutáveis;
+- evidências com validação de tipo, hash SHA-256, análise antimalware e armazenamento privado;
+- aprovações vinculadas ao digest do escopo revisado;
+- assurance independente de arquitetura para modelos e de segurança para agentes;
+- validação do escopo aprovado antes do roteamento externo de modelos;
+- incidentes, kill switch, exceções temporárias e remediação;
+- trilha de auditoria encadeada por hash e comportamento fail-closed.
+
+O projeto possui uma implementação funcional orientada à produção e uma [demo pública somente para leitura](https://vaigov-app.duckdns.org). Integrações corporativas selecionadas ainda dependem de validação em ambientes reais.
+
+### 2. Sistemas de IA de domínio
 
 Estes projetos demonstram como capacidades de IA são aplicadas a problemas concretos de negócio e engenharia.
 
@@ -111,40 +145,25 @@ Estes projetos demonstram como capacidades de IA são aplicadas a problemas conc
 | [Open Finance BR MCP](https://github.com/brunovicco/openfinance-br-mcp) | Fronteira MCP experimental para o Open Finance Brasil | Ferramentas tipadas, jornadas de consentimento, padrões de segurança FAPI-BR, execução mock-first e limites explícitos de validação |
 | [Multi-Agent Credit Desk](https://github.com/brunovicco/multi-agent-credit-desk) | Plataforma multiagente incremental para análise auditável de crédito corporativo | Política de crédito determinística, dados sintéticos de bureau, fronteiras MCP/A2A e narrativas opcionais geradas por LLM |
 
-### 2. Serviços compartilhados de plataforma de IA
+### 3. Serviços compartilhados de plataforma de IA
 
 Estes repositórios extraem capacidades reutilizáveis que não deveriam ser implementadas novamente dentro de cada aplicação.
 
 #### [Policy Model Router](https://github.com/brunovicco/policy-model-router)
 
-Serviço determinístico de roteamento que seleciona um grupo de modelos permitido somente após aplicar restrições de política e de workload.
+Serviço determinístico de roteamento que seleciona um grupo de modelos permitido somente após aplicar restrições de política e workload.
 
-Seu papel é manter a escolha de modelos fora dos agentes individuais e oferecer um ponto único para regras como:
-
-- provedores e grupos de modelos permitidos;
-- restrições por sensibilidade dos dados;
-- classes de latência e custo;
-- capacidades exigidas por tipo de workload;
-- justificativas explícitas para rejeições.
+O Verifiable AI Governance pode vincular uma aprovação a grupos de modelos permitidos; o router continua responsável pela decisão técnica em runtime, sem conceder a si próprio autoridade para ampliar o escopo aprovado.
 
 #### [a2a-otel-kit](https://github.com/brunovicco/a2a-otel-kit)
 
 Biblioteca reutilizável de observabilidade para agentes A2A e serviços MCP.
 
-Ela padroniza:
+Ela padroniza propagação de contexto, eventos estruturados, atributos baseados em allowlist, reporte seguro de falhas e operações em streaming, preservando a neutralidade em relação ao fornecedor de observabilidade.
 
-- inicialização do OpenTelemetry;
-- propagação de contexto W3C;
-- schemas de eventos estruturados;
-- atributos de telemetria baseados em allowlist;
-- reporte seguro de falhas;
-- ciclo de vida de operações em streaming.
+### 4. Plano de controle da engenharia assistida por IA
 
-A biblioteca evita tornar Datadog, Langfuse ou outro fornecedor de observabilidade parte do núcleo da aplicação.
-
-### 3. Plano de controle da engenharia assistida por IA
-
-Estes projetos tratam de outro problema: como usar agentes de código sem delegar a eles a autoridade sobre a engenharia.
+Estes projetos tratam de como usar agentes de código sem delegar a eles autoridade sobre a engenharia.
 
 #### [Claude Python Engineering Harness](https://github.com/brunovicco/claude-python-engineering-harness)
 
@@ -152,93 +171,71 @@ Scaffold reutilizável e plugin para Claude Code com instruções pertencentes a
 
 #### [Codex Python Engineering Harness](https://github.com/brunovicco/codex-python-engineering-harness)
 
-A linha-base correspondente para fluxos com Codex, também orientada a validação determinística em vez de autoavaliação pelo modelo.
+Linha-base correspondente para fluxos com Codex, orientada a validação determinística em vez de autoavaliação pelo modelo.
 
 #### [engineering-loop-schemas](https://github.com/brunovicco/engineering-loop-schemas)
 
-Contratos canônicos e neutros de provedor para loops de engenharia baseados em evidências.
-
-Ele define a linguagem compartilhada para:
-
-- contratos;
-- resultados produzidos pelo builder;
-- evidências de execução;
-- veredictos;
-- estados finais;
-- vínculos com commits e ambiente;
-- hashes dos bytes exatos.
-
-A regra central é simples: o builder pode relatar o que fez, mas não pode certificar o próprio resultado.
+Contratos canônicos e neutros de provedor para loops de engenharia baseados em evidências. O builder pode relatar o que fez, mas não pode certificar o próprio resultado.
 
 #### [Alicerce](https://github.com/brunovicco/alicerce)
 
-Núcleo local confiável para loops determinísticos e auditáveis de engenharia.
-
-Sua arquitetura incremental inclui:
-
-- identidade imutável da execução;
-- estado durável e atualizações compare-and-swap;
-- capabilities opacas de workspace;
-- materialização controlada do Git;
-- autorização de comandos imediatamente antes do spawn;
-- isolamento de processos no Linux;
-- evidência canônica de comandos;
-- autoridade humana explícita sobre promoção, merge e deploy.
+Núcleo local confiável para loops determinísticos e auditáveis de engenharia, com identidade imutável da execução, estado durável, workspaces controlados, autorização de comandos, isolamento, evidência canônica e autoridade humana sobre promoção.
 
 ## Como os projetos se conectam
+
+### Ciclo de governança
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant Owner as Responsável de negócio
+    participant Gov as Verifiable AI Governance
+    participant Review as Arquitetura, Segurança e Risco
+    participant Evidence as Pipeline de evidências
+    participant Router as Policy Model Router
+    participant Runtime as Sistema de IA
+
+    Owner->>Gov: Registra iniciativa, sistema e escopo
+    Gov->>Gov: Classifica risco e determina controles
+    Owner->>Evidence: Anexa evidências requeridas
+    Evidence-->>Gov: Retorna artefatos verificados e hashes
+    Gov->>Review: Abre gates independentes
+    Review-->>Gov: Aprova, rejeita ou solicita correção
+    Gov->>Gov: Vincula decisões ao digest do escopo
+
+    alt Escopo aprovado
+        Runtime->>Gov: Valida sistema, modelo ou agente
+        Gov-->>Runtime: Retorna limites aprovados
+        Runtime->>Router: Solicita modelo dentro dos limites
+        Router-->>Runtime: Retorna rota permitida ou rejeição
+    else Escopo não aprovado ou alterado
+        Gov-->>Runtime: Rejeita de forma explícita
+    end
+```
 
 ### Fluxo de engenharia
 
 ```mermaid
 sequenceDiagram
     autonumber
-
-    box rgb(250, 250, 249) Governança humana
-        participant Human as Humano
-    end
-
-    box rgb(239, 246, 255) Engenharia assistida por IA
-        participant Harness as Harness Claude/Codex
-        participant Agent as Agente de Código
-    end
-
-    box rgb(255, 247, 237) Execução e evidências
-        participant Alicerce
-        participant Schemas as engineering-loop-schemas
-    end
-
-    box rgb(240, 253, 250) Validação determinística
-        participant CI as Quality Gates / CI
-    end
+    participant Human as Humano
+    participant Harness as Harness Claude/Codex
+    participant Agent as Agente de código
+    participant Alicerce
+    participant Schemas as engineering-loop-schemas
+    participant CI as Quality e Security Gates
+    participant Gov as Verifiable AI Governance
 
     Human->>Harness: Define regras e critérios de aceitação
-    Harness->>Agent: Fornece contexto, limites e ações permitidas
-
-    Agent->>Alicerce: Submete candidato para execução controlada
-    activate Alicerce
-
-    Alicerce->>CI: Executa quality gates determinísticos
-    activate CI
-    CI-->>Alicerce: Retorna resultados e artefatos dos comandos
-    deactivate CI
-
-    Alicerce->>Schemas: Monta e valida evidências canônicas
-    activate Schemas
-    Schemas-->>Alicerce: Retorna Evidence validada e vinculada
-    deactivate Schemas
-
-    Alicerce-->>Human: Entrega candidato, evidências e veredicto limitado
-    deactivate Alicerce
-
-    critical Decisão de promoção sob controle humano
-        Human->>Human: Revisa evidências, riscos e critérios
-        option Promoção aprovada
-            Human->>Human: Autoriza avanço para o próximo estágio
-        option Promoção rejeitada
-            Human->>Harness: Solicita correções com base nas evidências
-        option Evidência insuficiente
-            Human->>Harness: Solicita nova execução ou validação
-    end
+    Harness->>Agent: Fornece contexto e ações permitidas
+    Agent->>Alicerce: Submete candidato
+    Alicerce->>CI: Executa gates determinísticos
+    CI-->>Alicerce: Retorna resultados e artefatos
+    Alicerce->>Schemas: Monta evidências canônicas
+    Schemas-->>Alicerce: Retorna Evidence validada
+    Alicerce-->>Human: Entrega candidato e evidências
+    Human->>Gov: Registra evidências e decisão de promoção
+    Gov->>Gov: Preserva escopo, autoridade e histórico
 ```
 
 ### Fluxo de execução de IA
@@ -246,143 +243,105 @@ sequenceDiagram
 ```mermaid
 sequenceDiagram
     autonumber
-
-    box rgb(250, 250, 249) Interação
-        participant User as Usuário
-    end
-
-    box rgb(250, 245, 255) Sistema de domínio
-        participant App as Sistema de IA
-    end
-
-    box rgb(240, 253, 250) Serviços compartilhados de plataforma
-        participant Router as Policy Model Router
-        participant OTel as a2a-otel-kit / OTLP
-    end
-
-    box rgb(255, 247, 237) Dependências governadas
-        participant MCP as MCP / Ferramentas Corporativas
-        participant Model as Modelo
-    end
+    participant User as Usuário
+    participant App as Sistema de IA
+    participant Gov as Verifiable AI Governance
+    participant Router as Policy Model Router
+    participant MCP as Ferramentas MCP
+    participant Model as Modelo
+    participant OTel as a2a-otel-kit / OTLP
 
     User->>App: Envia solicitação
-    activate App
+    App->>App: Autentica, autoriza e aplica políticas locais
+    App->>Gov: Valida escopo aprovado
 
-    App->>App: Autentica, autoriza e aplica políticas determinísticas
-    App->>Router: Solicita grupo de modelos permitido
-    activate Router
-    Router-->>App: Retorna decisão de roteamento
-    deactivate Router
-
-    alt Rota autorizada
-        opt Ferramentas corporativas necessárias
+    alt Sistema, modelo e agente aprovados
+        Gov-->>App: Retorna limites e grupos permitidos
+        App->>Router: Solicita grupo de modelos
+        Router-->>App: Retorna decisão
+        opt Ferramentas necessárias
             App->>MCP: Executa chamada limitada e tipada
-            activate MCP
-            MCP-->>App: Retorna resultado, proveniência ou rejeição explícita
-            deactivate MCP
+            MCP-->>App: Retorna resultado ou rejeição
         end
-
-        App->>App: Minimiza e aprova o contexto
         App->>Model: Envia contexto aprovado e contrato de saída
-        activate Model
         Model-->>App: Retorna saída estruturada
-        deactivate Model
-
-        App->>App: Valida estrutura, fundamentação e políticas de resposta
-
-        alt Saída válida e suficientemente fundamentada
-            App-->>OTel: Emite traces, métricas e eventos sanitizados
-            App-->>User: Retorna resposta e evidências permitidas
-        else Saída inválida ou não fundamentada
-            App->>App: Aplica fallback determinístico
-            App-->>OTel: Registra falha sanitizada e decisão de fallback
-            App-->>User: Retorna resposta limitada ou falha segura
-        end
-
-    else Rota rejeitada pela política
-        App-->>OTel: Registra rejeição sanitizada e motivo permitido
-        App-->>User: Retorna rejeição explícita e segura
+        App->>App: Valida estrutura, fundamentação e políticas
+        App-->>OTel: Emite telemetria sanitizada
+        App-->>User: Retorna resposta permitida
+    else Escopo ausente, inválido ou alterado
+        Gov-->>App: Rejeita explicitamente
+        App-->>OTel: Registra rejeição sanitizada
+        App-->>User: Retorna falha segura
     end
-
-    deactivate App
 ```
 
 ## Princípios compartilhados
 
 ### Decisões determinísticas antes do comportamento generativo
 
-Resultado de crédito, controle de acesso, autorização de comandos, avaliação de políticas e promoção de candidatos permanecem fora do LLM.
-
-O modelo pode classificar, resumir, rotear dentro de um contrato limitado ou redigir uma narrativa. Ele não se torna a fonte de verdade para decisões de alto impacto.
+Resultado de crédito, controle de acesso, autorização de comandos, avaliação de políticas, classificação preliminar de risco e promoção permanecem fora do LLM.
 
 ### Núcleo neutro de provedor, integrações nas bordas
 
-Regras de negócio e modelos de domínio não devem depender diretamente de OpenAI, Anthropic, Google, LangChain, LangGraph, MCP, A2A ou de um fornecedor de observabilidade.
-
-Essas integrações pertencem às bordas e podem ser substituídas sem reescrever o núcleo determinístico.
+Regras de negócio e modelos de domínio não dependem diretamente de um provedor de modelo, framework de agentes ou fornecedor de observabilidade.
 
 ### Segurança aplicada na fronteira
 
-Os projetos tratam toda integração externa como uma fronteira de confiança:
-
-- ferramentas MCP;
-- provedores de modelos;
-- chamadas entre agentes;
-- documentos recuperados;
-- exportadores de telemetria;
-- execução de código candidato;
-- acesso a Git e filesystem.
-
-Os controles falham de forma fechada quando identidade, política, proveniência ou garantias de execução não podem ser verificadas.
+Ferramentas MCP, provedores, chamadas entre agentes, documentos recuperados, exportadores de telemetria, execução de código, Git e filesystem são tratados como fronteiras de confiança.
 
 ### Evidência em vez de sucesso autorrelatado
 
-Um modelo afirmar que os testes passaram não é evidência.
+Afirmações importantes são vinculadas a comandos, outputs, políticas, commits, ambientes, hashes, escopos e decisões verificáveis.
 
-Os projetos de engineering loop vinculam resultados a comandos, outputs, políticas, commits, ambientes e hashes exatos. Os projetos de runtime usam citações, identificadores estruturais, filtros de acesso, traces e datasets de avaliação pela mesma razão: afirmações importantes devem ser verificáveis de forma independente.
+### Aprovação vinculada ao escopo
+
+Uma aprovação não autoriza qualquer versão futura do sistema. Mudanças materiais em dados, modelos, agentes, ferramentas, região ou finalidade exigem nova análise.
 
 ### Autoridade humana explícita
 
-Agentes podem preparar candidatos, coletar evidências, propor decisões e explicar trade-offs.
-
-Promoção, merge, deploy, exceções de política e ações de alto impacto permanecem sob autoridade humana ou organizacional explícita.
+Agentes podem preparar candidatos, coletar evidências e propor decisões. Aprovações, exceções, promoção, merge, deploy e ações de alto impacto permanecem sob autoridade humana ou organizacional explícita.
 
 ## Mapa de maturidade
 
-O portfólio contém deliberadamente projetos em estágios diferentes.
-
 | Projeto | Maturidade | O que está comprovado hoje | Próxima prova principal |
 |---|---|---|---|
+| Verifiable AI Governance | Release funcional v0.1.0 | Inventário, risco determinístico, avaliações, controles, aprovações, evidências, assurance de modelos/agentes, enforcement em runtime, incidentes e auditoria encadeada por hash | Validar Entra ID e integrações corporativas reais; incorporar telemetria e efetividade de controles |
 | RAGForge | Desenvolvimento ativo | Ingestão regulatória, chunking estrutural, estratégias de recuperação e métricas de relevância | Completar a matriz de benchmarks e publicar resultados reproduzíveis |
-| Meridian | Implementação de referência | Demo sem setup, roteamento, recuperação com ACL e caminho de consultas estruturadas | Walkthrough público e perfil completo de deploy |
-| Open Finance BR MCP | Release experimental | Ambiente mock, superfície MCP tipada, consentimento e fundamentos de segurança | Validação em sandboxes oficiais e configurações reais de participantes |
-| Multi-Agent Credit Desk | Construção incremental | Núcleo determinístico, serviços MCP, primeiro agente A2A e fluxo sintético de KYC | Orquestração, pacote decisório ponta a ponta e observabilidade conectada |
-| Policy Model Router | Serviço inicial | Núcleo determinístico de roteamento e publicação de imagem | Catálogo mais amplo de políticas, métricas operacionais e exemplos de consumo |
+| Meridian | Implementação de referência | Demo sem setup, roteamento, recuperação com ACL e consultas estruturadas | Walkthrough público e perfil completo de deploy |
+| Open Finance BR MCP | Release experimental | Ambiente mock, superfície MCP tipada, consentimento e fundamentos de segurança | Validação em sandboxes oficiais e configurações reais |
+| Multi-Agent Credit Desk | Construção incremental | Núcleo determinístico, serviços MCP, primeiro agente A2A e fluxo sintético de KYC | Orquestração, pacote decisório ponta a ponta e observabilidade |
+| Policy Model Router | Serviço inicial | Núcleo determinístico de roteamento e publicação de imagem | Catálogo de políticas, métricas e exemplos de consumo |
 | a2a-otel-kit | Biblioteca reutilizável | Propagação A2A/MCP, eventos sanitizados e testes de integração | Adoção mais ampla pelos serviços do portfólio |
-| engineering-loop-schemas | Fundação versionada | Contratos e modelos canônicos de evidência | Avaliador no nível de completion e contratos de saúde operacional |
+| engineering-loop-schemas | Fundação versionada | Contratos e modelos canônicos de evidência | Avaliador no nível de completion e contratos operacionais |
 | Alicerce | Phase 2A | Workspace confiável, sandbox, estado, autorização e primitivas de evidência | Evidência completa, persistência e orquestração retomável |
-| Harnesses Claude/Codex | Linha-base reutilizável | Scaffolding, quality gates, hooks, políticas e perfis de governança | Integração com o loop completo de execução do Alicerce |
+| Harnesses Claude/Codex | Linha-base reutilizável | Scaffolding, quality gates, hooks, políticas e perfis de governança | Integração com o loop completo do Alicerce |
 
 ## Narrativa do portfólio
 
 Juntos, os projetos sustentam uma única tese profissional:
 
-> Sistemas de IA em produção exigem mais do que integração com modelos. Precisam de fronteiras determinísticas, autoridade explícita, qualidade mensurável, observabilidade segura, evidências reproduzíveis e fluxos de engenharia que continuem confiáveis mesmo quando agentes escrevem parte do código.
-
-O portfólio cobre todo o caminho:
+> Sistemas de IA em produção exigem mais do que integração com modelos. Precisam de fronteiras determinísticas, autoridade explícita, qualidade mensurável, observabilidade segura, evidências reproduzíveis e governança capaz de vincular decisões ao escopo real do runtime.
 
 ```text
-Problema de domínio
+Contexto e finalidade
+    → inventário e classificação de risco
+    → controles, avaliações, evidências e aprovações
     → núcleo determinístico de negócio
     → capacidade de IA limitada
     → política de modelos e ferramentas
     → observabilidade e avaliação
     → engenharia assistida por IA com segurança
-    → evidência canônica
-    → promoção sob controle humano
+    → incidentes, revisão e melhoria contínua
 ```
 
 ## Trilhas sugeridas de leitura
+
+### Governança, risco e assurance de IA
+
+1. [Verifiable AI Governance](https://github.com/brunovicco/verifiable-ai-governance)
+2. [Policy Model Router](https://github.com/brunovicco/policy-model-router)
+3. [a2a-otel-kit](https://github.com/brunovicco/a2a-otel-kit)
+4. [engineering-loop-schemas](https://github.com/brunovicco/engineering-loop-schemas)
 
 ### Arquitetura e plataforma de IA
 
@@ -402,6 +361,7 @@ Problema de domínio
 1. [Multi-Agent Credit Desk](https://github.com/brunovicco/multi-agent-credit-desk)
 2. [Open Finance BR MCP](https://github.com/brunovicco/openfinance-br-mcp)
 3. [RAGForge](https://github.com/brunovicco/ragforge)
+4. [Verifiable AI Governance](https://github.com/brunovicco/verifiable-ai-governance)
 
 ### AI Enablement e produtividade de desenvolvimento
 

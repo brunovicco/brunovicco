@@ -7,7 +7,7 @@
 # Bruno Freitas Vicco
 
 ### Engenheiro Sênior de IA Generativa
-**Plataformas de IA · RAG · Agentes · LLMOps · Governança · Ambientes Regulados**
+**Plataformas de IA · RAG · Agentes · LLMOps · Governança Verificável · Ambientes Regulados**
 
 📍 São Paulo, Brasil &nbsp;|&nbsp; 🌍 Aberto a oportunidades internacionais e relocação
 
@@ -30,7 +30,7 @@ Tenho mais de 22 anos de experiência entre serviços financeiros e tecnologia, 
 
 ## Ecossistema de Engenharia de IA
 
-Os repositórios formam um único ecossistema de engenharia, e não uma coleção de demonstrações isoladas.
+Os repositórios formam um único ecossistema de engenharia, e não uma coleção de demonstrações isoladas. O portfólio cobre sistemas de domínio, serviços compartilhados, engenharia assistida por IA e um plano de governança que conecta contexto de negócio, risco, controles, evidências, aprovações e enforcement em runtime.
 
 <picture>
   <source
@@ -57,6 +57,7 @@ Os repositórios formam um único ecossistema de engenharia, e não uma coleçã
 - Liderei a adoção corporativa de IA para aproximadamente **400 usuários**, incluindo Claude Code para cerca de **250 desenvolvedores** e Claude Enterprise para aproximadamente **150 profissionais de negócio**.
 - Reduzi o contexto médio de um assistente de investimentos de aproximadamente **70 mil para 3 mil tokens** por meio de injeção condicional de conhecimento, melhorando precisão e reduzindo latência e custo.
 - Estruturei uma função de governança de IA com políticas de uso, processos de aprovação, allowlists de MCP, avaliação de riscos, auditabilidade, resposta a incidentes e adoção corporativa por fases.
+- Transformei requisitos de governança em uma implementação verificável, com controles determinísticos, segregação de funções, evidências vinculadas às decisões, enforcement em runtime e histórico de auditoria resistente a adulterações.
 
 ---
 
@@ -77,6 +78,7 @@ Os repositórios formam um único ecossistema de engenharia, e não uma coleçã
 
 | Projeto | O que demonstra |
 | --- | --- |
+| [**Verifiable AI Governance**](https://github.com/brunovicco/verifiable-ai-governance) | Plataforma de referência para governança operacional de IA, com classificação determinística de riscos, controles versionados, aprovações independentes, evidências verificadas, enforcement em runtime e trilha de auditoria resistente a adulterações. [Demo pública](https://vaigov-app.duckdns.org). |
 | [**RAGForge**](https://github.com/brunovicco/ragforge) | Benchmark reproduzível de estratégias de RAG regulatório sobre documentos financeiros e jurídicos brasileiros, com chunking estrutural, julgamentos de relevância e avaliação de recuperação. |
 | [**Alicerce**](https://github.com/brunovicco/alicerce) | Fundação confiável para loops de engenharia determinísticos, auditáveis e baseados em evidências, com workspaces controlados, sandbox, estado e evidência canônica. |
 | [**Open Finance BR MCP**](https://github.com/brunovicco/openfinance-br-mcp) | Ferramentas MCP tipadas, jornadas de consentimento, padrões de segurança FAPI-BR, execução mock-first e limites explícitos de validação para o Open Finance Brasil. |
@@ -95,6 +97,7 @@ Outras fundações: [engineering-loop-schemas](https://github.com/brunovicco/eng
 - Provedores, servidores MCP, ferramentas, telemetria e dados recuperados são tratados como fronteiras de confiança.
 - Saídas estruturadas, contratos explícitos e validação fail-closed limitam o comportamento generativo.
 - Evidências devem ser verificáveis de forma independente; o autorrelato do modelo não é prova.
+- Aprovações ficam vinculadas ao escopo exato revisado e mudanças materiais exigem nova avaliação.
 - Promoção, merge, deploy e ações de alto impacto permanecem sob autoridade humana explícita.
 
 ---
@@ -108,7 +111,7 @@ RAG · sistemas agênticos · arquiteturas multiagente · roteamento semântico 
 Plataformas corporativas · produtividade de desenvolvedores · engenharia assistida por IA · ferramentas internas · rollout · adoção · capacitação técnica
 
 **Arquitetura, segurança e governança**
-Clean Architecture · Arquitetura Hexagonal · MCP · A2A · menor privilégio · proteção contra prompt injection · gestão de riscos · auditabilidade · human-in-the-loop
+Clean Architecture · Arquitetura Hexagonal · MCP · A2A · menor privilégio · proteção contra prompt injection · gestão de riscos · assurance de modelos e agentes · auditabilidade · human-in-the-loop
 
 **LLMOps e observabilidade**
 OpenTelemetry · Datadog · Langfuse · tracing distribuído · logging estruturado · percentis de latência · pipelines de avaliação · testes de regressão · observabilidade de custos e tokens
