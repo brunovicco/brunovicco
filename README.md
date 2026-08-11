@@ -109,7 +109,7 @@ The common design goal is to keep high-impact decisions and security boundaries 
 
 ## Core Expertise
 
-**Generative AI Engineering**
+**Generative AI Engineering**  
 RAG · agentic systems · multi-agent architectures · semantic and model routing · structured outputs · tool calling · LLM evaluation · guardrails
 
 **Agent and MCP Security**
