@@ -7,7 +7,8 @@
 # Bruno Freitas Vicco
 
 ### Senior Generative AI Engineer
-**AI Platforms · RAG · Agents · LLMOps · Verifiable AI Governance · Regulated Environments**
+
+**AI Platforms · RAG & Agents · MCP/A2A · AI Security · LLMOps · Verifiable AI Governance**
 
 📍 São Paulo, Brazil &nbsp;|&nbsp; 🌍 Open to international opportunities and relocation
 
@@ -20,34 +21,41 @@
 
 ## About
 
-Senior Generative AI Engineer focused on enterprise AI platforms, AI-assisted software engineering, and governed production AI systems.
+Senior Generative AI Engineer focused on enterprise AI platforms and the trust infrastructure required to operate AI systems safely: retrieval, agents, identity, authorization, observability, runtime policy enforcement, evaluation, and verifiable governance.
 
-My work combines architecture, LLM engineering, observability, security, and governance to build reliable systems for regulated environments.
+My work combines software architecture, LLM engineering, security, LLMOps, and governance for production systems in regulated environments.
 
-I bring more than 22 years of experience across financial services and software engineering, including Caixa, BTG Pactual, Banco do Brasil, Itaú Unibanco, and ASA SCFI.
+I bring more than 22 years of experience across financial services and technology, including Caixa, BTG Pactual, Banco do Brasil, Itaú Unibanco, and ASA SCFI.
+
+---
+
+## Start Here
+
+| If you want to explore... | Start with |
+| --- | --- |
+| AI governance, assurance, and runtime evidence | [**Verifiable AI Governance**](https://github.com/brunovicco/verifiable-ai-governance) |
+| MCP security with OAuth 2.1 / OIDC | [**MCP Server Auth**](https://github.com/brunovicco/mcp-server-auth-template) + [**MCP Client Auth**](https://github.com/brunovicco/mcp-client-auth-template) |
+| Distributed observability across agents and tools | [**a2a-otel-kit**](https://github.com/brunovicco/a2a-otel-kit) |
+| Deterministic model policy enforcement | [**Policy Model Router**](https://github.com/brunovicco/policy-model-router) |
+| RAG evaluation over regulatory documents | [**RAGForge**](https://github.com/brunovicco/ragforge) |
+| Auditable multi-agent architecture | [**Multi-Agent Credit Desk**](https://github.com/brunovicco/multi-agent-credit-desk) |
+
+[Explore the complete portfolio architecture and project relationships](./PORTFOLIO_ARCHITECTURE.md)
 
 ---
 
 ## AI Engineering Ecosystem
 
-These repositories are designed as one engineering ecosystem rather than isolated demos. The portfolio spans domain systems, shared services, AI-assisted engineering, and a governance plane that connects business context, risk, controls, evidence, approvals, and runtime enforcement.
+The repositories form an engineering ecosystem rather than a collection of isolated demos.
 
-<picture>
-  <source
-    media="(prefers-color-scheme: dark)"
-    srcset="./assets/architecture/ai-engineering-ecosystem-dark.svg"
-  >
-  <source
-    media="(prefers-color-scheme: light)"
-    srcset="./assets/architecture/ai-engineering-ecosystem-light.svg"
-  >
-  <img
-    alt="AI Engineering Ecosystem architecture map"
-    src="./assets/architecture/ai-engineering-ecosystem-light.svg"
-  >
-</picture>
+The current architecture explores four complementary layers:
 
-[Explore the complete portfolio architecture, project relationships, and maturity map](./PORTFOLIO_ARCHITECTURE.md)
+- **Governance and assurance:** policy, risk, approvals, evidence, runtime assurance, incident response, and auditability.
+- **Runtime trust services:** model-policy enforcement, OAuth/OIDC for remote MCP, A2A/MCP trace continuity, and privacy-safe telemetry.
+- **Domain AI systems:** RAG, enterprise knowledge, Open Finance tools, and auditable multi-agent credit analysis.
+- **AI-assisted engineering controls:** deterministic execution, canonical evidence, architecture constraints, and human-controlled promotion.
+
+The common design goal is to keep high-impact decisions and security boundaries outside model reasoning while still using LLMs where generative behavior adds value.
 
 ---
 
@@ -61,44 +69,41 @@ These repositories are designed as one engineering ecosystem rather than isolate
 
 ---
 
-## Career Metrics
-
-<table>
-  <tr>
-    <td align="center"><strong>22+</strong><br>Years in financial services and technology</td>
-    <td align="center"><strong>17</strong><br>Years in banking at Caixa</td>
-    <td align="center"><strong>400+</strong><br>Enterprise AI users enabled</td>
-    <td align="center"><strong>250+</strong><br>Developers onboarded to AI-assisted engineering</td>
-  </tr>
-</table>
-
----
-
 ## Featured Projects
 
 | Project | What it demonstrates |
-|---|---|
-| [**Verifiable AI Governance**](https://github.com/brunovicco/verifiable-ai-governance) | Reference platform for operational AI governance with deterministic risk classification, versioned controls, independent approvals, verified evidence, runtime enforcement, and tamper-evident audit trails. [Live demo](https://vaigov-app.duckdns.org). |
-| [**RAGForge**](https://github.com/brunovicco/ragforge) | Reproducible benchmarking of regulatory RAG strategies over Brazilian financial and legal documents, with structural chunking, relevance judgments, and retrieval evaluation. |
-| [**Alicerce**](https://github.com/brunovicco/alicerce) | Trusted execution foundation for deterministic, auditable, evidence-gated engineering loops with controlled workspaces, sandboxing, state, and canonical evidence. |
-| [**Open Finance BR MCP**](https://github.com/brunovicco/openfinance-br-mcp) | Typed MCP tools, consent journeys, FAPI-BR security patterns, mock-first execution, and explicit validation boundaries for Brazilian Open Finance. |
-| [**Meridian**](https://github.com/brunovicco/meridian) | Internal knowledge platform with semantic routing, retrieval-time access control, structured queries, grounded answers, and zero-setup deterministic providers. |
-| [**Claude Python Engineering Harness**](https://github.com/brunovicco/claude-python-engineering-harness) | Governed AI-assisted software engineering with repository-owned instructions, deterministic hooks, architecture boundaries, quality gates, and MCP policy. |
-| [**Multi-Agent Credit Desk**](https://github.com/brunovicco/multi-agent-credit-desk) | Incremental multi-agent architecture for auditable corporate credit analysis with deterministic decisions, MCP/A2A boundaries, and optional LLM narratives. |
+| --- | --- |
+| [**Verifiable AI Governance**](https://github.com/brunovicco/verifiable-ai-governance) | Evidence-driven AI governance from deterministic risk and independent approvals through signed runtime authorization, enforcement, assurance, incident response, and verifiable release evidence. [Public demo](https://vaigov-app.duckdns.org). |
+| [**MCP OAuth Security Reference**](https://github.com/brunovicco/mcp-server-auth-template) | Paired [server](https://github.com/brunovicco/mcp-server-auth-template) and [client](https://github.com/brunovicco/mcp-client-auth-template) reference for OAuth 2.1/OIDC, Entra ID, exact resource binding, progressive authorization, stateless MCP, privacy-safe telemetry, and executable E2E evidence. |
+| [**a2a-otel-kit**](https://github.com/brunovicco/a2a-otel-kit) | Vendor-neutral OpenTelemetry tracing across A2A agents and MCP services with W3C Trace Context, metadata-only telemetry, and executable distributed-trace proof. |
+| [**Policy Model Router**](https://github.com/brunovicco/policy-model-router) | Fail-closed runtime policy enforcement with deterministic model routing, explainable decisions, governed runtime authorization, violation evidence, and kill-switch enforcement. |
+| [**RAGForge**](https://github.com/brunovicco/ragforge) | Reproducible benchmarking and evaluation of retrieval strategies over Brazilian financial and regulatory documents. |
+| [**Multi-Agent Credit Desk**](https://github.com/brunovicco/multi-agent-credit-desk) | Auditable multi-agent credit workflow combining deterministic credit policy, MCP/A2A boundaries, model routing, synthetic data, and privacy-safe governed runtime telemetry. |
 
-Additional foundations: [engineering-loop-schemas](https://github.com/brunovicco/engineering-loop-schemas), [a2a-otel-kit](https://github.com/brunovicco/a2a-otel-kit), [Policy Model Router](https://github.com/brunovicco/policy-model-router), and [Codex Python Engineering Harness](https://github.com/brunovicco/codex-python-engineering-harness).
+### Engineering foundations
+
+[**Alicerce**](https://github.com/brunovicco/alicerce) ·
+[**engineering-loop-schemas**](https://github.com/brunovicco/engineering-loop-schemas) ·
+[**Claude Python Engineering Harness**](https://github.com/brunovicco/claude-python-engineering-harness) ·
+[**Codex Python Engineering Harness**](https://github.com/brunovicco/codex-python-engineering-harness)
+
+### Additional domain references
+
+[**Open Finance BR MCP**](https://github.com/brunovicco/openfinance-br-mcp) ·
+[**Meridian**](https://github.com/brunovicco/meridian)
 
 ---
 
 ## Engineering Principles
 
 - Critical business decisions remain deterministic and auditable.
-- Security and authorization are enforced in code, never delegated to the language model.
-- Model providers, MCP servers, tools, telemetry, and retrieved data are treated as trust boundaries.
-- Structured outputs, explicit contracts, and fail-closed validation constrain generative behavior.
+- Authentication and authorization are enforced in code, never delegated to a language model.
+- Agents, MCP servers, model providers, retrieved data, and telemetry pipelines are treated as trust boundaries.
+- Structured outputs, explicit contracts, bounded retries, and fail-closed validation constrain generative behavior.
 - Evidence must be independently verifiable; model self-reports are not proof.
 - Approvals remain bound to the exact reviewed scope, and material changes trigger reassessment.
-- Promotion, merge, deployment, and high-impact actions remain under explicit human authority.
+- Telemetry is minimized by design; prompts, model responses, credentials, and business payloads are not observability defaults.
+- Promotion, deployment, runtime overrides, and other high-impact actions remain under explicit human authority.
 
 ---
 
@@ -107,14 +112,14 @@ Additional foundations: [engineering-loop-schemas](https://github.com/brunovicco
 **Generative AI Engineering**  
 RAG · agentic systems · multi-agent architectures · semantic and model routing · structured outputs · tool calling · LLM evaluation · guardrails
 
-**AI Platforms and Enablement**  
-Enterprise AI platforms · developer productivity · AI-assisted software engineering · internal tooling · rollout and adoption · technical enablement
+**Agent and MCP Security**
+MCP · A2A · OAuth 2.1 · OIDC · Microsoft Entra ID · PKCE · resource/audience binding · least privilege · fail-closed authorization · prompt-injection boundaries
 
-**Architecture, Security, and Governance**  
-Clean Architecture · Hexagonal Architecture · MCP · A2A · least privilege · prompt injection protection · AI risk management · model and agent assurance · auditability · human-in-the-loop
+**AI Platforms and Governance**
+Enterprise AI platforms · policy enforcement · runtime authorization · model and agent assurance · evidence · auditability · incident response · human-in-the-loop
 
-**LLMOps and Observability**  
-OpenTelemetry · Datadog · Langfuse · distributed tracing · structured logging · latency percentiles · evaluation pipelines · regression testing · cost and token observability
+**LLMOps and Observability**
+OpenTelemetry · W3C Trace Context · OTLP · Datadog · Langfuse · distributed tracing · structured logging · latency percentiles · evaluation pipelines · regression testing · token/cost observability
 
 <details>
 <summary><strong>Technology stack</strong></summary>
@@ -165,6 +170,3 @@ Professional background includes corporate banking, credit, risk, treasury, fina
 [LinkedIn](https://linkedin.com/in/brunovicco) · [Email](mailto:bfvicco@gmail.com)
 
 </div>
-
-<!-- Private profile analytics -->
-<img src="https://u8views.com/api/v1/github/profiles/38844444/views/day-week-month-total-count.svg" width="1" height="1" alt="">

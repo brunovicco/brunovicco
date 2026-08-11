@@ -2,370 +2,191 @@
 
 > 🇺🇸 [Read in English](./PORTFOLIO_ARCHITECTURE.md)
 
-Este portfólio foi organizado como um ecossistema, e não como uma coleção de demonstrações isoladas.
+Este portfólio foi organizado como um ecossistema de engenharia, e não como uma coleção de demonstrações isoladas.
 
-Os projetos exploram como construir, operar, avaliar, observar e governar sistemas de IA em ambientes regulados. Todos seguem a mesma direção arquitetural:
-
-- manter decisões críticas de negócio em componentes determinísticos;
-- colocar LLMs atrás de contratos explícitos e responsabilidades limitadas;
-- tratar agentes, servidores MCP, provedores de modelos e telemetria como fronteiras de confiança;
-- incorporar segurança, avaliação, proveniência e auditabilidade à arquitetura;
-- vincular aprovações ao escopo exato revisado;
-- usar agentes de código sob controles pertencentes ao repositório.
+Os projetos exploram como construir, proteger, operar, observar, avaliar e governar sistemas de IA. A direção arquitetural comum é manter decisões de alto impacto em componentes determinísticos, colocar o comportamento de modelos atrás de contratos explícitos e tratar identidade, agentes, ferramentas, provedores de modelos, dados recuperados e telemetria como fronteiras de confiança.
 
 ## Mapa do ecossistema
 
 ```mermaid
 flowchart TB
-    subgraph GOVERNANCE["Plano de Governança e Assurance de IA"]
-        direction LR
-        VAG["Verifiable AI Governance<br/><small>Inventário, risco, controles, aprovações,<br/>evidências, enforcement e auditoria</small>"]
+    subgraph GOV["Governança e Assurance de IA"]
+        VAG["Verifiable AI Governance<br/><small>Risco · controles · aprovações · assurance em runtime · evidências</small>"]
     end
 
-    subgraph CONTROL["Plano de Controle da Engenharia Assistida por IA"]
-        direction LR
-        LS["engineering-loop-schemas<br/><small>Contratos, evidências e veredictos canônicos</small>"]
-        AL["Alicerce<br/><small>Execução confiável e loops baseados em evidências</small>"]
-        CH["Claude Python<br/>Engineering Harness"]
-        CX["Codex Python<br/>Engineering Harness"]
+    subgraph TRUST["Confiança em Runtime e Serviços de Plataforma"]
+        PMR["Policy Model Router<br/><small>Enforcement determinístico de políticas</small>"]
+        A2A["a2a-otel-kit<br/><small>Tracing distribuído A2A/MCP</small>"]
+        MCPC["mcp-client-auth-template<br/><small>Fronteira OAuth/OIDC do cliente</small>"]
+        MCPS["mcp-server-auth-template<br/><small>Resource server OAuth/OIDC</small>"]
 
-        LS -->|"define contratos"| AL
-        LS -->|"padroniza evidências"| CH
-        LS -->|"padroniza evidências"| CX
-        AL -.->|"execução governada"| CH
-        AL -.->|"execução governada"| CX
+        MCPC -->|"OAuth 2.1 / OIDC"| MCPS
+        MCPC -.->|"W3C trace context"| A2A
+        MCPS -.->|"W3C trace context"| A2A
     end
 
-    subgraph PLATFORM["Serviços Compartilhados da Plataforma de IA"]
-        direction LR
-        PMR["Policy Model Router<br/><small>Seleção determinística de modelos</small>"]
-        OTEL["a2a-otel-kit<br/><small>Observabilidade segura para A2A e MCP</small>"]
+    subgraph DOMAIN["Sistemas de IA de Domínio"]
+        RAG["RAGForge<br/><small>Avaliação de RAG regulatório</small>"]
+        CREDIT["Multi-Agent Credit Desk<br/><small>Agentes auditáveis de crédito</small>"]
+        OF["Open Finance BR MCP<br/><small>Ferramentas financeiras tipadas</small>"]
+        MER["Meridian<br/><small>Plataforma interna de conhecimento</small>"]
     end
 
-    subgraph APPS["Sistemas de IA de Domínio"]
-        direction LR
-        RF["RAGForge<br/><small>Benchmark regulatório de RAG</small>"]
-        ME["Meridian<br/><small>Plataforma interna de conhecimento</small>"]
-        OF["Open Finance BR MCP<br/><small>Ferramentas financeiras tipadas e consentimento</small>"]
-        CD["Multi-Agent Credit Desk<br/><small>Análise auditável de crédito PJ</small>"]
+    subgraph ENG["Controles da Engenharia Assistida por IA"]
+        SCHEMAS["engineering-loop-schemas"]
+        ALICERCE["Alicerce"]
+        CLAUDE["Claude Python Engineering Harness"]
+        CODEX["Codex Python Engineering Harness"]
+
+        SCHEMAS --> ALICERCE
+        ALICERCE -.-> CLAUDE
+        ALICERCE -.-> CODEX
     end
 
-    VAG -->|"define controles e gates"| RF
-    VAG -->|"define controles e gates"| ME
-    VAG -->|"define controles e gates"| OF
-    VAG -->|"define controles e gates"| CD
-    VAG -->|"restringe escopo permitido"| PMR
-    PMR -->|"decisão de roteamento"| VAG
-    OTEL -->|"telemetria e eventos"| VAG
-    AL -->|"evidências de engenharia"| VAG
+    VAG -->|"escopo aprovado / controle em runtime"| PMR
+    PMR -->|"decisões / violações"| VAG
+    A2A -->|"telemetria sanitizada"| VAG
 
-    CH -->|"governa desenvolvimento"| RF
-    CH -->|"governa desenvolvimento"| CD
-    CH -->|"governa desenvolvimento"| PMR
-    CX -->|"governa desenvolvimento"| ME
+    PMR --> CREDIT
+    A2A --> CREDIT
+    MCPS -.->|"fronteira segura de ferramentas"| CREDIT
+    OF -.-> CREDIT
 
-    PMR -->|"roteia modelos"| CD
-    OTEL -->|"telemetria A2A"| CD
-    OTEL -->|"telemetria MCP"| OF
-    OF -.->|"fronteira financeira"| CD
-    OTEL -.->|"adaptador de observabilidade"| AL
+    VAG -.-> RAG
+    VAG -.-> CREDIT
+    VAG -.-> OF
+    VAG -.-> MER
 
-    subgraph PRINCIPLES["Princípios Transversais"]
-        direction LR
-        P1["Núcleo<br/>determinístico"]
-        P2["Neutralidade<br/>de provedor"]
-        P3["Segurança<br/>fail-closed"]
-        P4["Evidência e<br/>proveniência"]
-        P5["Autoridade<br/>humana explícita"]
-    end
-
-    classDef governance fill:#3F1D5C,stroke:#D8B4FE,color:#FAF5FF,stroke-width:2px;
-    classDef control fill:#172554,stroke:#60A5FA,color:#EFF6FF,stroke-width:1.5px;
-    classDef platform fill:#134E4A,stroke:#5EEAD4,color:#F0FDFA,stroke-width:1.5px;
-    classDef domain fill:#3B0764,stroke:#C084FC,color:#FAF5FF,stroke-width:1.5px;
-    classDef principle fill:#292524,stroke:#A8A29E,color:#FAFAF9,stroke-width:1.2px;
-    classDef schema fill:#1E3A8A,stroke:#93C5FD,color:#FFFFFF,stroke-width:2px;
-    classDef runtime fill:#7C2D12,stroke:#FDBA74,color:#FFF7ED,stroke-width:2px;
-
-    class VAG governance;
-    class CH,CX control;
-    class LS schema;
-    class AL runtime;
-    class PMR,OTEL platform;
-    class RF,ME,OF,CD domain;
-    class P1,P2,P3,P4,P5 principle;
+    ENG -.->|"evidências de engenharia"| VAG
 ```
 
-## Camadas arquiteturais
+## 1. Governança e Assurance de IA
 
-### 1. Plano de Governança e Assurance de IA
+### [Verifiable AI Governance](https://github.com/brunovicco/verifiable-ai-governance)
 
-#### [Verifiable AI Governance](https://github.com/brunovicco/verifiable-ai-governance)
+O plano de governança transforma requisitos de política em controles executáveis e inspecionáveis de forma independente.
 
-Plataforma de referência neutra de fornecedor que transforma requisitos de governança em controles executáveis e evidências verificáveis.
-
-Seu papel no portfólio é conectar:
+A cadeia central é:
 
 ```text
-Contexto de negócio
-    → inventário de iniciativas e sistemas
-    → classificação de risco e impacto
-    → controles aplicáveis
-    → avaliações e aprovações independentes
-    → evidências verificadas
-    → assurance de modelos e agentes
-    → enforcement em runtime
-    → monitoramento, incidentes e revisão
+Política
+  → Risco e controles
+  → Aprovação independente
+  → Autorização assinada em runtime
+  → Enforcement
+  → Violação / assurance em runtime
+  → Resposta governada
+  → Evidência
 ```
 
-As capacidades demonstradas incluem:
+O projeto cobre inventário, classificação determinística de risco, aplicabilidade de controles, segregação de funções, validação de evidências, aprovações vinculadas ao escopo, autorização em runtime, integração com o Policy Model Router, telemetria sanitizada, resposta a incidentes, atuação governada, histórico de auditoria e evidências de release.
 
-- inventário de iniciativas, sistemas, modelos e agentes;
-- classificação preliminar de risco por motor determinístico e versionado;
-- avaliações de impacto de IA, privacidade e processamento internacional;
-- controles declarativos, versionados e com aplicabilidade explicável;
-- segregação de funções, gates condicionais e rodadas de revisão imutáveis;
-- evidências com validação de tipo, hash SHA-256, análise antimalware e armazenamento privado;
-- aprovações vinculadas ao digest do escopo revisado;
-- assurance independente de arquitetura para modelos e de segurança para agentes;
-- validação do escopo aprovado antes do roteamento externo de modelos;
-- incidentes, kill switch, exceções temporárias e remediação;
-- trilha de auditoria encadeada por hash e comportamento fail-closed.
+O projeto possui uma implementação funcional orientada à produção e uma [demo pública somente para leitura](https://vaigov-app.duckdns.org), a qual pode estar em uma versão anterior à `main`; o README do projeto informa explicitamente a versão implantada.
 
-O projeto possui uma implementação funcional orientada à produção e uma [demo pública somente para leitura](https://vaigov-app.duckdns.org). Integrações corporativas selecionadas ainda dependem de validação em ambientes reais.
+## 2. Confiança em Runtime e Serviços de Plataforma
 
-### 2. Sistemas de IA de domínio
+Esses projetos fornecem fronteiras reutilizáveis de segurança, política e observabilidade que não deveriam ser reimplementadas de forma independente em cada aplicação de IA.
 
-Estes projetos demonstram como capacidades de IA são aplicadas a problemas concretos de negócio e engenharia.
+### [Policy Model Router](https://github.com/brunovicco/policy-model-router)
 
-| Projeto | Papel no portfólio | Ênfase atual |
-|---|---|---|
-| [RAGForge](https://github.com/brunovicco/ragforge) | Plataforma experimental para comparar estratégias de recuperação sobre normas financeiras e regulatórias brasileiras | Ingestão consciente da estrutura legal, recuperação esparsa/densa/híbrida, julgamentos de relevância e avaliação reproduzível |
-| [Meridian](https://github.com/brunovicco/meridian) | Arquitetura de referência para uma plataforma interna de conhecimento de engenharia | Roteamento semântico, controle de acesso durante a recuperação, consultas estruturadas e respostas fundamentadas com citações |
-| [Open Finance BR MCP](https://github.com/brunovicco/openfinance-br-mcp) | Fronteira MCP experimental para o Open Finance Brasil | Ferramentas tipadas, jornadas de consentimento, padrões de segurança FAPI-BR, execução mock-first e limites explícitos de validação |
-| [Multi-Agent Credit Desk](https://github.com/brunovicco/multi-agent-credit-desk) | Plataforma multiagente incremental para análise auditável de crédito corporativo | Política de crédito determinística, dados sintéticos de bureau, fronteiras MCP/A2A e narrativas opcionais geradas por LLM |
+Serviço fail-closed de enforcement de políticas em runtime.
 
-### 3. Serviços compartilhados de plataforma de IA
+Seleciona um grupo lógico de modelos somente depois da avaliação determinística das políticas e pode exigir autorização emitida pela governança, preservar evidência de negações e consumir estado de controle em runtime, como kill switch. A autorização nunca é delegada ao LLM.
 
-Estes repositórios extraem capacidades reutilizáveis que não deveriam ser implementadas novamente dentro de cada aplicação.
+### [mcp-server-auth-template](https://github.com/brunovicco/mcp-server-auth-template)
 
-#### [Policy Model Router](https://github.com/brunovicco/policy-model-router)
+Referência orientada à produção de um OAuth 2.1 resource server para MCP remoto.
 
-Serviço determinístico de roteamento que seleciona um grupo de modelos permitido somente após aplicar restrições de política e workload.
+Cobre Microsoft Entra ID e OIDC genérico, Protected Resource Metadata, validação exata de resource/audience, distinção entre scopes delegados e application roles, autorização progressiva, MCP stateless, proteção no discovery/JWKS, telemetria segura, provenance de release e publicação no Official MCP Registry.
 
-O Verifiable AI Governance pode vincular uma aprovação a grupos de modelos permitidos; o router continua responsável pela decisão técnica em runtime, sem conceder a si próprio autoridade para ampliar o escopo aprovado.
+### [mcp-client-auth-template](https://github.com/brunovicco/mcp-client-auth-template)
 
-#### [a2a-otel-kit](https://github.com/brunovicco/a2a-otel-kit)
+Cliente MCP complementar.
 
-Biblioteca reutilizável de observabilidade para agentes A2A e serviços MCP.
+Demonstra Authorization Code + PKCE, Client Credentials, discovery CIMD-first, resource binding exato, step-up limitado de scopes, rejeição de audience incorreta, MCP stateless e continuidade de trace distribuído com o servidor companion.
 
-Ela padroniza propagação de contexto, eventos estruturados, atributos baseados em allowlist, reporte seguro de falhas e operações em streaming, preservando a neutralidade em relação ao fornecedor de observabilidade.
+Juntos, os dois repositórios fornecem uma referência executável de autorização cliente/servidor, e não exemplos independentes de configuração.
 
-### 4. Plano de controle da engenharia assistida por IA
+### [a2a-otel-kit](https://github.com/brunovicco/a2a-otel-kit)
 
-Estes projetos tratam de como usar agentes de código sem delegar a eles autoridade sobre a engenharia.
+Biblioteca OpenTelemetry neutra de fornecedor para agentes A2A e serviços MCP.
 
-#### [Claude Python Engineering Harness](https://github.com/brunovicco/claude-python-engineering-harness)
+Continua W3C Trace Context através das fronteiras de protocolo e mantém a telemetria dos adaptadores de protocolo baseada somente em metadados por construção. A mesma biblioteca é utilizada em diferentes partes do portfólio para continuidade de traces e telemetria governada em runtime.
 
-Scaffold reutilizável e plugin para Claude Code com instruções pertencentes ao repositório, skills, hooks, quality gates, fronteiras arquiteturais, políticas MCP e overlays opcionais de governança.
+## 3. Sistemas de IA de Domínio
 
-#### [Codex Python Engineering Harness](https://github.com/brunovicco/codex-python-engineering-harness)
+| Projeto | Papel | Principal sinal |
+| --- | --- | --- |
+| [RAGForge](https://github.com/brunovicco/ragforge) | Plataforma de avaliação de recuperação | Experimentos reproduzíveis de RAG sobre documentos regulatórios e financeiros |
+| [Multi-Agent Credit Desk](https://github.com/brunovicco/multi-agent-credit-desk) | Sistema multiagente auditável de crédito | Política determinística, fronteiras MCP/A2A, roteamento governado e telemetria em runtime |
+| [Open Finance BR MCP](https://github.com/brunovicco/openfinance-br-mcp) | Referência MCP financeira | Ferramentas tipadas, jornadas de consentimento, padrões FAPI-BR e execução mock-first |
+| [Meridian](https://github.com/brunovicco/meridian) | Referência de conhecimento interno | Roteamento semântico, controle de acesso durante a recuperação, consultas estruturadas e respostas fundamentadas |
 
-Linha-base correspondente para fluxos com Codex, orientada a validação determinística em vez de autoavaliação pelo modelo.
+## 4. Controles da Engenharia Assistida por IA
 
-#### [engineering-loop-schemas](https://github.com/brunovicco/engineering-loop-schemas)
+| Projeto | Papel |
+| --- | --- |
+| [engineering-loop-schemas](https://github.com/brunovicco/engineering-loop-schemas) | Contratos canônicos para evidências, veredictos e resultados de execução |
+| [Alicerce](https://github.com/brunovicco/alicerce) | Execução determinística confiável e loops de engenharia baseados em evidências |
+| [Claude Python Engineering Harness](https://github.com/brunovicco/claude-python-engineering-harness) | Regras, hooks, limites arquiteturais e quality gates pertencentes ao repositório para Claude Code |
+| [Codex Python Engineering Harness](https://github.com/brunovicco/codex-python-engineering-harness) | Linha-base determinística equivalente para fluxos com Codex |
 
-Contratos canônicos e neutros de provedor para loops de engenharia baseados em evidências. O builder pode relatar o que fez, mas não pode certificar o próprio resultado.
-
-#### [Alicerce](https://github.com/brunovicco/alicerce)
-
-Núcleo local confiável para loops determinísticos e auditáveis de engenharia, com identidade imutável da execução, estado durável, workspaces controlados, autorização de comandos, isolamento, evidência canônica e autoridade humana sobre promoção.
-
-## Como os projetos se conectam
-
-### Ciclo de governança
+## Como as peças atuais se conectam em runtime
 
 ```mermaid
 sequenceDiagram
     autonumber
-    participant Owner as Responsável de negócio
-    participant Gov as Verifiable AI Governance
-    participant Review as Arquitetura, Segurança e Risco
-    participant Evidence as Pipeline de evidências
-    participant Router as Policy Model Router
-    participant Runtime as Sistema de IA
-
-    Owner->>Gov: Registra iniciativa, sistema e escopo
-    Gov->>Gov: Classifica risco e determina controles
-    Owner->>Evidence: Anexa evidências requeridas
-    Evidence-->>Gov: Retorna artefatos verificados e hashes
-    Gov->>Review: Abre gates independentes
-    Review-->>Gov: Aprova, rejeita ou solicita correção
-    Gov->>Gov: Vincula decisões ao digest do escopo
-
-    alt Escopo aprovado
-        Runtime->>Gov: Valida sistema, modelo ou agente
-        Gov-->>Runtime: Retorna limites aprovados
-        Runtime->>Router: Solicita modelo dentro dos limites
-        Router-->>Runtime: Retorna rota permitida ou rejeição
-    else Escopo não aprovado ou alterado
-        Gov-->>Runtime: Rejeita de forma explícita
-    end
-```
-
-### Fluxo de engenharia
-
-```mermaid
-sequenceDiagram
-    autonumber
-    participant Human as Humano
-    participant Harness as Harness Claude/Codex
-    participant Agent as Agente de código
-    participant Alicerce
-    participant Schemas as engineering-loop-schemas
-    participant CI as Quality e Security Gates
-    participant Gov as Verifiable AI Governance
-
-    Human->>Harness: Define regras e critérios de aceitação
-    Harness->>Agent: Fornece contexto e ações permitidas
-    Agent->>Alicerce: Submete candidato
-    Alicerce->>CI: Executa gates determinísticos
-    CI-->>Alicerce: Retorna resultados e artefatos
-    Alicerce->>Schemas: Monta evidências canônicas
-    Schemas-->>Alicerce: Retorna Evidence validada
-    Alicerce-->>Human: Entrega candidato e evidências
-    Human->>Gov: Registra evidências e decisão de promoção
-    Gov->>Gov: Preserva escopo, autoridade e histórico
-```
-
-### Fluxo de execução de IA
-
-```mermaid
-sequenceDiagram
-    autonumber
-    participant User as Usuário
-    participant App as Sistema de IA
+    participant App as Aplicação / Agente de IA
     participant Gov as Verifiable AI Governance
     participant Router as Policy Model Router
-    participant MCP as Ferramentas MCP
-    participant Model as Modelo
-    participant OTel as a2a-otel-kit / OTLP
+    participant MCPClient as Cliente MCP autenticado
+    participant MCPServer as Servidor MCP protegido
+    participant OTel as a2a-otel-kit
 
-    User->>App: Envia solicitação
-    App->>App: Autentica, autoriza e aplica políticas locais
-    App->>Gov: Valida escopo aprovado
+    App->>Gov: Valida escopo governado
+    Gov-->>App: Autorização assinada + limites aprovados
+    App->>Router: Solicita rota dentro do escopo
+    Router-->>App: Grupo de modelos ou negação fail-closed
 
-    alt Sistema, modelo e agente aprovados
-        Gov-->>App: Retorna limites e grupos permitidos
-        App->>Router: Solicita grupo de modelos
-        Router-->>App: Retorna decisão
-        opt Ferramentas necessárias
-            App->>MCP: Executa chamada limitada e tipada
-            MCP-->>App: Retorna resultado ou rejeição
-        end
-        App->>Model: Envia contexto aprovado e contrato de saída
-        Model-->>App: Retorna saída estruturada
-        App->>App: Valida estrutura, fundamentação e políticas
-        App-->>OTel: Emite telemetria sanitizada
-        App-->>User: Retorna resposta permitida
-    else Escopo ausente, inválido ou alterado
-        Gov-->>App: Rejeita explicitamente
-        App-->>OTel: Registra rejeição sanitizada
-        App-->>User: Retorna falha segura
+    opt Acesso a ferramenta necessário
+        App->>MCPClient: Executa ferramenta
+        MCPClient->>MCPServer: Requisição MCP vinculada ao OAuth
+        MCPServer-->>MCPClient: Resultado ou 401/403
+        MCPClient-->>App: Resultado limitado
     end
+
+    App-->>OTel: Metadados operacionais sanitizados
+    OTel-->>Gov: Evidência opcional de runtime
 ```
 
 ## Princípios compartilhados
 
-### Decisões determinísticas antes do comportamento generativo
+### Autoridade determinística
 
-Resultado de crédito, controle de acesso, autorização de comandos, avaliação de políticas, classificação preliminar de risco e promoção permanecem fora do LLM.
+Decisões de crédito, avaliação de políticas, controle de acesso, autorização, estados de aprovação, autorização de comandos e promoção permanecem fora do raciocínio do LLM.
 
-### Núcleo neutro de provedor, integrações nas bordas
+### Fronteiras de confiança explícitas
 
-Regras de negócio e modelos de domínio não dependem diretamente de um provedor de modelo, framework de agentes ou fornecedor de observabilidade.
+Agentes, servidores MCP, provedores OAuth/OIDC, gateways de modelos, documentos recuperados, exportadores de telemetria, Git, filesystem e ambientes de execução são tratados como fronteiras independentes.
 
-### Segurança aplicada na fronteira
+### Evidência em vez de autorrelato
 
-Ferramentas MCP, provedores, chamadas entre agentes, documentos recuperados, exportadores de telemetria, execução de código, Git e filesystem são tratados como fronteiras de confiança.
+Afirmações importantes são vinculadas a verificações executáveis, políticas versionadas, commits, hashes, escopos, traces e artefatos inspecionáveis de forma independente.
 
-### Evidência em vez de sucesso autorrelatado
+### Observabilidade com minimização de dados
 
-Afirmações importantes são vinculadas a comandos, outputs, políticas, commits, ambientes, hashes, escopos e decisões verificáveis.
+A instrumentação de protocolo é deliberadamente orientada a metadados. Prompts, respostas, credenciais, material de autorização, payloads arbitrários de negócio e textos de exceção ficam fora dos caminhos padrão de telemetria A2A/MCP.
 
-### Aprovação vinculada ao escopo
+### Autoridade humana sobre ações de alto impacto
 
-Uma aprovação não autoriza qualquer versão futura do sistema. Mudanças materiais em dados, modelos, agentes, ferramentas, região ou finalidade exigem nova análise.
+Modelos podem apoiar análise, redação e implementação, mas aprovação, deploy, overrides, contenção, restauração e promoção permanecem explicitamente governados.
 
-### Autoridade humana explícita
+## Caminho recomendado para revisão
 
-Agentes podem preparar candidatos, coletar evidências e propor decisões. Aprovações, exceções, promoção, merge, deploy e ações de alto impacto permanecem sob autoridade humana ou organizacional explícita.
+Para uma revisão técnica de cinco a dez minutos:
 
-## Mapa de maturidade
-
-| Projeto | Maturidade | O que está comprovado hoje | Próxima prova principal |
-|---|---|---|---|
-| Verifiable AI Governance | Release funcional v0.1.0 | Inventário, risco determinístico, avaliações, controles, aprovações, evidências, assurance de modelos/agentes, enforcement em runtime, incidentes e auditoria encadeada por hash | Validar Entra ID e integrações corporativas reais; incorporar telemetria e efetividade de controles |
-| RAGForge | Desenvolvimento ativo | Ingestão regulatória, chunking estrutural, estratégias de recuperação e métricas de relevância | Completar a matriz de benchmarks e publicar resultados reproduzíveis |
-| Meridian | Implementação de referência | Demo sem setup, roteamento, recuperação com ACL e consultas estruturadas | Walkthrough público e perfil completo de deploy |
-| Open Finance BR MCP | Release experimental | Ambiente mock, superfície MCP tipada, consentimento e fundamentos de segurança | Validação em sandboxes oficiais e configurações reais |
-| Multi-Agent Credit Desk | Construção incremental | Núcleo determinístico, serviços MCP, primeiro agente A2A e fluxo sintético de KYC | Orquestração, pacote decisório ponta a ponta e observabilidade |
-| Policy Model Router | Serviço inicial | Núcleo determinístico de roteamento e publicação de imagem | Catálogo de políticas, métricas e exemplos de consumo |
-| a2a-otel-kit | Biblioteca reutilizável | Propagação A2A/MCP, eventos sanitizados e testes de integração | Adoção mais ampla pelos serviços do portfólio |
-| engineering-loop-schemas | Fundação versionada | Contratos e modelos canônicos de evidência | Avaliador no nível de completion e contratos operacionais |
-| Alicerce | Phase 2A | Workspace confiável, sandbox, estado, autorização e primitivas de evidência | Evidência completa, persistência e orquestração retomável |
-| Harnesses Claude/Codex | Linha-base reutilizável | Scaffolding, quality gates, hooks, políticas e perfis de governança | Integração com o loop completo do Alicerce |
-
-## Narrativa do portfólio
-
-Juntos, os projetos sustentam uma única tese profissional:
-
-> Sistemas de IA em produção exigem mais do que integração com modelos. Precisam de fronteiras determinísticas, autoridade explícita, qualidade mensurável, observabilidade segura, evidências reproduzíveis e governança capaz de vincular decisões ao escopo real do runtime.
-
-```text
-Contexto e finalidade
-    → inventário e classificação de risco
-    → controles, avaliações, evidências e aprovações
-    → núcleo determinístico de negócio
-    → capacidade de IA limitada
-    → política de modelos e ferramentas
-    → observabilidade e avaliação
-    → engenharia assistida por IA com segurança
-    → incidentes, revisão e melhoria contínua
-```
-
-## Trilhas sugeridas de leitura
-
-### Governança, risco e assurance de IA
-
-1. [Verifiable AI Governance](https://github.com/brunovicco/verifiable-ai-governance)
-2. [Policy Model Router](https://github.com/brunovicco/policy-model-router)
-3. [a2a-otel-kit](https://github.com/brunovicco/a2a-otel-kit)
-4. [engineering-loop-schemas](https://github.com/brunovicco/engineering-loop-schemas)
-
-### Arquitetura e plataforma de IA
-
-1. [Alicerce](https://github.com/brunovicco/alicerce)
-2. [engineering-loop-schemas](https://github.com/brunovicco/engineering-loop-schemas)
-3. [a2a-otel-kit](https://github.com/brunovicco/a2a-otel-kit)
-4. [Policy Model Router](https://github.com/brunovicco/policy-model-router)
-
-### RAG e LLM Engineering
-
-1. [RAGForge](https://github.com/brunovicco/ragforge)
-2. [Meridian](https://github.com/brunovicco/meridian)
-3. [Open Finance BR MCP](https://github.com/brunovicco/openfinance-br-mcp)
-
-### IA em serviços financeiros
-
-1. [Multi-Agent Credit Desk](https://github.com/brunovicco/multi-agent-credit-desk)
-2. [Open Finance BR MCP](https://github.com/brunovicco/openfinance-br-mcp)
-3. [RAGForge](https://github.com/brunovicco/ragforge)
-4. [Verifiable AI Governance](https://github.com/brunovicco/verifiable-ai-governance)
-
-### AI Enablement e produtividade de desenvolvimento
-
-1. [Claude Python Engineering Harness](https://github.com/brunovicco/claude-python-engineering-harness)
-2. [Codex Python Engineering Harness](https://github.com/brunovicco/codex-python-engineering-harness)
-3. [Alicerce](https://github.com/brunovicco/alicerce)
-4. [engineering-loop-schemas](https://github.com/brunovicco/engineering-loop-schemas)
+1. Comece pelo **Verifiable AI Governance** para entender o modelo geral de governança e assurance em runtime.
+2. Analise o par **MCP Server + Client Auth** para identidade, autorização e segurança de protocolo.
+3. Execute ou inspecione a demo E2E do **a2a-otel-kit**.
+4. Revise o **Policy Model Router** para enforcement determinístico de políticas em runtime.
+5. Use **RAGForge** ou **Multi-Agent Credit Desk** para observar a aplicação dessas ideias em sistemas de IA.
