@@ -8,57 +8,13 @@ Os projetos exploram como construir, proteger, operar, observar, avaliar e gover
 
 ## Mapa do ecossistema
 
-```mermaid
-flowchart TB
-    subgraph GOV["Governança e Assurance de IA"]
-        VAG["Verifiable AI Governance<br/><small>Risco · controles · aprovações · assurance em runtime · evidências</small>"]
-    end
-
-    subgraph TRUST["Confiança em Runtime e Serviços de Plataforma"]
-        PMR["Policy Model Router<br/><small>Enforcement determinístico de políticas</small>"]
-        A2A["a2a-otel-kit<br/><small>Tracing distribuído A2A/MCP</small>"]
-        MCPC["mcp-client-auth-template<br/><small>Fronteira OAuth/OIDC do cliente</small>"]
-        MCPS["mcp-server-auth-template<br/><small>Resource server OAuth/OIDC</small>"]
-
-        MCPC -->|"OAuth 2.1 / OIDC"| MCPS
-        MCPC -.->|"W3C trace context"| A2A
-        MCPS -.->|"W3C trace context"| A2A
-    end
-
-    subgraph DOMAIN["Sistemas de IA de Domínio"]
-        RAG["RAGForge<br/><small>Avaliação de RAG regulatório</small>"]
-        CREDIT["Multi-Agent Credit Desk<br/><small>Agentes auditáveis de crédito</small>"]
-        OF["Open Finance BR MCP<br/><small>Ferramentas financeiras tipadas</small>"]
-        MER["Meridian<br/><small>Plataforma interna de conhecimento</small>"]
-    end
-
-    subgraph ENG["Controles da Engenharia Assistida por IA"]
-        SCHEMAS["engineering-loop-schemas"]
-        ALICERCE["Alicerce"]
-        CLAUDE["Claude Python Engineering Harness"]
-        CODEX["Codex Python Engineering Harness"]
-
-        SCHEMAS --> ALICERCE
-        ALICERCE -.-> CLAUDE
-        ALICERCE -.-> CODEX
-    end
-
-    VAG -->|"escopo aprovado / controle em runtime"| PMR
-    PMR -->|"decisões / violações"| VAG
-    A2A -->|"telemetria sanitizada"| VAG
-
-    PMR --> CREDIT
-    A2A --> CREDIT
-    MCPS -.->|"fronteira segura de ferramentas"| CREDIT
-    OF -.-> CREDIT
-
-    VAG -.-> RAG
-    VAG -.-> CREDIT
-    VAG -.-> OF
-    VAG -.-> MER
-
-    ENG -.->|"evidências de engenharia"| VAG
-```
+<p align="center">
+  <img
+    src="./assets/architecture/ai-governance-runtime-trust-ecosystem.svg"
+    alt="AI Governance and Runtime Trust ecosystem architecture"
+    width="1100"
+  >
+</p>
 
 ## 1. Governança e Assurance de IA
 
