@@ -8,57 +8,13 @@ The projects explore how to build, secure, operate, observe, evaluate, and gover
 
 ## Ecosystem map
 
-```mermaid
-flowchart TB
-    subgraph GOV["AI Governance & Assurance"]
-        VAG["Verifiable AI Governance<br/><small>Risk · controls · approvals · runtime assurance · evidence</small>"]
-    end
-
-    subgraph TRUST["Runtime Trust & Platform Services"]
-        PMR["Policy Model Router<br/><small>Deterministic policy enforcement</small>"]
-        A2A["a2a-otel-kit<br/><small>A2A/MCP distributed tracing</small>"]
-        MCPC["mcp-client-auth-template<br/><small>OAuth/OIDC client boundary</small>"]
-        MCPS["mcp-server-auth-template<br/><small>OAuth/OIDC resource server</small>"]
-
-        MCPC -->|"OAuth 2.1 / OIDC"| MCPS
-        MCPC -.->|"W3C trace context"| A2A
-        MCPS -.->|"W3C trace context"| A2A
-    end
-
-    subgraph DOMAIN["Domain AI Systems"]
-        RAG["RAGForge<br/><small>Regulatory RAG evaluation</small>"]
-        CREDIT["Multi-Agent Credit Desk<br/><small>Auditable credit agents</small>"]
-        OF["Open Finance BR MCP<br/><small>Typed financial tools</small>"]
-        MER["Meridian<br/><small>Internal knowledge platform</small>"]
-    end
-
-    subgraph ENG["AI-Assisted Engineering Controls"]
-        SCHEMAS["engineering-loop-schemas"]
-        ALICERCE["Alicerce"]
-        CLAUDE["Claude Python Engineering Harness"]
-        CODEX["Codex Python Engineering Harness"]
-
-        SCHEMAS --> ALICERCE
-        ALICERCE -.-> CLAUDE
-        ALICERCE -.-> CODEX
-    end
-
-    VAG -->|"approved scope / runtime control"| PMR
-    PMR -->|"routing decisions / violations"| VAG
-    A2A -->|"sanitized runtime telemetry"| VAG
-
-    PMR --> CREDIT
-    A2A --> CREDIT
-    MCPS -.->|"secure tool boundary"| CREDIT
-    OF -.-> CREDIT
-
-    VAG -.-> RAG
-    VAG -.-> CREDIT
-    VAG -.-> OF
-    VAG -.-> MER
-
-    ENG -.->|"engineering evidence"| VAG
-```
+<p align="center">
+  <img
+    src="./assets/architecture/ai-governance-runtime-trust-ecosystem.svg"
+    alt="AI Governance and Runtime Trust ecosystem architecture"
+    width="1100"
+  >
+</p>
 
 ## 1. AI Governance & Assurance
 

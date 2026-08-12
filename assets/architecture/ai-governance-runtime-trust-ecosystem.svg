@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="1024" viewBox="0 0 1536 1024">
+  <defs>
+    <marker id="arrow-dark" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#0f172a"/>
+    </marker>
+    <marker id="arrow-purple" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#6d28d9"/>
+    </marker>
+    <style>
+      .title { font: 700 40px Inter, Arial, sans-serif; fill:#0f172a; }
+      .subtitle { font: 400 22px Inter, Arial, sans-serif; fill:#334155; }
+      .section-purple { font: 700 22px Inter, Arial, sans-serif; fill:#6d28d9; }
+      .section-blue { font: 700 21px Inter, Arial, sans-serif; fill:#155eef; }
+      .section-green { font: 700 21px Inter, Arial, sans-serif; fill:#0f766e; }
+      .box-title { font: 700 22px Inter, Arial, sans-serif; fill:#0f172a; }
+      .box-title-sm { font: 700 18px Inter, Arial, sans-serif; fill:#0f172a; }
+      .box-sub { font: 400 16px Inter, Arial, sans-serif; fill:#334155; }
+      .label { font: 400 14px Inter, Arial, sans-serif; fill:#1e293b; }
+      .label-purple { font: 400 14px Inter, Arial, sans-serif; fill:#6d28d9; }
+      .legend-title { font: 700 17px Inter, Arial, sans-serif; fill:#6d28d9; }
+      .legend-text { font: 400 14px Inter, Arial, sans-serif; fill:#1e293b; }
+      .solid { stroke:#0f172a; stroke-width:2.2; fill:none; marker-end:url(#arrow-dark); }
+      .support { stroke:#0f172a; stroke-width:2; fill:none; stroke-dasharray:7 6; marker-end:url(#arrow-dark); }
+      .gov { stroke:#6d28d9; stroke-width:2.1; fill:none; stroke-dasharray:8 6; marker-end:url(#arrow-purple); }
+    </style>
+  </defs>
+
+  <!-- background -->
+  <rect width="1536" height="1024" fill="#ffffff"/>
+
+  <!-- title -->
+  <text x="768" y="44" text-anchor="middle" class="title">AI Governance &amp; Runtime Trust Ecosystem</text>
+  <text x="768" y="77" text-anchor="middle" class="subtitle">Governance, runtime trust, platform services, domain AI systems, and engineering controls</text>
+
+  <!-- AI Governance & Assurance -->
+  <rect x="24" y="98" width="1488" height="168" rx="16" fill="#faf7ff" stroke="#6d28d9" stroke-width="2"/>
+  <text x="50" y="136" class="section-purple">AI GOVERNANCE &amp; ASSURANCE</text>
+  <rect x="272" y="148" width="992" height="92" rx="14" fill="#ffffff" stroke="#7c3aed" stroke-width="1.8"/>
+  <text x="768" y="190" text-anchor="middle" class="box-title">Verifiable AI Governance</text>
+  <text x="768" y="218" text-anchor="middle" class="box-sub">Risk  •  controls  •  approvals  •  runtime assurance  •  evidence</text>
+
+  <!-- middle group backgrounds -->
+  <rect x="24" y="354" width="600" height="348" rx="18" fill="#f4f8ff" stroke="#155eef" stroke-width="2"/>
+  <text x="50" y="390" class="section-blue">AI-ASSISTED ENGINEERING CONTROLS</text>
+
+  <rect x="780" y="354" width="732" height="348" rx="18" fill="#f2fbf9" stroke="#0f766e" stroke-width="2"/>
+  <text x="806" y="390" class="section-green">RUNTIME TRUST &amp; PLATFORM SERVICES</text>
+
+  <!-- bottom domain group -->
+  <rect x="24" y="788" width="1488" height="150" rx="16" fill="#faf7ff" stroke="#6d28d9" stroke-width="2"/>
+  <text x="56" y="820" class="section-purple">DOMAIN AI SYSTEMS</text>
+
+  <!-- connectors governance <-> middle -->
+  <!-- engineering evidence -->
+  <path d="M360 354 V304 H448 V240" class="support"/>
+  <text x="462" y="294" class="label">engineering evidence</text>
+
+  <!-- sanitized runtime telemetry -->
+  <path d="M758 702 V338 V240" class="solid"/>
+  <text x="708" y="310" class="label">
+    <tspan x="708" dy="0">sanitized runtime</tspan>
+    <tspan x="708" dy="20">telemetry</tspan>
+  </text>
+
+  <!-- approved scope / runtime control -->
+  <path d="M1052 240 V352" class="solid"/>
+  <text x="912" y="294" class="label">
+    <tspan x="912" dy="0">approved scope /</tspan>
+    <tspan x="912" dy="20">runtime control</tspan>
+  </text>
+
+  <!-- routing decisions / violations -->
+  <path d="M1218 402 V240" class="solid"/>
+  <text x="1232" y="294" class="label">
+    <tspan x="1232" dy="0">routing decisions /</tspan>
+    <tspan x="1232" dy="20">violations</tspan>
+  </text>
+
+  <!-- engineering boxes -->
+  <rect x="48" y="414" width="264" height="82" rx="12" fill="#ffffff" stroke="#155eef" stroke-width="1.8"/>
+  <text x="180" y="462" text-anchor="middle" class="box-title-sm">engineering-loop-schemas</text>
+
+  <rect x="390" y="414" width="202" height="82" rx="12" fill="#ffffff" stroke="#f97316" stroke-width="1.8"/>
+  <text x="491" y="462" text-anchor="middle" class="box-title-sm">Alicerce</text>
+
+  <rect x="48" y="578" width="264" height="90" rx="12" fill="#ffffff" stroke="#155eef" stroke-width="1.8"/>
+  <text x="180" y="615" text-anchor="middle" class="box-title-sm">
+    <tspan x="180" dy="0">Claude Python</tspan>
+    <tspan x="180" dy="26">Engineering Harness</tspan>
+  </text>
+
+  <rect x="368" y="578" width="232" height="90" rx="12" fill="#ffffff" stroke="#155eef" stroke-width="1.8"/>
+  <text x="484" y="615" text-anchor="middle" class="box-title-sm">
+    <tspan x="484" dy="0">Codex Python</tspan>
+    <tspan x="484" dy="26">Engineering Harness</tspan>
+  </text>
+
+  <path d="M312 455 H390" class="solid"/>
+  <path d="M491 496 L290 578" class="support"/>
+  <path d="M491 496 L484 520 L590 578" class="support"/>
+
+  <!-- runtime boxes -->
+  <rect x="906" y="398" width="552" height="74" rx="12" fill="#ffffff" stroke="#0f766e" stroke-width="1.8"/>
+  <text x="1182" y="429" text-anchor="middle" class="box-title-sm">Policy Model Router</text>
+  <text x="1182" y="454" text-anchor="middle" class="box-sub">Deterministic policy enforcement</text>
+
+  <rect x="834" y="492" width="250" height="76" rx="12" fill="#ffffff" stroke="#0f766e" stroke-width="1.8"/>
+  <text x="959" y="522" text-anchor="middle" class="box-title-sm">mcp-client-auth-template</text>
+  <text x="959" y="548" text-anchor="middle" class="box-sub">OAuth/OIDC client boundary</text>
+
+  <rect x="1226" y="492" width="260" height="76" rx="12" fill="#ffffff" stroke="#0f766e" stroke-width="1.8"/>
+  <text x="1356" y="522" text-anchor="middle" class="box-title-sm">mcp-server-auth-template</text>
+  <text x="1356" y="548" text-anchor="middle" class="box-sub">OAuth/OIDC resource server</text>
+
+  <rect x="888" y="614" width="530" height="70" rx="12" fill="#ffffff" stroke="#0f766e" stroke-width="1.8"/>
+  <text x="1153" y="642" text-anchor="middle" class="box-title-sm">a2a-otel-kit</text>
+  <text x="1153" y="668" text-anchor="middle" class="box-sub">A2A/MCP distributed tracing</text>
+
+  <!-- oauth and trace context -->
+  <path d="M1084 530 H1226" class="solid"/>
+  <text x="1155" y="516" text-anchor="middle" class="label">
+    <tspan x="1155" dy="0">OAuth 2.1 /</tspan>
+    <tspan x="1155" dy="18">OIDC</tspan>
+  </text>
+
+  <path d="M996 568 V614" class="support"/>
+  <text x="858" y="592" class="label">W3C trace context</text>
+
+  <path d="M1268 568 V614" class="support"/>
+  <text x="1290" y="592" class="label">W3C trace context</text>
+
+  <!-- runtime to domain -->
+  <!-- Policy Model Router -> Multi-Agent Credit Desk -->
+  <path d="M906 435 H812 V746 H594 V836" class="solid"/>
+  <!-- a2a -> Multi-Agent Credit Desk -->
+  <path d="M1153 684 V724 H662 V836" class="solid"/>
+  <!-- secure tool boundary -->
+  <path d="M1444 568 V748 H690 V836" class="gov"/>
+  <text x="1054" y="746" class="label-purple">secure tool boundary</text>
+
+  <!-- governance dashed links to domains -->
+  <path d="M448 240 V724 H254 V836" class="gov"/>
+  <path d="M624 240 V742 H558 V836" class="gov"/>
+  <path d="M1018 240 V750 H950 V836" class="gov"/>
+  <path d="M1220 240 V732 H1290 V836" class="gov"/>
+
+  <!-- domain cards -->
+  <rect x="86" y="828" width="288" height="88" rx="12" fill="#ffffff" stroke="#6d28d9" stroke-width="1.8"/>
+  <text x="230" y="864" text-anchor="middle" class="box-title-sm">RAGForge</text>
+  <text x="230" y="890" text-anchor="middle" class="box-sub">Regulatory RAG evaluation</text>
+
+  <rect x="422" y="828" width="312" height="88" rx="12" fill="#ffffff" stroke="#6d28d9" stroke-width="1.8"/>
+  <text x="578" y="864" text-anchor="middle" class="box-title-sm">Multi-Agent Credit Desk</text>
+  <text x="578" y="890" text-anchor="middle" class="box-sub">Auditable credit agents</text>
+
+  <rect x="808" y="828" width="288" height="88" rx="12" fill="#ffffff" stroke="#6d28d9" stroke-width="1.8"/>
+  <text x="952" y="864" text-anchor="middle" class="box-title-sm">Open Finance BR MCP</text>
+  <text x="952" y="890" text-anchor="middle" class="box-sub">Typed financial tools</text>
+
+  <rect x="1140" y="828" width="296" height="88" rx="12" fill="#ffffff" stroke="#6d28d9" stroke-width="1.8"/>
+  <text x="1288" y="864" text-anchor="middle" class="box-title-sm">Meridian</text>
+  <text x="1288" y="890" text-anchor="middle" class="box-sub">Internal knowledge platform</text>
+
+  <!-- Open Finance -> Credit Desk -->
+  <path d="M808 872 H734" class="support"/>
+
+  <!-- footer legend -->
+  <rect x="24" y="950" width="1488" height="58" rx="12" fill="#fbfbff" stroke="#7c3aed" stroke-width="1.4"/>
+  <text x="50" y="984" class="legend-title">LINE LEGEND</text>
+
+  <path d="M216 979 H300" class="solid"/>
+  <text x="324" y="984" class="legend-text">Direct operational / control flow</text>
+
+  <path d="M618 979 H692" class="support"/>
+  <text x="716" y="984" class="legend-text">Supporting or indirect technical flow</text>
+
+  <path d="M1048 979 H1120" class="gov"/>
+  <text x="1146" y="984" class="legend-text">Governance relationship / secure boundary</text>
+</svg>
