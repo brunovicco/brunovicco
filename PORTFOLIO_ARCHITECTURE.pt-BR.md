@@ -11,7 +11,7 @@ Os projetos exploram como construir, proteger, operar, observar, avaliar e gover
 <p align="center">
   <img
     src="./assets/architecture/ai-governance-runtime-trust-ecosystem.svg"
-    alt="AI Governance and Runtime Trust ecosystem architecture"
+    alt="Arquitetura do ecossistema de Governança de IA e Confiança em Runtime"
     width="1100"
   >
 </p>
