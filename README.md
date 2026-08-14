@@ -6,14 +6,14 @@
 
 # Bruno Freitas Vicco
 
-### Senior Generative AI Engineer
+### AI Engineer
 
-**AI Platforms · RAG & Agents · MCP/A2A · AI Security · LLMOps · Verifiable AI Governance**
+**AI Platforms · Generative & Agentic AI · RAG · MCP/A2A · LLMOps · Security & Governance**
 
 📍 São Paulo, Brazil &nbsp;|&nbsp; 🌍 Open to international opportunities and relocation
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-brunovicco-0A66C2?style=flat&logo=linkedin&logoColor=white)](https://linkedin.com/in/brunovicco)
-[![Email](https://img.shields.io/badge/Email-bfvicco%40gmail.com-D14836?style=flat&logo=gmail&logoColor=white)](mailto:bfvicco@gmail.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-brunovicco-0A66C2?style=flat\&logo=linkedin\&logoColor=white)](https://linkedin.com/in/brunovicco)
+[![Email](https://img.shields.io/badge/Email-bfvicco%40gmail.com-D14836?style=flat\&logo=gmail\&logoColor=white)](mailto:bfvicco@gmail.com)
 
 </div>
 
@@ -21,24 +21,37 @@
 
 ## About
 
-Senior Generative AI Engineer focused on enterprise AI platforms and the trust infrastructure required to operate AI systems safely: retrieval, agents, identity, authorization, observability, runtime policy enforcement, evaluation, and verifiable governance.
+I am an AI Engineer focused on building and evolving AI platforms and production systems, especially where the problem requires more than integrating a model.
 
-My work combines software architecture, LLM engineering, security, LLMOps, and governance for production systems in regulated environments.
+My work is hands-on and spans engineering and architecture. I enjoy investigating ambiguous problems, exploring alternatives, defining the right technical boundaries, and turning business needs into reliable systems involving LLMs, RAG, agents, MCP/A2A, evaluation, observability, security, and governance.
 
-I bring more than 22 years of experience across financial services and technology, including Caixa, BTG Pactual, Banco do Brasil, Itaú Unibanco, and ASA SCFI.
+A recurring theme in my work is translating operational, security, and regulatory requirements into engineering mechanisms: explicit contracts, deterministic controls, authorization boundaries, evaluation pipelines, observability, auditability, and human-controlled decisions for high-impact actions.
+
+I bring more than 22 years of experience in financial services, with experience at Caixa, BTG Pactual, Banco do Brasil, Itaú Unibanco, and ASA SCFI. This background helps me work across technology, business, risk, and regulation without treating them as isolated concerns.
+
+---
+
+## Selected Impact
+
+* Built production AI systems for regulated financial institutions, including conversational and transactional assistants, RAG pipelines, agent workflows, observability, and security controls.
+* Led enterprise AI adoption for approximately **400 users**, including Claude Code for around **250 developers** and Claude Enterprise for approximately **150 business users**.
+* Reduced the average context of an investment assistant from approximately **70,000 to 3,000 tokens (~95%)** through conditional knowledge retrieval and injection, preserving response quality while reducing latency, token usage, and inference cost.
+* Designed semantic routing with intent-specific thresholds, positive and negative examples, and ambiguity handling, reaching approximately **94.7% accuracy** on the validation dataset.
+* Established engineering and governance mechanisms for enterprise AI adoption, including development standards, MCP allowlists, risk assessment, auditability, incident response, and controlled rollout.
+* Translated governance requirements into executable software through deterministic controls, segregation of duties, evidence-bound decisions, runtime enforcement, and tamper-evident audit history.
 
 ---
 
 ## Start Here
 
-| If you want to explore... | Start with |
-| --- | --- |
-| AI governance, assurance, and runtime evidence | [**Verifiable AI Governance**](https://github.com/brunovicco/verifiable-ai-governance) |
-| MCP security with OAuth 2.1 / OIDC | [**MCP Server Auth**](https://github.com/brunovicco/mcp-server-auth-template) + [**MCP Client Auth**](https://github.com/brunovicco/mcp-client-auth-template) |
-| Distributed observability across agents and tools | [**a2a-otel-kit**](https://github.com/brunovicco/a2a-otel-kit) |
-| Deterministic model policy enforcement | [**Policy Model Router**](https://github.com/brunovicco/policy-model-router) |
-| RAG evaluation over regulatory documents | [**RAGForge**](https://github.com/brunovicco/ragforge) |
-| Auditable multi-agent architecture | [**Multi-Agent Credit Desk**](https://github.com/brunovicco/multi-agent-credit-desk) |
+| If you want to explore...                              | Start with                                                                                                                                                    |
+| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Auditable multi-agent systems and domain orchestration | [**Multi-Agent Credit Desk**](https://github.com/brunovicco/multi-agent-credit-desk)                                                                          |
+| RAG evaluation and retrieval engineering               | [**RAGForge**](https://github.com/brunovicco/ragforge)                                                                                                        |
+| Distributed observability across agents and tools      | [**a2a-otel-kit**](https://github.com/brunovicco/a2a-otel-kit)                                                                                                |
+| Secure enterprise MCP with OAuth 2.1 / OIDC            | [**MCP Server Auth**](https://github.com/brunovicco/mcp-server-auth-template) + [**MCP Client Auth**](https://github.com/brunovicco/mcp-client-auth-template) |
+| Executable AI governance and runtime evidence          | [**Verifiable AI Governance**](https://github.com/brunovicco/verifiable-ai-governance)                                                                        |
+| Deterministic model routing and policy enforcement     | [**Policy Model Router**](https://github.com/brunovicco/policy-model-router)                                                                                  |
 
 [Explore the complete portfolio architecture and project relationships](./PORTFOLIO_ARCHITECTURE.md)
 
@@ -48,37 +61,29 @@ I bring more than 22 years of experience across financial services and technolog
 
 The repositories form an engineering ecosystem rather than a collection of isolated demos.
 
-The current architecture explores four complementary layers:
+They explore different parts of the same problem: **how to build AI systems that remain reliable, observable, secure, and governable as they move from experimentation into production.**
 
-- **Governance and assurance:** policy, risk, approvals, evidence, runtime assurance, incident response, and auditability.
-- **Runtime trust services:** model-policy enforcement, OAuth/OIDC for remote MCP, A2A/MCP trace continuity, and privacy-safe telemetry.
-- **Domain AI systems:** RAG, enterprise knowledge, Open Finance tools, and auditable multi-agent credit analysis.
-- **AI-assisted engineering controls:** deterministic execution, canonical evidence, architecture constraints, and human-controlled promotion.
+The ecosystem currently covers four complementary layers:
 
-The common design goal is to keep high-impact decisions and security boundaries outside model reasoning while still using LLMs where generative behavior adds value.
+* **Domain AI systems:** RAG, enterprise knowledge, Open Finance tools, and auditable multi-agent workflows.
+* **Runtime platform services:** model routing, MCP/A2A integration, distributed observability, identity, authorization, and privacy-safe telemetry.
+* **AI-assisted engineering:** deterministic execution, explicit contracts, architecture constraints, reproducible evidence, and human-controlled promotion.
+* **Governance and assurance:** policy, risk, approvals, runtime authorization, enforcement, incidents, evidence, and auditability.
 
----
-
-## Selected Impact
-
-- Built and governed production AI systems for regulated financial institutions, including conversational assistants, RAG pipelines, agent workflows, observability, and compliance controls.
-- Led enterprise AI adoption for approximately **400 users**, including Claude Code for around **250 developers** and Claude Enterprise for approximately **150 business users**.
-- Reduced the average context of an investment assistant from approximately **70,000 to 3,000 tokens** through conditional knowledge injection, improving accuracy while reducing latency and inference cost.
-- Established an AI governance function covering usage policies, approval processes, MCP allowlists, risk assessment, auditability, incident response, and phased enterprise adoption.
-- Translated governance requirements into a verifiable implementation with deterministic controls, segregation of duties, evidence-bound decisions, runtime enforcement, and tamper-evident audit history.
+The common engineering principle is to use LLMs where generative behavior adds value while keeping critical decisions, authorization, policy enforcement, and security boundaries explicit and independently verifiable.
 
 ---
 
 ## Featured Projects
 
-| Project | What it demonstrates |
-| --- | --- |
-| [**Verifiable AI Governance**](https://github.com/brunovicco/verifiable-ai-governance) | Evidence-driven AI governance from deterministic risk and independent approvals through signed runtime authorization, enforcement, assurance, incident response, and verifiable release evidence. [Public demo](https://vaigov-app.duckdns.org). |
+| Project                                                                                    | What it demonstrates                                                                                                                                                                                                                                                                                        |
+| ------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**Multi-Agent Credit Desk**](https://github.com/brunovicco/multi-agent-credit-desk)       | Auditable multi-agent credit workflow combining deterministic credit policy, MCP/A2A boundaries, model routing, synthetic data, and privacy-safe runtime telemetry.                                                                                                                                         |
+| [**RAGForge**](https://github.com/brunovicco/ragforge)                                     | Reproducible benchmarking and evaluation of retrieval strategies over Brazilian financial and regulatory documents.                                                                                                                                                                                         |
+| [**a2a-otel-kit**](https://github.com/brunovicco/a2a-otel-kit)                             | Vendor-neutral OpenTelemetry tracing across A2A agents and MCP services with W3C Trace Context, metadata-only telemetry, and executable distributed-trace proof.                                                                                                                                            |
 | [**MCP OAuth Security Reference**](https://github.com/brunovicco/mcp-server-auth-template) | Paired [server](https://github.com/brunovicco/mcp-server-auth-template) and [client](https://github.com/brunovicco/mcp-client-auth-template) reference for OAuth 2.1/OIDC, Entra ID, exact resource binding, progressive authorization, stateless MCP, privacy-safe telemetry, and executable E2E evidence. |
-| [**a2a-otel-kit**](https://github.com/brunovicco/a2a-otel-kit) | Vendor-neutral OpenTelemetry tracing across A2A agents and MCP services with W3C Trace Context, metadata-only telemetry, and executable distributed-trace proof. |
-| [**Policy Model Router**](https://github.com/brunovicco/policy-model-router) | Fail-closed runtime policy enforcement with deterministic model routing, explainable decisions, governed runtime authorization, violation evidence, and kill-switch enforcement. |
-| [**RAGForge**](https://github.com/brunovicco/ragforge) | Reproducible benchmarking and evaluation of retrieval strategies over Brazilian financial and regulatory documents. |
-| [**Multi-Agent Credit Desk**](https://github.com/brunovicco/multi-agent-credit-desk) | Auditable multi-agent credit workflow combining deterministic credit policy, MCP/A2A boundaries, model routing, synthetic data, and privacy-safe governed runtime telemetry. |
+| [**Verifiable AI Governance**](https://github.com/brunovicco/verifiable-ai-governance)     | Production-oriented reference platform connecting policy, approvals, signed runtime authorization, enforcement, assurance, incident response, and independently verifiable evidence. [Public demo](https://vaigov-app.duckdns.org).                                                                         |
+| [**Policy Model Router**](https://github.com/brunovicco/policy-model-router)               | Fail-closed model routing and runtime policy enforcement with explainable decisions, governed authorization, violation evidence, and kill-switch support.                                                                                                                                                   |
 
 ### Engineering foundations
 
@@ -96,30 +101,31 @@ The common design goal is to keep high-impact decisions and security boundaries 
 
 ## Engineering Principles
 
-- Critical business decisions remain deterministic and auditable.
-- Authentication and authorization are enforced in code, never delegated to a language model.
-- Agents, MCP servers, model providers, retrieved data, and telemetry pipelines are treated as trust boundaries.
-- Structured outputs, explicit contracts, bounded retries, and fail-closed validation constrain generative behavior.
-- Evidence must be independently verifiable; model self-reports are not proof.
-- Approvals remain bound to the exact reviewed scope, and material changes trigger reassessment.
-- Telemetry is minimized by design; prompts, model responses, credentials, and business payloads are not observability defaults.
-- Promotion, deployment, runtime overrides, and other high-impact actions remain under explicit human authority.
+* Choose the architecture based on the problem, not on the popularity of a specific AI pattern.
+* Critical business decisions remain deterministic and auditable.
+* Authentication and authorization are enforced in code, never delegated to a language model.
+* Agents, MCP servers, model providers, retrieved data, and telemetry pipelines are treated as explicit trust boundaries.
+* Structured outputs, typed contracts, bounded retries, and fail-closed validation constrain generative behavior.
+* Retrieval and generation are evaluated independently where possible.
+* Evidence must be independently verifiable; model self-reports are not proof.
+* Telemetry is minimized by design; prompts, model responses, credentials, and business payloads are not observability defaults.
+* High-impact actions such as promotion, deployment, runtime overrides, and sensitive tool execution remain under explicit human authority.
 
 ---
 
 ## Core Expertise
 
-**Generative AI Engineering**  
-RAG · agentic systems · multi-agent architectures · semantic and model routing · structured outputs · tool calling · LLM evaluation · guardrails
+**AI Platforms & Architecture**
+Enterprise AI platforms · distributed AI systems · API and service design · model routing · MCP/A2A · identity and authorization · platform capabilities · developer enablement
 
-**Agent and MCP Security**
-MCP · A2A · OAuth 2.1 · OIDC · Microsoft Entra ID · PKCE · resource/audience binding · least privilege · fail-closed authorization · prompt-injection boundaries
+**Generative & Agentic AI**
+LLMs · RAG · agentic systems · multi-agent architectures · LangGraph · semantic routing · structured outputs · tool calling · evaluation · guardrails
 
-**AI Platforms and Governance**
-Enterprise AI platforms · policy enforcement · runtime authorization · model and agent assurance · evidence · auditability · incident response · human-in-the-loop
+**LLMOps & Observability**
+OpenTelemetry · W3C Trace Context · OTLP · Datadog · Langfuse · distributed tracing · structured logging · evaluation pipelines · regression testing · latency/token/cost observability
 
-**LLMOps and Observability**
-OpenTelemetry · W3C Trace Context · OTLP · Datadog · Langfuse · distributed tracing · structured logging · latency percentiles · evaluation pipelines · regression testing · token/cost observability
+**AI Security & Governance**
+OAuth 2.1 · OIDC · least privilege · fail-closed authorization · prompt-injection boundaries · policy enforcement · runtime authorization · assurance · auditability · incident response · human-in-the-loop
 
 <details>
 <summary><strong>Technology stack</strong></summary>
@@ -143,7 +149,7 @@ OpenTelemetry · W3C Trace Context · OTLP · Datadog · Langfuse · distributed
 
 <br>
 
-Experience translating requirements and controls from BACEN, CMN, LGPD, CVM, ANBIMA, DORA, NIST AI RMF, ISO/IEC 42001, NIST SP 800-53, CIS Controls, MITRE ATLAS, and OWASP guidance for LLM and agentic systems.
+Experience translating requirements and controls from BACEN, CMN, LGPD, CVM, ANBIMA, DORA, NIST AI RMF, ISO/IEC 42001, NIST SP 800-53, CIS Controls, MITRE ATLAS, and OWASP guidance into technical and operational mechanisms for LLM and agentic systems.
 
 Professional background includes corporate banking, credit, risk, treasury, financial operations, software engineering, production AI, enterprise enablement, and AI governance.
 
@@ -154,10 +160,10 @@ Professional background includes corporate banking, credit, risk, treasury, fina
 
 <br>
 
-- AWS Certified AI Practitioner
-- AWS Certified Cloud Practitioner
-- Microsoft Certified: Azure Fundamentals
-- CPA-20 ANBIMA
+* AWS Certified AI Practitioner
+* AWS Certified Cloud Practitioner
+* Microsoft Certified: Azure Fundamentals
+* CPA-20 ANBIMA
 
 </details>
 
