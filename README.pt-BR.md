@@ -2,13 +2,13 @@
 
 🇧🇷 **Português** &nbsp;|&nbsp; 🇺🇸 [English](README.md)
 
-![Bruno Freitas Vicco — Engenharia de IA](https://raw.githubusercontent.com/brunovicco/brunovicco/main/assets/social/github-profile-cover.png)
+![Bruno Vicco - Engenharia de IA](https://raw.githubusercontent.com/brunovicco/brunovicco/main/assets/social/github-profile-cover.png)
 
-# Bruno Freitas Vicco
+# Bruno Vicco
 
-### Engenheiro Sênior de IA Generativa
+### Engenheiro de IA
 
-**Plataformas de IA · RAG e Agentes · MCP/A2A · Segurança de IA · LLMOps · Governança Verificável**
+**Plataformas de IA · IA Generativa e Agêntica · RAG · MCP/A2A · LLMOps · Segurança e Governança**
 
 📍 São Paulo, Brasil &nbsp;|&nbsp; 🌍 Aberto a oportunidades internacionais e relocação
 
@@ -21,24 +21,37 @@
 
 ## Sobre mim
 
-Engenheiro Sênior de IA Generativa com foco em plataformas corporativas de IA e na infraestrutura de confiança necessária para operar esses sistemas com segurança: recuperação, agentes, identidade, autorização, observabilidade, enforcement de políticas em runtime, avaliação e governança verificável.
+Atuo como Engenheiro de IA na construção e evolução de plataformas e sistemas de Inteligência Artificial, principalmente em problemas que exigem ir além da integração com modelos.
 
-Meu trabalho combina arquitetura de software, engenharia de LLMs, segurança, LLMOps e governança para sistemas em produção, especialmente em ambientes regulados.
+Minha atuação é hands-on e transita entre engenharia e arquitetura. Gosto de investigar problemas ainda pouco estruturados, explorar alternativas, definir os limites técnicos adequados e transformar necessidades de negócio em sistemas confiáveis envolvendo LLMs, RAG, agentes, MCP/A2A, avaliação, observabilidade, segurança e governança.
 
-Tenho mais de 22 anos de experiência entre serviços financeiros e tecnologia, com passagens por Caixa, BTG Pactual, Banco do Brasil, Itaú Unibanco e ASA SCFI.
+Uma parte recorrente do meu trabalho é transformar requisitos operacionais, regulatórios e de segurança em mecanismos de engenharia: contratos explícitos, controles determinísticos, fronteiras de autorização, pipelines de avaliação, observabilidade, auditabilidade e decisões humanas para ações de maior impacto.
+
+Tenho mais de 22 anos de experiência no setor financeiro, com passagens por Caixa, BTG Pactual, Banco do Brasil, Itaú Unibanco e ASA SCFI. Essa trajetória me permite transitar entre tecnologia, negócio, risco e regulação sem tratar essas dimensões como problemas isolados.
+
+---
+
+## Principais resultados
+
+* Construí sistemas de IA em produção para instituições financeiras reguladas, incluindo assistentes conversacionais e transacionais, pipelines RAG, workflows com agentes, observabilidade e controles de segurança.
+* Liderei a adoção corporativa de IA para aproximadamente **400 usuários**, incluindo Claude Code para cerca de **250 desenvolvedores** e Claude Enterprise para aproximadamente **150 profissionais de negócio**.
+* Reduzi o contexto médio de um assistente de investimentos de aproximadamente **70 mil para 3 mil tokens (~95%)** por meio de recuperação e injeção condicional de conhecimento, preservando a qualidade das respostas e reduzindo latência, consumo de tokens e custo de inferência.
+* Estruturei roteamento semântico com thresholds específicos por intenção, exemplos positivos e negativos e tratamento de ambiguidades, alcançando aproximadamente **94,7% de acurácia** no conjunto de validação.
+* Estruturei mecanismos de engenharia e governança para adoção corporativa de IA, incluindo padrões de desenvolvimento, allowlists de MCP, avaliação de riscos, auditabilidade, resposta a incidentes e rollout controlado.
+* Transformei requisitos de governança em software executável por meio de controles determinísticos, segregação de funções, decisões vinculadas a evidências, enforcement em runtime e histórico de auditoria resistente a adulterações.
 
 ---
 
 ## Por onde começar
 
-| Se você quer explorar... | Comece por |
-| --- | --- |
-| Governança de IA, assurance e evidência em runtime | [**Verifiable AI Governance**](https://github.com/brunovicco/verifiable-ai-governance) |
-| Segurança MCP com OAuth 2.1 / OIDC | [**MCP Server Auth**](https://github.com/brunovicco/mcp-server-auth-template) + [**MCP Client Auth**](https://github.com/brunovicco/mcp-client-auth-template) |
-| Observabilidade distribuída entre agentes e ferramentas | [**a2a-otel-kit**](https://github.com/brunovicco/a2a-otel-kit) |
-| Enforcement determinístico de políticas de modelo | [**Policy Model Router**](https://github.com/brunovicco/policy-model-router) |
-| Avaliação de RAG sobre documentos regulatórios | [**RAGForge**](https://github.com/brunovicco/ragforge) |
-| Arquitetura multiagente auditável | [**Multi-Agent Credit Desk**](https://github.com/brunovicco/multi-agent-credit-desk) |
+| Se você quer explorar...                                        | Comece por                                                                                                                                                    |
+| --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Sistemas multiagente auditáveis e orquestração de domínio       | [**Multi-Agent Credit Desk**](https://github.com/brunovicco/multi-agent-credit-desk)                                                                          |
+| Avaliação de RAG e engenharia de recuperação                    | [**RAGForge**](https://github.com/brunovicco/ragforge)                                                                                                        |
+| Observabilidade distribuída entre agentes e ferramentas         | [**a2a-otel-kit**](https://github.com/brunovicco/a2a-otel-kit)                                                                                                |
+| MCP corporativo seguro com OAuth 2.1 / OIDC                     | [**MCP Server Auth**](https://github.com/brunovicco/mcp-server-auth-template) + [**MCP Client Auth**](https://github.com/brunovicco/mcp-client-auth-template) |
+| Governança executável de IA e evidências em runtime             | [**Verifiable AI Governance**](https://github.com/brunovicco/verifiable-ai-governance)                                                                        |
+| Roteamento determinístico de modelos e enforcement de políticas | [**Policy Model Router**](https://github.com/brunovicco/policy-model-router)                                                                                  |
 
 [Explore a arquitetura completa do portfólio e as relações entre os projetos](./PORTFOLIO_ARCHITECTURE.pt-BR.md)
 
@@ -48,37 +61,29 @@ Tenho mais de 22 anos de experiência entre serviços financeiros e tecnologia, 
 
 Os repositórios formam um ecossistema de engenharia, e não uma coleção de demonstrações isoladas.
 
-A arquitetura atual explora quatro camadas complementares:
+Eles exploram diferentes partes de um mesmo problema: **como construir sistemas de IA que permaneçam confiáveis, observáveis, seguros e governáveis à medida que avançam da experimentação para produção.**
 
-- **Governança e assurance:** política, risco, aprovações, evidências, assurance em runtime, resposta a incidentes e auditabilidade.
-- **Serviços de confiança em runtime:** enforcement de política de modelos, OAuth/OIDC para MCP remoto, continuidade de traces entre A2A/MCP e telemetria com minimização de dados.
-- **Sistemas de IA de domínio:** RAG, conhecimento corporativo, ferramentas de Open Finance e análise multiagente auditável de crédito.
-- **Controles para engenharia assistida por IA:** execução determinística, evidência canônica, limites arquiteturais e promoção controlada por humanos.
+O ecossistema atualmente cobre quatro camadas complementares:
 
-O objetivo comum é manter decisões de alto impacto e fronteiras de segurança fora do raciocínio do modelo, usando LLMs apenas onde o comportamento generativo agrega valor.
+* **Sistemas de IA de domínio:** RAG, conhecimento corporativo, ferramentas de Open Finance e workflows multiagente auditáveis.
+* **Serviços de plataforma em runtime:** roteamento de modelos, integração MCP/A2A, observabilidade distribuída, identidade, autorização e telemetria com minimização de dados.
+* **Engenharia assistida por IA:** execução determinística, contratos explícitos, limites arquiteturais, evidência reproduzível e promoção controlada por humanos.
+* **Governança e assurance:** políticas, riscos, aprovações, autorização em runtime, enforcement, incidentes, evidências e auditabilidade.
 
----
-
-## Principais resultados
-
-- Construí e governei sistemas de IA em produção para instituições financeiras reguladas, incluindo assistentes conversacionais, pipelines RAG, fluxos agênticos, observabilidade e controles de compliance.
-- Liderei a adoção corporativa de IA para aproximadamente **400 usuários**, incluindo Claude Code para cerca de **250 desenvolvedores** e Claude Enterprise para aproximadamente **150 profissionais de negócio**.
-- Reduzi o contexto médio de um assistente de investimentos de aproximadamente **70 mil para 3 mil tokens** por meio de injeção condicional de conhecimento, melhorando precisão e reduzindo latência e custo.
-- Estruturei uma função de governança de IA com políticas de uso, processos de aprovação, allowlists de MCP, avaliação de riscos, auditabilidade, resposta a incidentes e adoção corporativa por fases.
-- Transformei requisitos de governança em uma implementação verificável, com controles determinísticos, segregação de funções, evidências vinculadas às decisões, enforcement em runtime e histórico de auditoria resistente a adulterações.
+O princípio comum é utilizar LLMs onde o comportamento generativo agrega valor, mantendo decisões críticas, autorização, enforcement de políticas e fronteiras de segurança explícitos e verificáveis de forma independente.
 
 ---
 
 ## Projetos em destaque
 
-| Projeto | O que demonstra |
-| --- | --- |
-| [**Verifiable AI Governance**](https://github.com/brunovicco/verifiable-ai-governance) | Governança de IA orientada a evidências, da classificação determinística de risco e aprovações independentes até autorização assinada em runtime, enforcement, assurance, resposta a incidentes e evidência verificável de release. [Demo pública](https://vaigov-app.duckdns.org). |
+| Projeto                                                                                    | O que demonstra                                                                                                                                                                                                                                                                                             |
+| ------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**Multi-Agent Credit Desk**](https://github.com/brunovicco/multi-agent-credit-desk)       | Workflow multiagente auditável de crédito combinando política determinística, fronteiras MCP/A2A, roteamento de modelos, dados sintéticos e telemetria de runtime com minimização de dados.                                                                                                                 |
+| [**RAGForge**](https://github.com/brunovicco/ragforge)                                     | Benchmark e avaliação reproduzíveis de estratégias de recuperação sobre documentos financeiros e regulatórios brasileiros.                                                                                                                                                                                  |
+| [**a2a-otel-kit**](https://github.com/brunovicco/a2a-otel-kit)                             | Tracing OpenTelemetry neutro de fornecedor entre agentes A2A e serviços MCP, com W3C Trace Context, telemetria somente de metadados e prova executável do trace distribuído.                                                                                                                                |
 | [**MCP OAuth Security Reference**](https://github.com/brunovicco/mcp-server-auth-template) | Referência combinada de [servidor](https://github.com/brunovicco/mcp-server-auth-template) e [cliente](https://github.com/brunovicco/mcp-client-auth-template) para OAuth 2.1/OIDC, Entra ID, resource binding exato, autorização progressiva, MCP stateless, telemetria segura e evidência E2E executável. |
-| [**a2a-otel-kit**](https://github.com/brunovicco/a2a-otel-kit) | Tracing OpenTelemetry neutro de fornecedor entre agentes A2A e serviços MCP, com W3C Trace Context, telemetria somente de metadados e prova executável do trace distribuído. |
-| [**Policy Model Router**](https://github.com/brunovicco/policy-model-router) | Enforcement fail-closed de políticas em runtime, com roteamento determinístico de modelos, decisões explicáveis, autorização governada, evidência de violações e kill switch. |
-| [**RAGForge**](https://github.com/brunovicco/ragforge) | Benchmark e avaliação reproduzíveis de estratégias de recuperação sobre documentos financeiros e regulatórios brasileiros. |
-| [**Multi-Agent Credit Desk**](https://github.com/brunovicco/multi-agent-credit-desk) | Fluxo multiagente auditável de crédito que combina política determinística, fronteiras MCP/A2A, roteamento de modelos, dados sintéticos e telemetria governada com minimização de dados. |
+| [**Verifiable AI Governance**](https://github.com/brunovicco/verifiable-ai-governance)     | Plataforma de referência orientada a produção que conecta políticas, aprovações, autorização assinada em runtime, enforcement, assurance, resposta a incidentes e evidências verificáveis de forma independente. [Demo pública](https://vaigov-app.duckdns.org).                                            |
+| [**Policy Model Router**](https://github.com/brunovicco/policy-model-router)               | Roteamento fail-closed de modelos e enforcement de políticas em runtime, com decisões explicáveis, autorização governada, evidência de violações e suporte a kill switch.                                                                                                                                   |
 
 ### Fundações de engenharia
 
@@ -96,30 +101,31 @@ O objetivo comum é manter decisões de alto impacto e fronteiras de segurança 
 
 ## Princípios de engenharia
 
-- Decisões críticas de negócio permanecem determinísticas e auditáveis.
-- Autenticação e autorização são aplicadas em código, nunca delegadas ao modelo de linguagem.
-- Agentes, servidores MCP, provedores de modelos, dados recuperados e pipelines de telemetria são tratados como fronteiras de confiança.
-- Saídas estruturadas, contratos explícitos, retries limitados e validação fail-closed restringem o comportamento generativo.
-- Evidências precisam ser verificáveis de forma independente; autorrelato do modelo não é prova.
-- Aprovações permanecem vinculadas ao escopo exato revisado e mudanças materiais exigem nova avaliação.
-- Telemetria é minimizada por design; prompts, respostas de modelos, credenciais e payloads de negócio não são o padrão de observabilidade.
-- Promoção, deploy, overrides em runtime e outras ações de alto impacto permanecem sob autoridade humana explícita.
+* Escolher a arquitetura de acordo com o problema, e não pela popularidade de um padrão específico de IA.
+* Decisões críticas de negócio permanecem determinísticas e auditáveis.
+* Autenticação e autorização são aplicadas em código, nunca delegadas ao modelo de linguagem.
+* Agentes, servidores MCP, provedores de modelos, dados recuperados e pipelines de telemetria são tratados como fronteiras explícitas de confiança.
+* Saídas estruturadas, contratos tipados, retries limitados e validações fail-closed restringem o comportamento generativo.
+* Recuperação e geração são avaliadas separadamente sempre que possível.
+* Evidências precisam ser verificáveis de forma independente; autorrelato do modelo não é prova.
+* Telemetria é minimizada por design; prompts, respostas de modelos, credenciais e payloads de negócio não são o padrão de observabilidade.
+* Ações de alto impacto, como promoção, deploy, overrides em runtime e execução de ferramentas sensíveis, permanecem sob autoridade humana explícita.
 
 ---
 
 ## Competências principais
 
-**Engenharia de IA Generativa**
-RAG · sistemas agênticos · arquiteturas multiagente · roteamento semântico e de modelos · saídas estruturadas · tool calling · avaliação de LLMs · guardrails
+**Plataformas e Arquitetura de IA**
+Plataformas corporativas de IA · sistemas distribuídos de IA · APIs e serviços · roteamento de modelos · MCP/A2A · identidade e autorização · capacidades de plataforma · developer enablement
 
-**Segurança de Agentes e MCP**
-MCP · A2A · OAuth 2.1 · OIDC · Microsoft Entra ID · PKCE · resource/audience binding · menor privilégio · autorização fail-closed · fronteiras contra prompt injection
+**IA Generativa e Agêntica**
+LLMs · RAG · sistemas agênticos · arquiteturas multiagente · LangGraph · roteamento semântico · saídas estruturadas · tool calling · avaliação · guardrails
 
-**Plataformas e Governança de IA**
-Plataformas corporativas · policy enforcement · autorização em runtime · assurance de modelos e agentes · evidências · auditabilidade · resposta a incidentes · human-in-the-loop
+**LLMOps e Observabilidade**
+OpenTelemetry · W3C Trace Context · OTLP · Datadog · Langfuse · tracing distribuído · logging estruturado · pipelines de avaliação · testes de regressão · observabilidade de latência, tokens e custos
 
-**LLMOps e observabilidade**
-OpenTelemetry · W3C Trace Context · OTLP · Datadog · Langfuse · tracing distribuído · logging estruturado · percentis de latência · pipelines de avaliação · testes de regressão · observabilidade de tokens e custos
+**Segurança e Governança de IA**
+OAuth 2.1 · OIDC · menor privilégio · autorização fail-closed · fronteiras contra prompt injection · policy enforcement · autorização em runtime · assurance · auditabilidade · resposta a incidentes · human-in-the-loop
 
 <details>
 <summary><strong>Stack tecnológica</strong></summary>
@@ -143,7 +149,7 @@ OpenTelemetry · W3C Trace Context · OTLP · Datadog · Langfuse · tracing dis
 
 <br>
 
-Experiência na tradução de requisitos e controles de BACEN, CMN, LGPD, CVM, ANBIMA, DORA, NIST AI RMF, ISO/IEC 42001, NIST SP 800-53, CIS Controls, MITRE ATLAS e orientações OWASP para LLMs e sistemas agênticos.
+Experiência na tradução de requisitos e controles de BACEN, CMN, LGPD, CVM, ANBIMA, DORA, NIST AI RMF, ISO/IEC 42001, NIST SP 800-53, CIS Controls, MITRE ATLAS e orientações OWASP em mecanismos técnicos e operacionais para LLMs e sistemas agênticos.
 
 A trajetória inclui banking corporativo, crédito, risco, tesouraria, operações financeiras, engenharia de software, IA em produção, adoção corporativa e governança de IA.
 
@@ -154,10 +160,10 @@ A trajetória inclui banking corporativo, crédito, risco, tesouraria, operaçõ
 
 <br>
 
-- AWS Certified AI Practitioner
-- AWS Certified Cloud Practitioner
-- Microsoft Certified: Azure Fundamentals
-- CPA-20 ANBIMA
+* AWS Certified AI Practitioner
+* AWS Certified Cloud Practitioner
+* Microsoft Certified: Azure Fundamentals
+* CPA-20 ANBIMA
 
 </details>
 
