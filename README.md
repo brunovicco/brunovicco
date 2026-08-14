@@ -2,9 +2,9 @@
 
 🇺🇸 **English** &nbsp;|&nbsp; 🇧🇷 [Português](README.pt-BR.md)
 
-![Bruno Freitas Vicco — AI Engineering](https://raw.githubusercontent.com/brunovicco/brunovicco/main/assets/social/github-profile-cover.png)
+![Bruno Vicco — AI Engineering](https://raw.githubusercontent.com/brunovicco/brunovicco/main/assets/social/github-profile-cover.png)
 
-# Bruno Freitas Vicco
+# Bruno Vicco
 
 ### AI Engineer
 

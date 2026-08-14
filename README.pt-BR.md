@@ -2,9 +2,9 @@
 
 🇧🇷 **Português** &nbsp;|&nbsp; 🇺🇸 [English](README.md)
 
-![Bruno Freitas Vicco - Engenharia de IA](https://raw.githubusercontent.com/brunovicco/brunovicco/main/assets/social/github-profile-cover.png)
+![Bruno Vicco - Engenharia de IA](https://raw.githubusercontent.com/brunovicco/brunovicco/main/assets/social/github-profile-cover.png)
 
-# Bruno Freitas Vicco
+# Bruno Vicco
 
 ### Engenheiro de IA
 
