@@ -1,180 +1,230 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="1024" viewBox="0 0 1536 1024">
+<svg xmlns="http://www.w3.org/2000/svg" width="1700" height="1120" viewBox="0 0 1700 1120" role="img" aria-labelledby="title desc">
+  <title id="title">AI Platform Architecture</title>
+  <desc id="desc">
+    Architecture diagram showing AI products, agents, and developer workflows on top; a central AI Platform
+    with control plane, model access, identity and tool access, agent runtime, observability, evaluation and quality,
+    and AI developer platform; supported by a cloud and platform foundation. Security, governance, and evidence
+    and auditability are shown as cross-cutting capabilities.
+  </desc>
+
   <defs>
-    <marker id="arrow-dark" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="strokeWidth">
-      <path d="M0,0 L10,5 L0,10 Z" fill="#0f172a"/>
+    <linearGradient id="platformGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2563eb" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#7c3aed" stop-opacity="0.08"/>
+    </linearGradient>
+
+    <linearGradient id="topGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="5" stdDeviation="10" flood-color="#000000" flood-opacity="0.10"/>
+    </filter>
+
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#64748b"/>
     </marker>
-    <marker id="arrow-purple" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="strokeWidth">
-      <path d="M0,0 L10,5 L0,10 Z" fill="#6d28d9"/>
-    </marker>
+
     <style>
-      .title { font: 700 40px Inter, Arial, sans-serif; fill:#0f172a; }
-      .subtitle { font: 400 22px Inter, Arial, sans-serif; fill:#334155; }
-      .section-purple { font: 700 22px Inter, Arial, sans-serif; fill:#6d28d9; }
-      .section-blue { font: 700 21px Inter, Arial, sans-serif; fill:#155eef; }
-      .section-green { font: 700 21px Inter, Arial, sans-serif; fill:#0f766e; }
-      .box-title { font: 700 22px Inter, Arial, sans-serif; fill:#0f172a; }
-      .box-title-sm { font: 700 18px Inter, Arial, sans-serif; fill:#0f172a; }
-      .box-sub { font: 400 16px Inter, Arial, sans-serif; fill:#334155; }
-      .label { font: 400 14px Inter, Arial, sans-serif; fill:#1e293b; }
-      .label-purple { font: 400 14px Inter, Arial, sans-serif; fill:#6d28d9; }
-      .legend-title { font: 700 17px Inter, Arial, sans-serif; fill:#6d28d9; }
-      .legend-text { font: 400 14px Inter, Arial, sans-serif; fill:#1e293b; }
-      .solid { stroke:#0f172a; stroke-width:2.2; fill:none; marker-end:url(#arrow-dark); }
-      .support { stroke:#0f172a; stroke-width:2; fill:none; stroke-dasharray:7 6; marker-end:url(#arrow-dark); }
-      .gov { stroke:#6d28d9; stroke-width:2.1; fill:none; stroke-dasharray:8 6; marker-end:url(#arrow-purple); }
+      :root {
+        color-scheme: light dark;
+      }
+
+      .bg { fill: #ffffff; }
+      .surface { fill: #ffffff; stroke: #d0d7de; }
+      .surface-soft { fill: #f6f8fa; stroke: #d0d7de; }
+      .platform-shell { fill: url(#platformGrad); stroke: #8b5cf6; }
+      .text { fill: #24292f; }
+      .muted { fill: #57606a; }
+      .transversal { fill: #f6f8fa; stroke: #afb8c1; }
+      .chip-text { fill: #24292f; }
+
+      @media (prefers-color-scheme: dark) {
+        .bg { fill: #0d1117; }
+        .surface { fill: #161b22; stroke: #30363d; }
+        .surface-soft { fill: #0d1117; stroke: #30363d; }
+        .platform-shell { fill: #111827; stroke: #8b5cf6; }
+        .text { fill: #f0f6fc; }
+        .muted { fill: #8b949e; }
+        .transversal { fill: #161b22; stroke: #484f58; }
+        .chip-text { fill: #f0f6fc; }
+      }
+
+      text {
+        font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      }
+
+      .title {
+        font-size: 28px;
+        font-weight: 700;
+      }
+
+      .layer-title {
+        font-size: 24px;
+        font-weight: 700;
+      }
+
+      .card-title {
+        font-size: 20px;
+        font-weight: 700;
+      }
+
+      .card-sub {
+        font-size: 16px;
+        font-weight: 500;
+      }
+
+      .small {
+        font-size: 15px;
+        font-weight: 600;
+      }
+
+      .label {
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: .08em;
+      }
     </style>
   </defs>
 
-  <!-- background -->
-  <rect width="1536" height="1024" fill="#ffffff"/>
+  <rect class="bg" x="0" y="0" width="1700" height="1120" rx="28"/>
 
-  <!-- title -->
-  <text x="768" y="44" text-anchor="middle" class="title">AI Governance &amp; Runtime Trust Ecosystem</text>
-  <text x="768" y="77" text-anchor="middle" class="subtitle">Governance, runtime trust, platform services, domain AI systems, and engineering controls</text>
+  <g filter="url(#shadow)">
+    <rect class="surface" x="290" y="70" width="1120" height="120" rx="24" stroke-width="2"/>
+    <rect x="290" y="70" width="10" height="120" rx="5" fill="url(#topGrad)"/>
+  </g>
 
-  <!-- AI Governance & Assurance -->
-  <rect x="24" y="98" width="1488" height="168" rx="16" fill="#faf7ff" stroke="#6d28d9" stroke-width="2"/>
-  <text x="50" y="136" class="section-purple">AI GOVERNANCE &amp; ASSURANCE</text>
-  <rect x="272" y="148" width="992" height="92" rx="14" fill="#ffffff" stroke="#7c3aed" stroke-width="1.8"/>
-  <text x="768" y="190" text-anchor="middle" class="box-title">Verifiable AI Governance</text>
-  <text x="768" y="218" text-anchor="middle" class="box-sub">Risk  •  controls  •  approvals  •  runtime assurance  •  evidence</text>
+  <g transform="translate(345,106)">
+    <rect x="0" y="0" width="52" height="52" rx="14" fill="#2563eb" opacity="0.12"/>
+    <rect x="13" y="13" width="11" height="11" rx="3" fill="#2563eb"/>
+    <rect x="28" y="13" width="11" height="11" rx="3" fill="#7c3aed"/>
+    <rect x="13" y="28" width="11" height="11" rx="3" fill="#7c3aed"/>
+    <rect x="28" y="28" width="11" height="11" rx="3" fill="#2563eb"/>
 
-  <!-- middle group backgrounds -->
-  <rect x="24" y="354" width="600" height="348" rx="18" fill="#f4f8ff" stroke="#155eef" stroke-width="2"/>
-  <text x="50" y="390" class="section-blue">AI-ASSISTED ENGINEERING CONTROLS</text>
+    <text class="text title" x="76" y="22">AI Products · Agents · Developer Workflows</text>
+    <text class="muted card-sub" x="76" y="49">User-facing experiences and engineering workflows built on shared platform capabilities</text>
+  </g>
 
-  <rect x="780" y="354" width="732" height="348" rx="18" fill="#f2fbf9" stroke="#0f766e" stroke-width="2"/>
-  <text x="806" y="390" class="section-green">RUNTIME TRUST &amp; PLATFORM SERVICES</text>
+  <line x1="850" y1="190" x2="850" y2="242" stroke="#64748b" stroke-width="3" marker-end="url(#arrow)"/>
 
-  <!-- bottom domain group -->
-  <rect x="24" y="788" width="1488" height="150" rx="16" fill="#faf7ff" stroke="#6d28d9" stroke-width="2"/>
-  <text x="56" y="820" class="section-purple">DOMAIN AI SYSTEMS</text>
+  <g filter="url(#shadow)">
+    <rect class="platform-shell" x="145" y="250" width="1410" height="620" rx="30" stroke-width="2.5"/>
+  </g>
 
-  <!-- connectors governance <-> middle -->
-  <!-- engineering evidence -->
-  <path d="M360 354 V304 H448 V240" class="support"/>
-  <text x="462" y="294" class="label">engineering evidence</text>
+  <g transform="translate(195,286)">
+    <circle cx="15" cy="15" r="15" fill="#7c3aed" opacity="0.18"/>
+    <path d="M8 15h14M15 8v14" stroke="#7c3aed" stroke-width="3" stroke-linecap="round"/>
+    <text class="text layer-title" x="44" y="23">AI Platform</text>
+    <text class="muted card-sub" x="44" y="48">Shared control, runtime, observability, quality, and developer enablement capabilities</text>
+  </g>
 
-  <!-- sanitized runtime telemetry -->
-  <path d="M758 702 V338 V240" class="solid"/>
-  <text x="708" y="310" class="label">
-    <tspan x="708" dy="0">sanitized runtime</tspan>
-    <tspan x="708" dy="20">telemetry</tspan>
-  </text>
+  <g>
+    <rect class="surface" x="200" y="365" width="400" height="170" rx="22" stroke-width="1.6"/>
+    <circle cx="240" cy="405" r="20" fill="#7c3aed" opacity="0.12"/>
+    <path d="M232 405h16M240 397v16" stroke="#7c3aed" stroke-width="2.5" stroke-linecap="round"/>
+    <text class="text card-title" x="275" y="407">Control Plane</text>
+    <text class="muted card-sub" x="240" y="452">
+      <tspan x="240" dy="0">Policy · Approval</tspan>
+      <tspan x="240" dy="26">Evidence</tspan>
+    </text>
+  </g>
 
-  <!-- approved scope / runtime control -->
-  <path d="M1052 240 V352" class="solid"/>
-  <text x="912" y="294" class="label">
-    <tspan x="912" dy="0">approved scope /</tspan>
-    <tspan x="912" dy="20">runtime control</tspan>
-  </text>
+  <g>
+    <rect class="surface" x="650" y="365" width="400" height="170" rx="22" stroke-width="1.6"/>
+    <circle cx="690" cy="405" r="20" fill="#2563eb" opacity="0.12"/>
+    <path d="M681 411l9-12 9 12M681 399h18" stroke="#2563eb" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <text class="text card-title" x="725" y="407">Model Access</text>
+    <text class="muted card-sub" x="690" y="452">
+      <tspan x="690" dy="0">Routing · Cost</tspan>
+      <tspan x="690" dy="26">Risk · Availability</tspan>
+    </text>
+  </g>
 
-  <!-- routing decisions / violations -->
-  <path d="M1218 402 V240" class="solid"/>
-  <text x="1232" y="294" class="label">
-    <tspan x="1232" dy="0">routing decisions /</tspan>
-    <tspan x="1232" dy="20">violations</tspan>
-  </text>
+  <g>
+    <rect class="surface" x="1100" y="365" width="400" height="170" rx="22" stroke-width="1.6"/>
+    <circle cx="1140" cy="405" r="20" fill="#0891b2" opacity="0.12"/>
+    <path d="M1133 405a7 7 0 1 0 14 0a7 7 0 1 0-14 0M1140 412v8M1135 420h10" stroke="#0891b2" stroke-width="2.3" fill="none" stroke-linecap="round"/>
+    <text class="text card-title" x="1175" y="407">Identity &amp; Tool Access</text>
+    <text class="muted card-sub" x="1140" y="452">
+      <tspan x="1140" dy="0">OAuth/OIDC · MCP</tspan>
+      <tspan x="1140" dy="26">Least Privilege</tspan>
+    </text>
+  </g>
 
-  <!-- engineering boxes -->
-  <rect x="48" y="414" width="264" height="82" rx="12" fill="#ffffff" stroke="#155eef" stroke-width="1.8"/>
-  <text x="180" y="462" text-anchor="middle" class="box-title-sm">engineering-loop-schemas</text>
+  <g>
+    <rect class="surface" x="200" y="570" width="400" height="170" rx="22" stroke-width="1.6"/>
+    <circle cx="240" cy="610" r="20" fill="#0ea5e9" opacity="0.12"/>
+    <path d="M230 612c5-12 15-12 20 0M230 618c5-7 15-7 20 0M240 623h0" stroke="#0ea5e9" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <text class="text card-title" x="275" y="612">Agent Runtime</text>
+    <text class="muted card-sub" x="240" y="657">
+      <tspan x="240" dy="0">A2A · MCP</tspan>
+      <tspan x="240" dy="26">Structured Contracts</tspan>
+    </text>
+  </g>
 
-  <rect x="390" y="414" width="202" height="82" rx="12" fill="#ffffff" stroke="#f97316" stroke-width="1.8"/>
-  <text x="491" y="462" text-anchor="middle" class="box-title-sm">Alicerce</text>
+  <g>
+    <rect class="surface" x="650" y="570" width="400" height="170" rx="22" stroke-width="1.6"/>
+    <circle cx="690" cy="610" r="20" fill="#0f766e" opacity="0.12"/>
+    <path d="M680 611c5-12 15-12 20 0M680 617c5-7 15-7 20 0M690 622h0" stroke="#0f766e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <text class="text card-title" x="725" y="612">Observability</text>
+    <text class="muted card-sub" x="690" y="657">
+      <tspan x="690" dy="0">OpenTelemetry · Traces</tspan>
+      <tspan x="690" dy="26">Runtime Evidence</tspan>
+    </text>
+  </g>
 
-  <rect x="48" y="578" width="264" height="90" rx="12" fill="#ffffff" stroke="#155eef" stroke-width="1.8"/>
-  <text x="180" y="615" text-anchor="middle" class="box-title-sm">
-    <tspan x="180" dy="0">Claude Python</tspan>
-    <tspan x="180" dy="26">Engineering Harness</tspan>
-  </text>
+  <g>
+    <rect class="surface" x="1100" y="570" width="400" height="170" rx="22" stroke-width="1.6"/>
+    <circle cx="1140" cy="610" r="20" fill="#16a34a" opacity="0.12"/>
+    <path d="M1130 611l7 7 14-16" stroke="#16a34a" stroke-width="2.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <text class="text card-title" x="1175" y="612">Evaluation &amp; Quality</text>
+    <text class="muted card-sub" x="1140" y="657">
+      <tspan x="1140" dy="0">RAG Metrics · Evals</tspan>
+      <tspan x="1140" dy="26">Regression</tspan>
+    </text>
+  </g>
 
-  <rect x="368" y="578" width="232" height="90" rx="12" fill="#ffffff" stroke="#155eef" stroke-width="1.8"/>
-  <text x="484" y="615" text-anchor="middle" class="box-title-sm">
-    <tspan x="484" dy="0">Codex Python</tspan>
-    <tspan x="484" dy="26">Engineering Harness</tspan>
-  </text>
+  <g>
+    <rect class="surface" x="650" y="755" width="400" height="90" rx="22" stroke-width="1.6"/>
+    <circle cx="690" cy="800" r="20" fill="#f59e0b" opacity="0.14"/>
+    <path d="M681 807h18M684 801h12M687 795h6" stroke="#f59e0b" stroke-width="2.7" fill="none" stroke-linecap="round"/>
+    <text class="text card-title" x="725" y="792">AI Developer Platform</text>
+    <text class="muted card-sub" x="725" y="819">Harnesses · Gates · Deterministic Execution</text>
+  </g>
 
-  <path d="M312 455 H390" class="solid"/>
-  <path d="M491 496 L290 578" class="support"/>
-  <path d="M491 496 L484 520 L590 578" class="support"/>
+  <g>
+    <text class="muted label" x="195" y="900">CROSS-CUTTING CAPABILITIES</text>
 
-  <!-- runtime boxes -->
-  <rect x="906" y="398" width="552" height="74" rx="12" fill="#ffffff" stroke="#0f766e" stroke-width="1.8"/>
-  <text x="1182" y="429" text-anchor="middle" class="box-title-sm">Policy Model Router</text>
-  <text x="1182" y="454" text-anchor="middle" class="box-sub">Deterministic policy enforcement</text>
+    <rect class="transversal" x="470" y="875" width="170" height="48" rx="24" stroke-width="1.4"/>
+    <circle cx="500" cy="899" r="9" fill="#dc2626" opacity="0.18"/>
+    <path d="M496 899l3 3 6-7" stroke="#dc2626" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <text class="chip-text small" x="520" y="905">Security</text>
 
-  <rect x="834" y="492" width="250" height="76" rx="12" fill="#ffffff" stroke="#0f766e" stroke-width="1.8"/>
-  <text x="959" y="522" text-anchor="middle" class="box-title-sm">mcp-client-auth-template</text>
-  <text x="959" y="548" text-anchor="middle" class="box-sub">OAuth/OIDC client boundary</text>
+    <rect class="transversal" x="670" y="875" width="185" height="48" rx="24" stroke-width="1.4"/>
+    <circle cx="700" cy="899" r="9" fill="#7c3aed" opacity="0.18"/>
+    <path d="M695 899h10M700 894v10" stroke="#7c3aed" stroke-width="2" stroke-linecap="round"/>
+    <text class="chip-text small" x="720" y="905">Governance</text>
 
-  <rect x="1226" y="492" width="260" height="76" rx="12" fill="#ffffff" stroke="#0f766e" stroke-width="1.8"/>
-  <text x="1356" y="522" text-anchor="middle" class="box-title-sm">mcp-server-auth-template</text>
-  <text x="1356" y="548" text-anchor="middle" class="box-sub">OAuth/OIDC resource server</text>
+    <rect class="transversal" x="885" y="875" width="275" height="48" rx="24" stroke-width="1.4"/>
+    <circle cx="915" cy="899" r="9" fill="#0ea5e9" opacity="0.18"/>
+    <path d="M908 900c4-7 10-7 14 0M910 904c3-4 7-4 10 0" stroke="#0ea5e9" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    <text class="chip-text small" x="935" y="905">Evidence &amp; Auditability</text>
 
-  <rect x="888" y="614" width="530" height="70" rx="12" fill="#ffffff" stroke="#0f766e" stroke-width="1.8"/>
-  <text x="1153" y="642" text-anchor="middle" class="box-title-sm">a2a-otel-kit</text>
-  <text x="1153" y="668" text-anchor="middle" class="box-sub">A2A/MCP distributed tracing</text>
+    <line x1="470" y1="865" x2="1160" y2="865" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="6 8" opacity="0.55"/>
+  </g>
 
-  <!-- oauth and trace context -->
-  <path d="M1084 530 H1226" class="solid"/>
-  <text x="1155" y="516" text-anchor="middle" class="label">
-    <tspan x="1155" dy="0">OAuth 2.1 /</tspan>
-    <tspan x="1155" dy="18">OIDC</tspan>
-  </text>
+  <line x1="850" y1="870" x2="850" y2="918" stroke="#64748b" stroke-width="3" marker-end="url(#arrow)"/>
 
-  <path d="M996 568 V614" class="support"/>
-  <text x="858" y="592" class="label">W3C trace context</text>
+  <g filter="url(#shadow)">
+    <rect class="surface-soft" x="280" y="940" width="1140" height="125" rx="24" stroke-width="2"/>
+  </g>
 
-  <path d="M1268 568 V614" class="support"/>
-  <text x="1290" y="592" class="label">W3C trace context</text>
-
-  <!-- runtime to domain -->
-  <!-- Policy Model Router -> Multi-Agent Credit Desk -->
-  <path d="M906 435 H812 V746 H594 V836" class="solid"/>
-  <!-- a2a -> Multi-Agent Credit Desk -->
-  <path d="M1153 684 V724 H662 V836" class="solid"/>
-  <!-- secure tool boundary -->
-  <path d="M1444 568 V748 H690 V836" class="gov"/>
-  <text x="1054" y="746" class="label-purple">secure tool boundary</text>
-
-  <!-- governance dashed links to domains -->
-  <path d="M448 240 V724 H254 V836" class="gov"/>
-  <path d="M624 240 V742 H558 V836" class="gov"/>
-  <path d="M1018 240 V750 H950 V836" class="gov"/>
-  <path d="M1220 240 V732 H1290 V836" class="gov"/>
-
-  <!-- domain cards -->
-  <rect x="86" y="828" width="288" height="88" rx="12" fill="#ffffff" stroke="#6d28d9" stroke-width="1.8"/>
-  <text x="230" y="864" text-anchor="middle" class="box-title-sm">RAGForge</text>
-  <text x="230" y="890" text-anchor="middle" class="box-sub">Regulatory RAG evaluation</text>
-
-  <rect x="422" y="828" width="312" height="88" rx="12" fill="#ffffff" stroke="#6d28d9" stroke-width="1.8"/>
-  <text x="578" y="864" text-anchor="middle" class="box-title-sm">Multi-Agent Credit Desk</text>
-  <text x="578" y="890" text-anchor="middle" class="box-sub">Auditable credit agents</text>
-
-  <rect x="808" y="828" width="288" height="88" rx="12" fill="#ffffff" stroke="#6d28d9" stroke-width="1.8"/>
-  <text x="952" y="864" text-anchor="middle" class="box-title-sm">Open Finance BR MCP</text>
-  <text x="952" y="890" text-anchor="middle" class="box-sub">Typed financial tools</text>
-
-  <rect x="1140" y="828" width="296" height="88" rx="12" fill="#ffffff" stroke="#6d28d9" stroke-width="1.8"/>
-  <text x="1288" y="864" text-anchor="middle" class="box-title-sm">Meridian</text>
-  <text x="1288" y="890" text-anchor="middle" class="box-sub">Internal knowledge platform</text>
-
-  <!-- Open Finance -> Credit Desk -->
-  <path d="M808 872 H734" class="support"/>
-
-  <!-- footer legend -->
-  <rect x="24" y="950" width="1488" height="58" rx="12" fill="#fbfbff" stroke="#7c3aed" stroke-width="1.4"/>
-  <text x="50" y="984" class="legend-title">LINE LEGEND</text>
-
-  <path d="M216 979 H300" class="solid"/>
-  <text x="324" y="984" class="legend-text">Direct operational / control flow</text>
-
-  <path d="M618 979 H692" class="support"/>
-  <text x="716" y="984" class="legend-text">Supporting or indirect technical flow</text>
-
-  <path d="M1048 979 H1120" class="gov"/>
-  <text x="1146" y="984" class="legend-text">Governance relationship / secure boundary</text>
+  <g transform="translate(340,973)">
+    <circle cx="26" cy="26" r="26" fill="#2563eb" opacity="0.10"/>
+    <path d="M14 30h24c5 0 8-3 8-7s-3-7-8-7c-2-7-8-11-15-8c-4 2-6 5-6 9c-5 0-9 3-9 7s3 6 6 6z"
+          fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linejoin="round"/>
+    <text class="text card-title" x="72" y="20">Cloud &amp; Platform Foundation</text>
+    <text class="muted card-sub" x="72" y="48">AWS · IaC · CI/CD Identity · Observability · Cost Controls</text>
+  </g>
 </svg>
