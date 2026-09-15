@@ -41,7 +41,7 @@ Transforma requisitos de governança em controles executáveis e evidências de 
 Política
   → Risco e controles
   → Aprovação independente
-  → Autorização assinada em runtime
+  → Autorização em runtime
   → Enforcement
   → Violação/assurance
   → Resposta governada

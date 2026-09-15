@@ -17,13 +17,7 @@ The architectural direction is consistent across the portfolio:
 
 ## Capability map
 
-<p align="center">
-  <img
-    src="./assets/architecture/ai-governance-runtime-trust-ecosystem.svg"
-    alt="AI Governance and Runtime Trust ecosystem architecture"
-    width="1100"
-  >
-</p>
+> **Models may reason and propose. Trusted software authorizes, constrains, executes, and produces evidence.**
 
 The goal is not to build one monolithic platform repository. Each project isolates a capability so its contracts, security boundaries, failure modes, and evidence can be inspected independently.
 

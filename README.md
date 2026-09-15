@@ -12,8 +12,8 @@
 
 📍 São Paulo, Brazil &nbsp;|&nbsp; 🌍 Open to international opportunities and relocation
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-brunovicco-0A66C2?style=flat\&logo=linkedin\&logoColor=white)](https://linkedin.com/in/brunovicco)
-[![Email](https://img.shields.io/badge/Email-bfvicco%40gmail.com-D14836?style=flat\&logo=gmail\&logoColor=white)](mailto:bfvicco@gmail.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-brunovicco-0A66C2?style=flat&logo=linkedin&logoColor=white)](https://linkedin.com/in/brunovicco)
+[![Email](https://img.shields.io/badge/Email-bfvicco%40gmail.com-D14836?style=flat&logo=gmail&logoColor=white)](mailto:bfvicco@gmail.com)
 
 </div>
 
@@ -71,7 +71,9 @@ I am particularly interested in the horizontal capabilities that allow many AI p
 | **Multi-agent reference workload** | [**Multi-Agent Credit Desk**](https://github.com/brunovicco/multi-agent-credit-desk) |
 | **AWS platform engineering** | [**OpsLens**](https://github.com/brunovicco/opslens) |
 
----
+    Gateway["Governed LLM Gateway<br/>Execution · Resilience · Provenance"]
+    Router["Policy Model Router<br/>Authorization · Logical Model Groups"]
+    Providers["LLM Providers"]
 
 ## AI Platform Engineering ecosystem
 
@@ -183,23 +185,23 @@ AWS · Azure · Terraform · Docker · Kubernetes · CI/CD · GitHub Actions OID
 <details>
 <summary><strong>Financial services, regulatory & governance background</strong></summary>
 
-<br>
+## Financial services & regulated environments
 
-Experience translating requirements and controls from BACEN, CMN, LGPD, CVM, ANBIMA, DORA, NIST AI RMF, ISO/IEC 42001, NIST SP 800-53, CIS Controls, MITRE ATLAS, and OWASP guidance into technical and operational mechanisms for LLM and agentic systems.
+My professional background spans corporate banking, credit, treasury, financial operations, software engineering, production AI, enterprise AI adoption, and AI governance.
 
-Professional background includes corporate banking, credit, risk, treasury, financial operations, software engineering, production AI, enterprise enablement, and AI governance.
+I have worked with requirements and engineering concerns related to environments governed by frameworks and institutions such as **BACEN, CMN, CVM, ANBIMA, LGPD, NIST AI RMF, ISO/IEC 42001, OWASP, MITRE ATLAS, CIS Controls, and NIST security guidance**.
 
-</details>
+This experience strongly influences how I design AI systems: regulation and governance are not documentation layers added after implementation; they become architecture, controls, runtime behavior, and evidence.
 
 <details>
 <summary><strong>Certifications</strong></summary>
 
 <br>
 
-* AWS Certified AI Practitioner
-* AWS Certified Cloud Practitioner
-* Microsoft Certified: Azure Fundamentals
-* CPA-20 ANBIMA
+- AWS Certified AI Practitioner
+- AWS Certified Cloud Practitioner
+- Microsoft Certified: Azure Fundamentals
+- CPA-20 ANBIMA
 
 </details>
 

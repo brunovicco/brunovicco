@@ -47,7 +47,9 @@ Tenho interesse especial nas capacidades horizontais que permitem a vários prod
 
 ---
 
-## Principais resultados
+## Principais projetos
+
+Estes são os repositórios que melhor representam os problemas de arquitetura e engenharia nos quais estou trabalhando atualmente.
 
 - Construí sistemas de IA em produção para instituições financeiras reguladas, incluindo assistentes conversacionais e transacionais, pipelines RAG, workflows com agentes, observabilidade e controles de segurança.
 - Liderei a adoção corporativa de IA para aproximadamente **400 usuários**, incluindo Claude Code para cerca de **250 desenvolvedores** e Claude Enterprise para aproximadamente **150 profissionais de negócio**.
@@ -58,7 +60,7 @@ Tenho interesse especial nas capacidades horizontais que permitem a vários prod
 
 ---
 
-## Por onde começar
+## Engenharia de Plataformas de IA
 
 | Se você quer avaliar... | Comece por |
 | --- | --- |
@@ -71,7 +73,9 @@ Tenho interesse especial nas capacidades horizontais que permitem a vários prod
 | **Workload multiagente de referência** | [**Multi-Agent Credit Desk**](https://github.com/brunovicco/multi-agent-credit-desk) |
 | **Engenharia de plataforma na AWS** | [**OpsLens**](https://github.com/brunovicco/opslens) |
 
----
+    Gateway["Governed LLM Gateway<br/>Execução · Resiliência · Proveniência"]
+    Router["Policy Model Router<br/>Autorização · Grupos Lógicos de Modelos"]
+    Providers["Provedores de LLM"]
 
 ## Ecossistema de Engenharia de Plataformas de IA
 
@@ -131,7 +135,16 @@ O princípio comum é simples: **usar comportamento generativo onde ele agrega v
 
 ---
 
-## Princípios de engenharia
+## Outros projetos open source
+
+### Políticas de modelo, identidade e acesso seguro a ferramentas
+
+- [**Policy Model Router**](https://github.com/brunovicco/policy-model-router) - autorização e roteamento determinísticos e fail-closed entre grupos lógicos de modelos.
+- [**MCP Server Auth Template**](https://github.com/brunovicco/mcp-server-auth-template) - referência de servidor MCP remoto protegido utilizando padrões OAuth/OIDC.
+- [**MCP Client Auth Template**](https://github.com/brunovicco/mcp-client-auth-template) - padrões correspondentes para clientes MCP autenticados.
+- [**Open Finance BR MCP**](https://github.com/brunovicco/openfinance-br-mcp) - arquitetura MCP orientada a Open Finance Brasil e padrões FAPI-BR.
+
+### Arquitetura de agentes e autonomia controlada
 
 - Escolher a arquitetura de acordo com o problema, não pela popularidade de um padrão de IA.
 - Preferir workflows determinísticos quando autonomia não cria valor suficiente para justificar risco adicional.
@@ -170,7 +183,7 @@ AWS · Azure · Terraform · Docker · Kubernetes · CI/CD · GitHub Actions OID
 
 **Linguagens e backend:** Python, FastAPI, Pydantic, TypeScript, Node.js, APIs REST, sistemas assíncronos e orientados a eventos
 
-**Frameworks e plataformas de IA:** LangGraph, DSPy, LangChain, LlamaIndex, LiteLLM, Azure OpenAI, Azure AI Foundry, Amazon Bedrock, Anthropic Claude, Gemini
+**Frameworks e plataformas de IA:** LangGraph, DSPy, LangChain, LlamaIndex, LiteLLM, Azure OpenAI, Azure AI Foundry, Amazon Bedrock, Anthropic Claude, OpenAI, Gemini
 
 **Dados e retrieval:** Redis Stack, RediSearch, RedisJSON, PostgreSQL, pgvector, OpenSearch, busca vetorial e recuperação híbrida
 
@@ -180,26 +193,25 @@ AWS · Azure · Terraform · Docker · Kubernetes · CI/CD · GitHub Actions OID
 
 </details>
 
-<details>
-<summary><strong>Experiência financeira, regulatória e de governança</strong></summary>
+---
 
-<br>
+## Setor financeiro e ambientes regulados
 
-Experiência na tradução de requisitos e controles de BACEN, CMN, LGPD, CVM, ANBIMA, DORA, NIST AI RMF, ISO/IEC 42001, NIST SP 800-53, CIS Controls, MITRE ATLAS e orientações OWASP em mecanismos técnicos e operacionais para LLMs e sistemas agênticos.
+Minha trajetória profissional inclui banking corporativo, crédito, tesouraria, operações financeiras, engenharia de software, IA em produção, adoção corporativa de IA e governança.
 
-A trajetória inclui banking corporativo, crédito, risco, tesouraria, operações financeiras, engenharia de software, IA em produção, adoção corporativa e governança de IA.
+Tenho experiência trabalhando com requisitos e preocupações de engenharia relacionados a ambientes orientados por referências e instituições como **BACEN, CMN, CVM, ANBIMA, LGPD, NIST AI RMF, ISO/IEC 42001, OWASP, MITRE ATLAS, CIS Controls e orientações de segurança do NIST**.
 
-</details>
+Essa experiência influencia diretamente a forma como projeto sistemas de IA: regulação e governança não são camadas documentais adicionadas depois da implementação; elas se transformam em arquitetura, controles, comportamento de runtime e evidências.
 
 <details>
 <summary><strong>Certificações</strong></summary>
 
 <br>
 
-* AWS Certified AI Practitioner
-* AWS Certified Cloud Practitioner
-* Microsoft Certified: Azure Fundamentals
-* CPA-20 ANBIMA
+- AWS Certified AI Practitioner
+- AWS Certified Cloud Practitioner
+- Microsoft Certified: Azure Fundamentals
+- CPA-20 ANBIMA
 
 </details>
 
