@@ -2,420 +2,829 @@
 
 > 🇧🇷 [Leia em Português](./PORTFOLIO_ARCHITECTURE.pt-BR.md)
 
-This portfolio is organized as an **AI Platform Engineering ecosystem**, not as a collection of isolated demos.
+This portfolio is organized as an **AI Platform Engineering ecosystem**, not as a collection of isolated AI demos.
 
-The projects explore the horizontal capabilities required to build, operate, secure, observe, evaluate, and govern AI systems across multiple products and teams. Domain applications are used as **reference workloads** that exercise those capabilities in realistic scenarios.
+The projects explore how to build, operate, secure, observe, evaluate, and govern AI systems across multiple products and teams. The portfolio deliberately separates reusable platform capabilities from reference workloads and research labs so that security boundaries, contracts, failure behavior, and evidence can be inspected independently.
 
-The architectural direction is consistent across the portfolio:
+The recurring architecture principle is:
 
-- keep high-impact authority outside LLM reasoning;
-- place model and agent behavior behind explicit contracts;
-- treat identity, tools, model providers, retrieved data, telemetry, and execution environments as trust boundaries;
-- make important claims independently verifiable through code, tests, traces, policies, hashes, and evidence artifacts.
+> **Models may reason and propose. Trusted software authorizes, constrains, executes, and produces evidence.**
 
----
+Across the ecosystem, this means:
 
-## Capability map
-
-<p align="center">
-  <img
-    src="./assets/architecture/ai-governance-runtime-trust-ecosystem.svg"
-    alt="AI Governance and Runtime Trust ecosystem architecture"
-    width="1100"
-  >
-</p>
-
-The goal is not to build one monolithic platform repository. Each project isolates a capability so its contracts, security boundaries, failure modes, and evidence can be inspected independently.
+- high-impact authority remains outside LLM reasoning;
+- applications depend on provider-neutral and policy-aware contracts instead of embedding provider logic everywhere;
+- identity, model access, tools, retrieved data, execution environments, and telemetry are explicit trust boundaries;
+- important runtime claims should resolve to independently inspectable evidence;
+- autonomy is introduced only where it creates enough value to justify the additional failure modes.
 
 ---
 
-# 1. AI Control Plane & Runtime Policy
+## Portfolio map
 
-## [Verifiable AI Governance](https://github.com/brunovicco/verifiable-ai-governance)
+```mermaid
+flowchart TB
+    Apps["AI Applications/Agents/Workflows"]
 
-**Role:** governance and assurance control plane.
+    subgraph Core["Core AI Platform"]
+        GW["Governed LLM Gateway<br/>Execution · Resilience · Provenance"]
+        PMR["Policy Model Router<br/>PDP · Authorization · Model Groups"]
+        GOV["Verifiable AI Governance<br/>Control Plane · Approval · Assurance"]
+    end
 
-It turns governance requirements into executable controls and independently inspectable runtime evidence.
+    subgraph Runtime["Agent Runtime & Security"]
+        STATE["StateOps<br/>Durable State Machine"]
+        SEC["Agentic Security Framework Lab<br/>Identity · Authority · HITL"]
+        MCP["MCP Auth Templates<br/>OAuth/OIDC · Tool Access"]
+        OTEL["a2a-otel-kit<br/>A2A/MCP Observability"]
+    end
 
-```text
-Policy
-  → Risk & controls
-  → Independent approval
-  → Signed runtime authorization
-  → Runtime enforcement
-  → Violation/assurance
-  → Governed response
-  → Evidence
+    subgraph Quality["Evaluation & Research"]
+        RAG["RAGForge<br/>RAG Evaluation"]
+        AUTO["Controlled Autonomy Lab<br/>Architecture Experiments"]
+    end
+
+    subgraph Dev["AI Developer Platform"]
+        HARNESS["Claude/Codex Harnesses"]
+        LOOP["Alicerce + engineering-loop-schemas"]
+    end
+
+    subgraph Workloads["Applied/Reference Workloads"]
+        OPS["OpsLens"]
+        MER["Meridian"]
+        OF["Open Finance BR MCP"]
+        CREDIT["Multi-Agent Credit Desk"]
+    end
+
+    Providers["LLM Providers"]
+    Tools["Enterprise Tools/Data"]
+
+    Apps --> GW
+    GW -. policy decision .-> PMR
+    GW --> Providers
+    GOV -. narrows authority .-> GW
+
+    STATE --> GW
+    SEC -. security patterns .-> Apps
+    Apps --> MCP
+    MCP --> Tools
+
+    OTEL -. traces .-> Apps
+    OTEL -. traces .-> GW
+    OTEL -. traces .-> MCP
+
+    RAG -. evaluates .-> Apps
+    AUTO -. informs architecture .-> Apps
+
+    HARNESS --> LOOP
+
+    OPS -. exercises .-> Core
+    MER -. exercises .-> Core
+    OF -. exercises .-> Runtime
+    CREDIT -. exercises .-> Core
 ```
 
-Key platform signals:
+This is a conceptual capability map, not a claim that every repository is deployed together or that every workload requires every platform component.
 
-- deterministic policy and risk evaluation;
-- segregation of duties and immutable review rounds;
-- scope-bound model/agent approvals;
-- signed runtime authorization;
-- runtime enforcement and trusted denial evidence;
-- sanitized runtime telemetry;
-- incidents, containment, restoration, and audit history;
-- release evidence, provenance, SBOM/security checks, and clean-install verification.
+---
 
-This repository is the clearest expression of the portfolio's **control-plane** concept: governance is not a document layer around AI; it becomes runtime state and enforceable software behavior.
+# 1. Core AI Platform
+
+## [Governed LLM Gateway](https://github.com/brunovicco/governed-llm-gateway)
+
+**Role:** flagship provider-neutral LLM execution layer.
+
+The Gateway keeps provider credentials, model/provider selection, retry and fallback behavior, budgets, runtime provenance, and observability outside application code.
+
+A consumer declares a workload and requirements. It does not need to choose a provider-specific SDK or embed provider-routing logic throughout the application.
+
+```text
+Application/Agent
+        │
+        │ workload + requirements + Gateway credential
+        ▼
+Policy Model Router (PDP)
+        │
+        │ authorized logical model groups
+        ▼
+Governed LLM Gateway (PEP)
+        ├─ eligibility
+        ├─ deterministic ranking
+        ├─ health/circuit breaker
+        ├─ bounded retry
+        ├─ safe fallback
+        ├─ provider translation
+        ├─ spend limits
+        └─ provenance + OpenTelemetry
+        ▼
+Authorized provider/model
+```
+
+The key authority invariant is:
+
+```text
+Gateway allowed set ⊆ Policy Router authorized set
+```
+
+The Gateway may narrow what policy authorized. It may never widen it.
+
+### Platform signals
+
+- provider-neutral consumer contract;
+- centralized provider credentials;
+- native and compatibility adapters;
+- deterministic selection inside an authorized set;
+- bounded retry and fallback;
+- health and circuit-breaking behavior;
+- per-client/workload budget controls;
+- execution provenance;
+- metadata-safe OpenTelemetry;
+- fail-closed startup and policy behavior;
+- operational console and trace correlation.
+
+### Architectural boundary
+
+The Gateway is not an agent framework, RAG framework, prompt-management platform, or business-tool executor.
+
+It owns **model execution authority**. Application runtimes still own workflow state, business-tool authorization, side effects, and domain decisions.
 
 ---
 
 ## [Policy Model Router](https://github.com/brunovicco/policy-model-router)
 
-**Role:** deterministic policy decision point for model access.
+**Role:** Policy Decision Point (PDP) for model access.
 
-The router deliberately keeps model selection out of agent prompts and application code. A workload is evaluated against versioned constraints such as:
+The Router is a supporting platform component behind the Gateway rather than a second application-facing execution layer.
+
+It evaluates a workload against deterministic, versioned constraints such as:
 
 - data classification;
-- workflow risk;
-- structured-output and tool requirements;
-- context-window limits;
+- workload risk;
+- required capabilities;
+- structured-output requirements;
+- context limits;
 - cost ceilings;
 - latency ceilings;
 - availability;
-- agent allowlists.
+- approved logical model groups.
 
-The output is an explainable model-group decision or a fail-closed rejection. The service does **not** call an LLM.
+The result is an explainable authorization decision or a fail-closed denial.
 
-### Why this belongs in a platform
+The Router does not call a language model.
 
-Without a shared policy layer, each application tends to embed its own provider selection, cost rules, data permissions, and fallback behavior. The router centralizes that policy boundary while keeping downstream inference/provider gateways replaceable.
+### Why this separation matters
+
+```text
+Policy Model Router = what may be used
+Governed LLM Gateway = what actually executes
+```
+
+Keeping PDP and PEP responsibilities separate makes authorization independently testable and prevents runtime availability from silently becoming permission.
 
 ---
 
-# 2. Identity & Tool Access
+## [Verifiable AI Governance](https://github.com/brunovicco/verifiable-ai-governance)
 
-## [mcp-server-auth-template](https://github.com/brunovicco/mcp-server-auth-template)
-## [mcp-client-auth-template](https://github.com/brunovicco/mcp-client-auth-template)
+**Role:** AI governance and runtime-assurance control plane.
 
-**Role:** executable identity and authorization reference for remote MCP.
+The project explores how governance requirements can become enforceable system behavior instead of remaining only in documents or approval tickets.
 
-The pair answers a platform-level question:
+```text
+Policy
+  → Risk & controls
+  → Independent approval
+  → Runtime authorization
+  → Enforcement
+  → Runtime assurance
+  → Incident/governed response
+  → Evidence
+```
 
-> How can agents and developer tools access enterprise capabilities without turning MCP into an IAM bypass?
+Key concerns include:
 
-The combined reference covers:
+- deterministic policy and risk evaluation;
+- segregation of duties;
+- scope-bound approvals;
+- runtime authorization;
+- trusted denial and violation evidence;
+- runtime assurance;
+- containment and restoration workflows;
+- audit history and evidence lineage;
+- release/security provenance.
+
+### Relationship with the Gateway
+
+Governance may further restrict what a workload is allowed to do, but must not silently expand the authority already granted by model-access policy.
+
+The portfolio therefore treats authorization as **monotonic narrowing of authority** across layers.
+
+---
+
+# 2. Stateful Agent Runtime
+
+## [StateOps](https://github.com/brunovicco/stateops)
+
+**Role:** reference implementation of a durable, replayable LangGraph state machine integrated with the Governed LLM Gateway.
+
+StateOps demonstrates that production agentic workflows require more than conversational memory.
+
+Its core concerns are:
+
+- explicit typed state;
+- lifecycle transitions;
+- dynamic fan-out with `Send`;
+- deterministic reducers;
+- `Command`-based routing;
+- nested graphs;
+- human interrupts;
+- Redis checkpointing;
+- restart/resume;
+- replay and controlled forks;
+- idempotent side effects;
+- streaming and execution history;
+- provider-neutral reasoning through the Gateway.
+
+```text
+Incident
+   ↓
+Enrichment
+   ↓
+Classification
+   ↓
+Parallel Investigation
+   ↓
+Proposed Remediation
+   ↓
+Human Approval
+   ↓
+Idempotent Execution
+   ↓
+Verification
+   ├─ resolved
+   ├─ replan
+   └─ escalate
+```
+
+### Authority boundary
+
+StateOps owns workflow and business-side-effect semantics.
+
+The Governed LLM Gateway owns model/provider execution policy.
+
+```text
+StateOps
+  ├─ state
+  ├─ transitions
+  ├─ human approval
+  ├─ remediation authorization
+  └─ side effects
+
+Governed LLM Gateway
+  ├─ model authorization
+  ├─ provider selection
+  ├─ retry/fallback
+  └─ execution provenance
+```
+
+This separation is a central portfolio theme: **agent orchestration should not implicitly acquire infrastructure authority.**
+
+---
+
+# 3. Agent Security, Identity & Tool Access
+
+## [Agentic Security Framework Lab](https://github.com/brunovicco/agentic-security-framework-lab)
+
+**Role:** framework-neutral security and authority lab for agentic systems.
+
+The same controlled workload is implemented through multiple orchestration frameworks while keeping authorization and enforcement outside the framework:
+
+- LangGraph;
+- CrewAI;
+- LlamaIndex;
+- Agno.
+
+The design separates:
+
+```text
+the model proposes
+trusted context establishes identity
+policy authorizes
+human approval validates high-impact actions
+runtime executes
+evidence records the result
+```
+
+A key distinction is:
+
+```text
+tool availability != tool authorization != tool execution
+```
+
+The project also treats prompt injection conservatively: it does not claim that injection can always be prevented. Instead, it asks what authority a compromised reasoning path actually receives.
+
+### Why this belongs in the ecosystem
+
+Frameworks may own orchestration.
+
+They should not automatically own:
+
+- caller identity;
+- authorization;
+- approval authority;
+- policy truth;
+- execution authority;
+- evidence truth.
+
+---
+
+## [MCP Server Auth Template](https://github.com/brunovicco/mcp-server-auth-template)
+
+## [MCP Client Auth Template](https://github.com/brunovicco/mcp-client-auth-template)
+
+**Role:** executable identity and authorization references for protected remote MCP.
+
+These repositories explore how agents and developer tools can access enterprise capabilities without turning MCP into an IAM bypass.
+
+The pair covers patterns around:
 
 - OAuth 2.1/OIDC;
-- Microsoft Entra ID and generic OIDC boundaries;
-- Authorization Code + PKCE and machine-to-machine flows;
-- Protected Resource Metadata and exact resource/audience binding;
-- delegated scopes versus application roles;
-- bounded step-up authorization;
+- delegated and machine identities;
+- authorization code + PKCE;
+- machine-to-machine flows;
+- resource/audience binding;
+- scopes and application roles;
+- protected resource metadata;
+- step-up authorization;
 - wrong-audience rejection;
 - protected tool discovery;
-- stateless MCP;
-- W3C trace-context continuity;
-- privacy-safe telemetry;
-- executable cross-repository E2E evidence.
+- trace-context continuity;
+- privacy-aware telemetry.
 
-### Platform principle
+The platform rule is simple:
 
-The LLM or agent may request a tool. **Authorization remains a deterministic security decision outside the model.**
+> The model may request a tool. Authorization remains a deterministic security decision outside the model.
 
 ---
 
-# 3. Agent Runtime & Observability
+# 4. Distributed Agent Observability
 
 ## [a2a-otel-kit](https://github.com/brunovicco/a2a-otel-kit)
 
-**Role:** vendor-neutral distributed observability for A2A and MCP boundaries.
+**Role:** vendor-neutral observability layer for A2A and MCP interactions.
 
-Agentic systems frequently cross process and protocol boundaries:
-
-```text
-Business request
-    ↓
-Orchestrator
-    ↓ A2A
-Agent
-    ↓ MCP
-Tool/Service
-```
+Distributed agentic systems can cross orchestrators, agents, MCP services, and downstream APIs in a single business request.
 
 `a2a-otel-kit` keeps those hops in one OpenTelemetry trace using W3C Trace Context.
 
+```text
+Business request
+   ↓
+Orchestrator
+   ↓ A2A
+Agent
+   ↓ MCP
+Tool/Service
+```
+
 Key design properties:
 
-- A2A client/server tracing;
-- MCP Streamable HTTP client/server tracing;
-- OTLP export without coupling applications to an observability vendor SDK;
-- explicit lifecycle and shutdown;
-- privacy-safe metadata-only protocol telemetry;
-- no prompts, responses, business payloads, MCP arguments/results, credentials, or arbitrary headers in built-in protocol instrumentation;
-- executable demo proving A2A and MCP spans share a trace ID.
+- A2A client/server instrumentation;
+- MCP Streamable HTTP client/server instrumentation;
+- OTLP export;
+- structured trace-correlated events;
+- explicit telemetry lifecycle;
+- deny-by-default attribute handling;
+- metadata-only built-in protocol telemetry;
+- no default capture of prompts, model responses, MCP arguments/results, credentials, or business payloads.
 
-### Why this belongs in a platform
+### Platform rationale
 
-Each application should not invent its own protocol instrumentation, correlation vocabulary, privacy rules, and trace propagation. Observability is a reusable runtime capability.
+Applications should not each invent their own propagation rules, protocol spans, privacy policy, and telemetry vocabulary.
+
+Observability is a shared runtime capability.
 
 ---
 
-# 4. AI Evaluation & Quality Engineering
+# 5. Evaluation & AI Quality Engineering
 
 ## [RAGForge](https://github.com/brunovicco/ragforge)
 
-**Role:** evaluation and experimentation layer for retrieval-augmented systems.
+**Role:** RAG experimentation, benchmarking, and evaluation platform.
 
-RAGForge treats architecture choices as experiments rather than intuition. Its current scope includes:
+RAGForge treats retrieval architecture as an empirical engineering problem.
 
-- **230-question** RegRAG-BR golden dataset;
-- 10 retrieval configurations, from dense/BM25/hybrid to reranking, contextual retrieval, parent-child, SAC, RAPTOR, and GraphRAG;
-- retrieval metrics such as Recall@K, Precision@K, MRR, and nDCG;
-- generated-answer evaluation including Citation Accuracy, Faithfulness, and Answer Relevancy;
-- explicit abstention/evidence handling;
-- auditable experiment artifacts and lineage;
-- architectural separation between retrieval quality and generation quality.
+Its current scope includes:
 
-### Why this is a platform capability
+- a 230-question RegRAG-BR golden dataset;
+- dense retrieval;
+- BM25;
+- hybrid retrieval;
+- reranking;
+- contextual retrieval;
+- parent-child retrieval;
+- summary-augmented chunking;
+- RAPTOR;
+- GraphRAG;
+- retrieval and answer-quality metrics;
+- citation support evaluation;
+- evidence-aware abstention;
+- experiment lineage and auditable run artifacts.
 
-AI platforms need more than runtime metrics. They need a way to answer:
+The platform-level questions are:
 
-- Did quality regress after changing a model, prompt, chunker, or retriever?
-- Is the failure in retrieval or generation?
-- Is the answer supported by evidence?
-- Is a more expensive strategy actually better enough to justify its cost?
+- Did retrieval regress?
+- Did answer quality regress?
+- Is the answer actually supported by retrieved evidence?
+- Did a more expensive strategy improve quality enough to justify its cost?
+- Is a failure caused by retrieval, generation, or evaluation?
 
-RAGForge is therefore positioned as an **AI evaluation lab**, with the regulatory corpus acting as a demanding reference domain rather than defining the capability itself.
+The regulatory corpus provides a demanding reference domain, but the capability itself is **evaluation engineering**.
 
 ---
 
-# 5. AI Developer Platform & Enablement
+## [Controlled Autonomy Lab](https://github.com/brunovicco/controlled-autonomy-lab)
 
-Coding agents create a new platform problem: how to improve developer productivity without making code generation, execution, and promotion an uncontrolled trust boundary.
+**Role:** architecture research lab for model autonomy and control.
 
-The portfolio separates that problem into reusable foundations.
+The project asks:
 
-| Project | Platform role |
+> Who owns the next step: deterministic application code or the model?
+
+It compares bounded implementations of:
+
+- augmented LLM;
+- prompt chaining;
+- routing;
+- parallelization;
+- evaluator-optimizer;
+- bounded tool-using agent.
+
+The same workload is evaluated across multiple provider/model bundles using frozen experiment evidence.
+
+The goal is not to prove that agents are universally better than workflows. It is to make the trade-off between deterministic control and model-owned trajectory measurable.
+
+### Difference from the security lab
+
+```text
+Controlled Autonomy Lab
+→ How much control should the model receive?
+
+Agentic Security Framework Lab
+→ Which authorities must remain outside the model/framework?
+```
+
+---
+
+# 6. AI Developer Platform
+
+Coding agents create a platform problem beyond code generation: how to improve engineering productivity while keeping execution, validation, and promotion controlled.
+
+The portfolio splits this into reusable components.
+
+| Project | Role |
 | --- | --- |
-| [**engineering-loop-schemas**](https://github.com/brunovicco/engineering-loop-schemas) | Canonical contracts for evidence, verdicts, and execution results |
+| [**Claude Python Engineering Harness**](https://github.com/brunovicco/claude-python-engineering-harness) | Repository-owned engineering rules, hooks, architecture boundaries, and quality gates for Claude Code |
+| [**Codex Python Engineering Harness**](https://github.com/brunovicco/codex-python-engineering-harness) | Equivalent deterministic baseline for Codex workflows |
+| [**engineering-loop-schemas**](https://github.com/brunovicco/engineering-loop-schemas) | Canonical typed contracts for evidence, execution results, and verdicts |
 | [**Alicerce**](https://github.com/brunovicco/alicerce) | Trusted deterministic execution and evidence-gated engineering loops |
-| [**Claude Python Engineering Harness**](https://github.com/brunovicco/claude-python-engineering-harness) | Repository-owned rules, hooks, architecture boundaries, and quality gates for Claude Code |
-| [**Codex Python Engineering Harness**](https://github.com/brunovicco/codex-python-engineering-harness) | Equivalent deterministic engineering baseline for Codex workflows |
 
 Shared principles include:
 
-- repository-owned policy instead of user-local convention;
+- repository-owned policy rather than developer-local convention;
 - deterministic validation around generative coding behavior;
 - architecture and dependency boundaries;
 - explicit evidence before promotion;
-- human authority over merge/deploy/high-impact actions;
-- repeatable quality gates rather than model self-evaluation.
+- bounded execution;
+- human authority over merge, deployment, and other high-impact actions.
 
-This capability connects directly to enterprise AI enablement: the difficult part of scaling coding agents is not distributing licenses, but defining safe, observable, repeatable engineering behavior across many developers and repositories.
-
----
-
-# 6. Reference Workloads
-
-Reference workloads are intentionally separated from platform capabilities. They exist to prove that the horizontal components can be applied to different domains.
-
-## [Multi-Agent Credit Desk](https://github.com/brunovicco/multi-agent-credit-desk)
-
-**Role:** in-progress auditable multi-agent reference workload.
-
-Current implemented pieces include deterministic credit evaluation, MCP services, an A2A decision agent, a cadastral screening agent, model-routing integration, and local observability infrastructure. The complete orchestrator is not presented as finished.
-
-Its purpose in the ecosystem is to exercise:
-
-- deterministic authority versus generative assistance;
-- MCP tool boundaries;
-- A2A communication;
-- governed model routing;
-- structured contracts;
-- runtime telemetry;
-- auditable domain evidence.
+This reflects a practical enterprise AI problem: scaling coding agents safely is not just a licensing problem. It is a **developer-platform and governance problem**.
 
 ---
 
-## [Open Finance BR MCP](https://github.com/brunovicco/openfinance-br-mcp)
+# 7. Applied & Reference Workloads
 
-**Role:** regulated-domain MCP reference.
+Reference workloads prove that platform principles can be applied to different domains without turning the portfolio into a single monolithic architecture.
 
-The project uses a mock-first environment to explore typed tools, consent journeys, OAuth/FAPI-BR security patterns, mTLS-related boundaries, Redis-backed shared state, and remote MCP deployment patterns.
+## [OpsLens](https://github.com/brunovicco/opslens)
 
-Real banking integrations remain experimental/unvalidated; the project explicitly separates mock evidence from production claims.
+**Role:** AWS-native architecture lab for software-supply-chain intelligence.
+
+OpsLens separates probabilistic reasoning from deterministic security authority.
+
+The model may explain, classify, or propose bounded structured intent. Deterministic code owns:
+
+- repository/package identity;
+- version applicability;
+- vulnerability-source correlation;
+- risk policy;
+- structured query admission;
+- typed SQL compilation;
+- evidence admission;
+- tool authorization;
+- missing-evidence behavior.
+
+The project also demonstrates:
+
+- Amazon Bedrock;
+- RAG and hybrid retrieval;
+- IAM and least privilege;
+- Terraform;
+- GitHub Actions OIDC;
+- CloudWatch;
+- CI/CD security gates;
+- deterministic local reviewer scenarios;
+- cost and observability concerns.
 
 ---
 
 ## [Meridian](https://github.com/brunovicco/meridian)
 
-**Role:** enterprise knowledge reference workload.
+**Role:** enterprise knowledge application reference.
 
-It demonstrates how a knowledge application can combine semantic routing, access control during retrieval, structured-data queries, grounded answers, and enterprise integration concerns.
+Meridian demonstrates:
 
----
+- semantic routing with positive/negative examples;
+- ambiguity thresholds;
+- retrieval-time ACL enforcement;
+- structured-data query paths;
+- Pydantic output contracts;
+- DSPy-based reasoning paths;
+- Redis Stack;
+- grounded answers and citations.
 
-## [OpsLens](https://github.com/brunovicco/opslens)
-
-**Role:** AWS-native platform/reference workload for software supply-chain intelligence.
-
-OpsLens is designed around a different problem domain so cloud and platform decisions are not hidden behind another chatbot/RAG demo.
-
-Its completed AWS foundation demonstrates:
-
-- AWS IAM Identity Center for human bootstrap access;
-- GitHub Actions OIDC without persistent AWS access keys;
-- constrained IAM trust and least-privilege deployment permissions;
-- Terraform remote state and environment infrastructure;
-- CloudWatch logging foundation;
-- CI gates with Terraform validation/security tooling;
-- CloudTrail correlation for federation events;
-- cost-governance and observability as architectural requirements.
-
-The next data-path milestones add event-driven ingestion and structured analytics. The repository intentionally evolves AWS services only when they solve a concrete OpsLens problem.
+Its key security property is that unauthorized knowledge is filtered **inside retrieval**, not retrieved first and removed later.
 
 ---
 
-# Cross-cutting architecture concerns
+## [Open Finance BR MCP](https://github.com/brunovicco/openfinance-br-mcp)
+
+**Role:** regulated-domain MCP and Open Finance reference.
+
+The project explores:
+
+- Open Finance Brasil concepts;
+- FAPI-BR-oriented security patterns;
+- MCP tools;
+- typed contracts;
+- consent-oriented flows;
+- mTLS/PAR/JAR/PKCE-related boundaries;
+- mock-first development;
+- shared state;
+- security and observability.
+
+Mock and experimental integrations are kept distinct from production claims.
+
+---
+
+## [Multi-Agent Credit Desk](https://github.com/brunovicco/multi-agent-credit-desk)
+
+**Role:** auditable financial multi-agent reference workload.
+
+The project is used to exercise combinations of:
+
+- deterministic credit policy;
+- agent collaboration;
+- MCP boundaries;
+- A2A communication;
+- governed model access;
+- structured contracts;
+- telemetry;
+- auditable decision evidence.
+
+It is a workload for exercising platform ideas rather than the platform itself.
+
+---
+
+# 8. Cross-cutting concerns
 
 ## Security
 
-Security is not a separate final gate. It appears in model access, tool access, identity, CI/CD, telemetry, evidence, and runtime control.
+Security appears across every layer rather than as a final gate.
 
-Examples across the ecosystem include:
+Common patterns include:
 
 - fail-closed policy evaluation;
-- least-privilege authorization;
-- exact token resource/audience binding;
-- tool scope enforcement;
-- privacy-safe telemetry;
-- CI/CD OIDC instead of long-lived cloud keys;
-- architecture tests and dependency boundaries;
-- controlled runtime actions and kill-switch paths.
-
-## Governance
-
-Governance is treated as executable system state rather than documentation alone:
-
-- approved scope;
-- policy version;
-- runtime authorization;
-- evidence lineage;
-- denial/violation records;
-- human approval for high-impact actions;
-- incident and restoration paths.
-
-## Observability
-
-Operational visibility spans both deterministic systems and AI-specific behavior:
-
-- latency and error rates;
-- distributed traces;
-- model/routing decisions;
-- retrieval behavior;
-- token/cost signals;
-- tool calls and failures;
-- privacy-aware metadata;
-- evaluation/regression evidence.
-
-## Evidence
-
-Important portfolio claims aim to be verifiable through one or more of:
-
-- executable demos;
-- tests and CI gates;
-- deterministic seeds;
-- benchmark artifacts;
-- traces;
-- policy digests;
-- release provenance;
-- SBOM/security evidence;
-- audit/event chains;
-- explicit limitations and maturity statements.
+- exact authority boundaries;
+- least privilege;
+- identity separate from model input;
+- resource/audience binding;
+- tool-scope enforcement;
+- bounded side effects;
+- privacy-aware telemetry;
+- architecture guards;
+- CI/CD identity without long-lived cloud credentials.
 
 ---
 
-# Runtime relationship
+## Governance
 
-The following sequence is a conceptual integration path across the platform capabilities. Not every reference workload requires every step.
+Governance is modeled as executable state and policy.
+
+Examples include:
+
+- policy versions;
+- approved scopes;
+- runtime authorization;
+- human approval;
+- segregation of duties;
+- evidence lineage;
+- denial and violation records;
+- containment and restoration paths.
+
+---
+
+## Observability
+
+Operational visibility includes both conventional distributed-system telemetry and AI-specific runtime information:
+
+- latency;
+- error rates;
+- distributed traces;
+- model-routing decisions;
+- retry/fallback behavior;
+- token and cost signals;
+- tool calls;
+- checkpoint transitions;
+- evaluation evidence.
+
+Telemetry is intentionally minimized to avoid turning observability systems into secondary stores for sensitive prompts and business payloads.
+
+---
+
+## Evaluation
+
+Evaluation is part of architecture, not a final demo score.
+
+Depending on the system, evaluation may cover:
+
+- retrieval quality;
+- answer quality;
+- grounding;
+- citation support;
+- routing;
+- tool selection;
+- structured-output validity;
+- workflow outcomes;
+- regressions across model/provider changes;
+- latency and cost.
+
+---
+
+## Evidence
+
+Important claims should resolve to independently inspectable evidence when practical:
+
+- tests;
+- CI gates;
+- deterministic fixtures;
+- benchmark artifacts;
+- traces;
+- decision IDs;
+- policy and registry digests;
+- release provenance;
+- audit/event records;
+- screenshots of real execution;
+- explicit limitations and non-claims.
+
+---
+
+# 9. Authority model
+
+A recurring pattern across the portfolio is separating **reasoning** from **authority**.
+
+| Concern | Model/Agent | Trusted software |
+| --- | --- | --- |
+| Interpret natural language | Yes | May validate |
+| Generate hypotheses | Yes | Bounds collection/execution |
+| Summarize evidence | Yes | Controls admitted evidence |
+| Propose an action | Yes | Validates and authorizes |
+| Choose any provider/model | No | Policy + Gateway |
+| Establish caller identity | No | Identity layer |
+| Grant tool permission | No | Authorization layer |
+| Approve high-impact action | No | Human/policy authority |
+| Execute external side effect | No direct authority | Controlled runtime |
+| Declare evidence valid | No | Deterministic/evaluation logic |
+| Override missing evidence | No | Fail-closed system behavior |
+
+This is not an argument against capable models. It is an architecture for using capable models without making them implicit roots of trust.
+
+---
+
+# 10. Conceptual runtime flow
+
+Not every workload uses every component, but the following sequence illustrates how the platform pieces fit together.
 
 ```mermaid
 sequenceDiagram
     autonumber
-    participant App as AI Product/Agent
-    participant Gov as AI Control Plane
-    participant Router as Model Policy Router
+
+    participant App as Application/Agent
+    participant Gov as Governance Control Plane
+    participant GW as Governed LLM Gateway
+    participant PDP as Policy Model Router
+    participant LLM as Provider/Model
     participant MCP as Authorized MCP Boundary
-    participant Tool as Enterprise Tool/Data
+    participant Tool as Enterprise Tool
     participant OTel as Observability
     participant Eval as Evaluation
 
     App->>Gov: Resolve approved scope/controls
-    Gov-->>App: Runtime authorization + constraints
-    App->>Router: Request model group
-    Router-->>App: Approved group or fail-closed denial
+    Gov-->>App: Runtime constraints
+
+    App->>GW: workload + requirements
+    GW->>PDP: authorization request
+    PDP-->>GW: authorized model group or denial
+    GW->>LLM: provider-specific execution
+    LLM-->>GW: result + usage
+    GW-->>App: normalized result + provenance
 
     opt Tool access required
-        App->>MCP: Invoke with OAuth-bound identity
-        MCP->>Tool: Authorized operation
-        Tool-->>MCP: Result
-        MCP-->>App: Bounded result or 401/403
+        App->>MCP: tool request + trusted identity
+        MCP->>Tool: authorized bounded operation
+        Tool-->>MCP: result
+        MCP-->>App: bounded result or denial
     end
 
-    App-->>OTel: Sanitized runtime metadata/trace context
-    App-->>Eval: Offline/online quality evidence
-    OTel-->>Gov: Optional assurance evidence
+    App-->>OTel: metadata-safe trace/events
+    GW-->>OTel: routing/execution telemetry
+    MCP-->>OTel: protocol telemetry
+
+    App-->>Eval: outcome/quality evidence
 ```
 
 ---
 
-# Platform design principles
+# 11. Maturity and repository roles
 
-### 1. Deterministic authority
+Not every repository is intended to have the same maturity or product surface.
 
-LLMs may classify, summarize, draft, route within bounded choices, and recommend actions. They do not own authorization, policy truth, financial decisions, deployment authority, or security enforcement.
+| Category | Purpose |
+| --- | --- |
+| **Platform/product** | Reusable capability intended to have a clear consumer contract |
+| **Reference implementation** | Concrete implementation of an architectural pattern |
+| **Research/architecture lab** | Controlled experiment or comparative engineering investigation |
+| **Reference workload** | Domain workload used to exercise horizontal platform capabilities |
+| **Engineering foundation** | Shared contracts, harnesses, or execution primitives |
+| **Educational/challenge** | Learning material or work created under a constrained exercise |
 
-### 2. Prefer workflows before autonomy
-
-When the process is known, deterministic workflows are easier to test, observe, and govern. Agent autonomy is introduced where dynamic planning or tool selection creates enough value to justify the additional failure modes.
-
-### 3. Explicit trust boundaries
-
-Agents, MCP servers, identity providers, model gateways, retrieved documents, telemetry exporters, Git, filesystems, CI/CD, and cloud environments are treated as distinct trust boundaries.
-
-### 4. Evaluation is part of architecture
-
-Quality is not inferred from demos. Retrieval, generation, routing, structured outputs, and business outcomes require task-appropriate metrics and regression datasets.
-
-### 5. Evidence over self-report
-
-A model saying that an action succeeded, a policy was followed, or an answer is grounded is not sufficient proof. Critical claims must resolve to independently inspectable evidence.
-
-### 6. Privacy-aware observability
-
-Observability should preserve enough metadata to debug distributed systems without turning telemetry into a secondary store for prompts, credentials, or sensitive business payloads.
-
-### 7. Cloud services must solve a concrete problem
-
-Platform complexity is added deliberately. A managed service, queue, workflow engine, vector store, or Kubernetes cluster is justified by reliability, scale, security, operability, or cost requirements - not by architecture-diagram completeness.
+This distinction matters because the portfolio prioritizes **clear claims over architectural breadth**.
 
 ---
 
-# Recommended review paths
+# 12. Recommended review paths
 
 ## 5-minute hiring-manager path
 
-1. Read the profile README and this capability map.
-2. Open **Verifiable AI Governance** for the control-plane story.
-3. Open **a2a-otel-kit** or the MCP Auth pair for a focused runtime capability.
-4. Open **RAGForge** for measurable AI quality.
-5. Open **OpsLens** for AWS/platform-engineering evidence.
+1. [**Governed LLM Gateway**](https://github.com/brunovicco/governed-llm-gateway) — flagship platform component.
+2. [**StateOps**](https://github.com/brunovicco/stateops) — stateful agent runtime and LangGraph engineering.
+3. [**Agentic Security Framework Lab**](https://github.com/brunovicco/agentic-security-framework-lab) — security and authority boundaries.
+4. [**a2a-otel-kit**](https://github.com/brunovicco/a2a-otel-kit) — focused reusable OSS capability.
+5. [**RAGForge**](https://github.com/brunovicco/ragforge) — evaluation rigor.
 
-## 15-minute architect path
+## 15-minute AI/platform architect path
 
-1. Review **Policy Model Router** constraints and decision provenance.
-2. Inspect **MCP Auth** authorization boundaries and E2E proof.
-3. Inspect the **a2a-otel-kit** distributed trace and privacy model.
-4. Review **RAGForge** methodology and experiment evidence.
-5. Use **Multi-Agent Credit Desk** as a reference workload showing how multiple pieces can converge.
+1. Inspect the **Gateway ↔ Policy Model Router** PDP/PEP boundary.
+2. Review **Verifiable AI Governance** for control-plane and runtime-assurance concepts.
+3. Inspect **StateOps** checkpointing, replay, idempotency, and human-interrupt semantics.
+4. Review **Agentic Security Framework Lab** for identity, authorization, approval, and side-effect boundaries.
+5. Inspect **a2a-otel-kit** for A2A/MCP trace propagation and privacy design.
+6. Review **RAGForge** methodology and evidence lineage.
 
 ## AI developer-platform path
 
 1. Review the **Claude/Codex Engineering Harnesses**.
-2. Inspect **engineering-loop-schemas** contracts.
-3. Review **Alicerce** deterministic execution/evidence model.
-4. Connect those repositories to the broader platform principles of authorization, evidence, quality gates, and human-controlled promotion.
+2. Inspect **engineering-loop-schemas**.
+3. Review **Alicerce**.
+4. Connect those components to the same portfolio principles: deterministic authority, evidence, bounded execution, and human-controlled promotion.
+
+## AWS/applied architecture path
+
+1. Review **OpsLens**.
+2. Inspect its deterministic authority model and AWS foundation.
+3. Compare those boundaries with the Governed LLM Gateway and the broader platform architecture.
+
+---
+
+# Final architecture thesis
+
+The portfolio is intentionally moving away from application-specific AI integration toward reusable AI platform capabilities.
+
+The direction can be summarized as:
+
+```text
+Applications declare intent and requirements.
+
+Policy determines authority.
+The Gateway controls model execution.
+Agent runtimes control workflow state.
+Identity controls tool access.
+Deterministic software protects consequential decisions.
+Observability explains runtime behavior.
+Evaluation measures quality.
+Governance constrains the system.
+Evidence proves what happened.
+```
+
+The goal is not to remove model autonomy.
+
+It is to make autonomy **bounded, observable, replaceable, testable, and compatible with enterprise authority models**.
