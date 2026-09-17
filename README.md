@@ -40,8 +40,9 @@ These repositories best represent the architecture and engineering problems I am
 | Project | What it demonstrates |
 | --- | --- |
 | [**Governed LLM Gateway**](https://github.com/brunovicco/governed-llm-gateway) | Provider-neutral LLM execution gateway with policy-constrained model selection, centralized credentials, deterministic ranking, retry/fallback, budgets, provenance, and OpenTelemetry. |
-| [**Verifiable AI Governance**](https://github.com/brunovicco/verifiable-ai-governance) | Governance control plane for policy, approvals, runtime authorization, enforcement, evidence, assurance, and governed response. |
+| [**Agent Runtime Boundaries Lab**](https://github.com/brunovicco/agent-runtime-boundaries-lab) | Multi-runtime agent architecture with LangGraph as authoritative workflow owner, Agno/CrewAI specialists behind A2A contracts, durable effect-ledger semantics, crash/retry evidence, cross-runtime OpenTelemetry, and governed model execution. |
 | [**StateOps**](https://github.com/brunovicco/stateops) | Durable LangGraph state machine with explicit state, parallel investigation, interrupts, Redis checkpointing, restart/resume, replay, forks, idempotent effects, and governed LLM access. |
+| [**Verifiable AI Governance**](https://github.com/brunovicco/verifiable-ai-governance) | Governance control plane for policy, approvals, runtime authorization, enforcement, evidence, assurance, and governed response. |
 | [**Agentic Security Framework Lab**](https://github.com/brunovicco/agentic-security-framework-lab) | Framework-neutral agent security across LangGraph, CrewAI, LlamaIndex, and Agno with explicit identity, authorization, human approval, tool boundaries, failure evidence, and MCP. |
 | [**a2a-otel-kit**](https://github.com/brunovicco/a2a-otel-kit) | Vendor-neutral distributed tracing for A2A agents and MCP services using OpenTelemetry and W3C Trace Context with metadata-only telemetry. |
 | [**RAGForge**](https://github.com/brunovicco/ragforge) | RAG benchmarking and evaluation platform with 10 retrieval configurations, a 230-question Brazilian regulatory dataset, citation evaluation, reproducible experiments, and auditable evidence. |
@@ -54,31 +55,34 @@ I am interested in the shared capabilities that allow multiple AI products and t
 
 ```mermaid
 flowchart TB
-    Apps["AI Applications/Agents/Workflows"]
+    Apps["AI Applications / Agents / Workflows"]
 
     Gateway["Governed LLM Gateway<br/>Execution · Resilience · Provenance"]
     Router["Policy Model Router<br/>Authorization · Logical Model Groups"]
     Providers["LLM Providers"]
 
+    Boundaries["Agent Runtime Boundaries<br/>State Ownership · A2A · Replay"]
     Governance["Governance & Runtime Assurance<br/>Policy · Approval · Evidence"]
     Identity["Identity & Tool Access<br/>OAuth/OIDC · MCP · Least Privilege"]
     Observability["Observability<br/>OpenTelemetry · A2A · MCP"]
     Evaluation["Evaluation & Quality<br/>RAG · Evals · Regression"]
 
-    Apps --> Gateway
+    Apps --> Boundaries
+    Boundaries --> Gateway
     Gateway -. policy decision .-> Router
     Gateway --> Providers
 
     Governance -. constrains .-> Gateway
     Identity -. authority boundary .-> Apps
     Observability -. traces .-> Apps
+    Observability -. traces .-> Boundaries
     Observability -. traces .-> Gateway
     Evaluation -. validates .-> Apps
 ```
 
 The architecture is intentionally modular. Applications should not need provider credentials, provider-specific retry logic, model-selection rules, or hidden authorization logic scattered throughout their codebases.
 
-A consumer declares its workload and requirements. Platform components determine what it is allowed to use, execute within those limits, and produce evidence about what actually happened.
+The same principle applies to agent frameworks: **one runtime should own global execution state; other runtimes should expose bounded capabilities behind explicit contracts rather than competing for the same source of truth.**
 
 [Explore the broader portfolio architecture →](./PORTFOLIO_ARCHITECTURE.md)
 
@@ -98,14 +102,15 @@ A consumer declares its workload and requirements. Platform components determine
 ## Engineering principles
 
 - **Authority is explicit.** Model output is not authorization.
+- **One runtime owns global workflow state.** Specialist frameworks may keep local context, but should not compete for the same execution truth.
+- **Checkpoints and side-effect evidence are different concerns.** Durable workflow state does not by itself prove whether a remote effect already happened.
 - **Fail closed when trust is missing.** Missing identity, policy, evidence, or configuration must not silently become permission.
 - **Use the simplest architecture that solves the problem.** Agents are not the default answer to every AI workflow.
 - **Keep deterministic authority around probabilistic reasoning.** Models can classify, plan, retrieve, synthesize, and propose without owning every consequential decision.
-- **Treat identity, tools, providers, retrieved data, and telemetry as trust boundaries.**
+- **Treat identity, tools, providers, retrieved data, runtime boundaries, and telemetry as trust boundaries.**
 - **Evaluate retrieval and generation independently whenever possible.**
 - **Make evidence inspectable.** Model self-report is not runtime proof.
-- **Minimize telemetry by design.** Prompts, responses, credentials, and arbitrary business payloads are not observability defaults.
-- **Design for retries and re-execution.** Idempotency, bounded retries, checkpoints, and explicit failure states matter in agentic systems.
+- **Design for retries and re-execution.** Idempotency, bounded retries, checkpoints, effect ledgers, and explicit failure states matter in distributed agentic systems.
 - **Document guarantees and non-guarantees.** A production-oriented architecture should state what it does not prove.
 
 ---
@@ -141,19 +146,19 @@ A consumer declares its workload and requirements. Platform components determine
 
 ## Core expertise
 
-**AI Platforms & Architecture**
-Enterprise AI platforms · model gateways · distributed AI systems · control plane/runtime separation · model routing · provider abstraction · platform capabilities · developer enablement
+**AI Platforms & Architecture**  
+Enterprise AI platforms · model gateways · distributed AI systems · control plane/runtime separation · model routing · provider abstraction · runtime boundaries · durable execution · platform capabilities · developer enablement
 
-**Generative & Agentic AI**
-LLMs · RAG · LangGraph · durable state machines · multi-agent systems · semantic routing · structured outputs · tool calling · MCP · A2A · DSPy
+**Generative & Agentic AI**  
+LLMs · RAG · LangGraph · Agno · CrewAI · durable state machines · multi-agent systems · semantic routing · structured outputs · tool calling · MCP · A2A · DSPy
 
-**AI Security & Governance**
+**AI Security & Governance**  
 OAuth 2.1 · OIDC · least privilege · fail-closed authorization · tool boundaries · human-in-the-loop · runtime policy · evidence provenance · auditability · prompt-injection authority boundaries
 
-**Evaluation, LLMOps & Observability**
-Golden datasets · retrieval evaluation · answer quality · citation support · regression evaluation · OpenTelemetry · W3C Trace Context · OTLP · Datadog · Langfuse · distributed tracing · latency/token/cost observability
+**Evaluation, LLMOps & Observability**  
+Golden datasets · retrieval evaluation · answer quality · citation support · regression evaluation · OpenTelemetry · W3C Trace Context · OTLP · Datadog · Langfuse · Grafana · Tempo · distributed tracing · latency/token/cost observability
 
-**Cloud & Platform Engineering**
+**Cloud & Platform Engineering**  
 AWS · Azure · Amazon Bedrock · Azure OpenAI · Terraform · Docker · Kubernetes · CI/CD · GitHub Actions OIDC · IAM · event-driven systems · observability · cost controls
 
 <details>
@@ -163,7 +168,7 @@ AWS · Azure · Amazon Bedrock · Azure OpenAI · Terraform · Docker · Kuberne
 
 **Languages & backend:** Python, FastAPI, Pydantic, TypeScript, Node.js, REST APIs, asynchronous and event-driven systems
 
-**AI frameworks & platforms:** LangGraph, DSPy, LangChain, LlamaIndex, LiteLLM, Azure OpenAI, Azure AI Foundry, Amazon Bedrock, Anthropic Claude, OpenAI, Gemini
+**AI frameworks & platforms:** LangGraph, Agno, CrewAI, DSPy, LangChain, LlamaIndex, LiteLLM, Azure OpenAI, Azure AI Foundry, Amazon Bedrock, Anthropic Claude, OpenAI, Gemini
 
 **Data & retrieval:** Redis Stack, RediSearch, RedisJSON, PostgreSQL, pgvector, OpenSearch, vector search, hybrid retrieval
 
