@@ -10,7 +10,7 @@
 
 **Plataformas de IA · Runtime de Agentes · LLM Gateway · MCP/A2A · Evals · LLMOps · Segurança e Governança**
 
-📍 São Paulo, Brasil &nbsp;|&nbsp; 🌍 Aberto a relocação
+📍 São Paulo, Brasil &nbsp;|&nbsp; 🌍 Aberto a oportunidades internacionais e relocação
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-brunovicco-0A66C2?style=flat&logo=linkedin&logoColor=white)](https://linkedin.com/in/brunovicco)
 [![Email](https://img.shields.io/badge/Email-bfvicco%40gmail.com-D14836?style=flat&logo=gmail&logoColor=white)](mailto:bfvicco@gmail.com)
@@ -40,8 +40,9 @@ Estes são os repositórios que melhor representam os problemas de arquitetura e
 | Projeto | O que demonstra |
 | --- | --- |
 | [**Governed LLM Gateway**](https://github.com/brunovicco/governed-llm-gateway) | Gateway de execução de LLMs neutro de provedor, com seleção de modelos condicionada por políticas, credenciais centralizadas, ranking determinístico, retry/fallback, budgets, proveniência e OpenTelemetry. |
-| [**Verifiable AI Governance**](https://github.com/brunovicco/verifiable-ai-governance) | Control plane de governança para políticas, aprovações, autorização em runtime, enforcement, evidências, assurance e resposta governada. |
+| [**Agent Runtime Boundaries Lab**](https://github.com/brunovicco/agent-runtime-boundaries-lab) | Arquitetura multi-runtime com LangGraph como owner autoritativo do workflow, especialistas Agno/CrewAI atrás de contratos A2A, effect ledger durável, evidências de crash/retry, OpenTelemetry cross-runtime e execução governada de modelos. |
 | [**StateOps**](https://github.com/brunovicco/stateops) | Máquina de estados durável com LangGraph, estado explícito, investigação paralela, interrupts, checkpoints Redis, restart/resume, replay, forks, efeitos idempotentes e acesso governado a LLMs. |
+| [**Verifiable AI Governance**](https://github.com/brunovicco/verifiable-ai-governance) | Control plane de governança para políticas, aprovações, autorização em runtime, enforcement, evidências, assurance e resposta governada. |
 | [**Agentic Security Framework Lab**](https://github.com/brunovicco/agentic-security-framework-lab) | Segurança agêntica independente de framework com LangGraph, CrewAI, LlamaIndex e Agno, incluindo identidade, autorização, aprovação humana, fronteiras de ferramentas, evidências de falha e MCP. |
 | [**a2a-otel-kit**](https://github.com/brunovicco/a2a-otel-kit) | Tracing distribuído neutro de fornecedor para agentes A2A e serviços MCP utilizando OpenTelemetry e W3C Trace Context com telemetria baseada apenas em metadados. |
 | [**RAGForge**](https://github.com/brunovicco/ragforge) | Plataforma de benchmark e avaliação de RAG com 10 configurações de retrieval, dataset regulatório brasileiro de 230 perguntas, avaliação de citações, experimentos reproduzíveis e evidências auditáveis. |
@@ -54,31 +55,34 @@ Tenho interesse especial nas capacidades compartilhadas que permitem que diferen
 
 ```mermaid
 flowchart TB
-    Apps["Aplicações de IA/Agentes/Workflows"]
+    Apps["Aplicações de IA / Agentes / Workflows"]
 
     Gateway["Governed LLM Gateway<br/>Execução · Resiliência · Proveniência"]
     Router["Policy Model Router<br/>Autorização · Grupos Lógicos de Modelos"]
     Providers["Provedores de LLM"]
 
+    Boundaries["Agent Runtime Boundaries<br/>Ownership de Estado · A2A · Replay"]
     Governance["Governança e Runtime Assurance<br/>Política · Aprovação · Evidência"]
     Identity["Identidade e Acesso a Ferramentas<br/>OAuth/OIDC · MCP · Menor Privilégio"]
     Observability["Observabilidade<br/>OpenTelemetry · A2A · MCP"]
     Evaluation["Avaliação e Qualidade<br/>RAG · Evals · Regressão"]
 
-    Apps --> Gateway
+    Apps --> Boundaries
+    Boundaries --> Gateway
     Gateway -. decisão de política .-> Router
     Gateway --> Providers
 
     Governance -. restringe .-> Gateway
     Identity -. fronteira de autoridade .-> Apps
     Observability -. traces .-> Apps
+    Observability -. traces .-> Boundaries
     Observability -. traces .-> Gateway
     Evaluation -. valida .-> Apps
 ```
 
 A arquitetura é intencionalmente modular. Aplicações não deveriam precisar carregar credenciais de provedores, lógica específica de retry por fornecedor, regras de seleção de modelos ou autorização implícita espalhada pelo código.
 
-O consumidor declara seu workload e seus requisitos. A plataforma determina o que ele pode utilizar, executa dentro desses limites e produz evidências sobre o que realmente aconteceu.
+O mesmo princípio vale para frameworks de agentes: **um runtime deve ser o owner do estado global de execução; os demais devem fornecer capacidades limitadas atrás de contratos explícitos, em vez de competir pela mesma fonte de verdade.**
 
 [Explore a arquitetura mais ampla do portfólio →](./PORTFOLIO_ARCHITECTURE.pt-BR.md)
 
@@ -98,14 +102,15 @@ O consumidor declara seu workload e seus requisitos. A plataforma determina o qu
 ## Princípios de engenharia
 
 - **Autoridade precisa ser explícita.** Saída de modelo não é autorização.
+- **Um runtime controla o estado global do workflow.** Frameworks especialistas podem manter contexto local, mas não devem competir pela mesma verdade de execução.
+- **Checkpoint e evidência de side effect são preocupações diferentes.** Estado durável do workflow não prova, sozinho, se um efeito remoto já aconteceu.
 - **Falhar fechado quando confiança estiver ausente.** Falta de identidade, política, evidência ou configuração não deve se transformar silenciosamente em permissão.
 - **Usar a arquitetura mais simples que resolva o problema.** Agentes não são a resposta padrão para todo workflow de IA.
 - **Manter autoridade determinística ao redor do raciocínio probabilístico.** Modelos podem classificar, planejar, recuperar, sintetizar e propor sem controlar todas as decisões consequenciais.
-- **Tratar identidade, ferramentas, provedores, dados recuperados e telemetria como fronteiras de confiança.**
+- **Tratar identidade, ferramentas, provedores, dados recuperados, fronteiras de runtime e telemetria como fronteiras de confiança.**
 - **Avaliar retrieval e geração separadamente sempre que possível.**
 - **Produzir evidências inspecionáveis.** Autorrelato do modelo não é prova de execução.
-- **Minimizar telemetria por design.** Prompts, respostas, credenciais e payloads arbitrários de negócio não são defaults de observabilidade.
-- **Projetar para retry e reexecução.** Idempotência, retries limitados, checkpoints e estados explícitos de falha importam em sistemas agênticos.
+- **Projetar para retry e reexecução.** Idempotência, retries limitados, checkpoints, effect ledgers e estados explícitos de falha importam em sistemas agênticos distribuídos.
 - **Documentar garantias e não-garantias.** Uma arquitetura orientada a produção deve dizer claramente também o que ela não prova.
 
 ---
@@ -141,19 +146,19 @@ O consumidor declara seu workload e seus requisitos. A plataforma determina o qu
 
 ## Competências principais
 
-**Plataformas e Arquitetura de IA**
-Plataformas corporativas de IA · LLM gateways · sistemas distribuídos de IA · separação control plane/runtime · roteamento de modelos · abstração de provedores · capacidades de plataforma · developer enablement
+**Plataformas e Arquitetura de IA**  
+Plataformas corporativas de IA · LLM gateways · sistemas distribuídos de IA · separação control plane/runtime · roteamento de modelos · abstração de provedores · fronteiras de runtime · execução durável · capacidades de plataforma · developer enablement
 
-**IA Generativa e Agêntica**
-LLMs · RAG · LangGraph · máquinas de estado duráveis · sistemas multiagente · roteamento semântico · structured outputs · tool calling · MCP · A2A · DSPy
+**IA Generativa e Agêntica**  
+LLMs · RAG · LangGraph · Agno · CrewAI · máquinas de estado duráveis · sistemas multiagente · roteamento semântico · structured outputs · tool calling · MCP · A2A · DSPy
 
-**Segurança e Governança de IA**
+**Segurança e Governança de IA**  
 OAuth 2.1 · OIDC · menor privilégio · autorização fail-closed · fronteiras de ferramentas · human-in-the-loop · políticas de runtime · proveniência de evidências · auditabilidade · limites de autoridade diante de prompt injection
 
-**Avaliação, LLMOps e Observabilidade**
-Golden datasets · avaliação de retrieval · qualidade de respostas · suporte de citações · avaliação de regressão · OpenTelemetry · W3C Trace Context · OTLP · Datadog · Langfuse · tracing distribuído · observabilidade de latência/tokens/custos
+**Avaliação, LLMOps e Observabilidade**  
+Golden datasets · avaliação de retrieval · qualidade de respostas · suporte de citações · avaliação de regressão · OpenTelemetry · W3C Trace Context · OTLP · Datadog · Langfuse · Grafana · Tempo · tracing distribuído · observabilidade de latência/tokens/custos
 
-**Cloud e Engenharia de Plataforma**
+**Cloud e Engenharia de Plataforma**  
 AWS · Azure · Amazon Bedrock · Azure OpenAI · Terraform · Docker · Kubernetes · CI/CD · GitHub Actions OIDC · IAM · sistemas event-driven · observabilidade · controles de custo
 
 <details>
@@ -163,7 +168,7 @@ AWS · Azure · Amazon Bedrock · Azure OpenAI · Terraform · Docker · Kuberne
 
 **Linguagens e backend:** Python, FastAPI, Pydantic, TypeScript, Node.js, APIs REST, sistemas assíncronos e orientados a eventos
 
-**Frameworks e plataformas de IA:** LangGraph, DSPy, LangChain, LlamaIndex, LiteLLM, Azure OpenAI, Azure AI Foundry, Amazon Bedrock, Anthropic Claude, OpenAI, Gemini
+**Frameworks e plataformas de IA:** LangGraph, Agno, CrewAI, DSPy, LangChain, LlamaIndex, LiteLLM, Azure OpenAI, Azure AI Foundry, Amazon Bedrock, Anthropic Claude, OpenAI, Gemini
 
 **Dados e retrieval:** Redis Stack, RediSearch, RedisJSON, PostgreSQL, pgvector, OpenSearch, busca vetorial e retrieval híbrido
 
