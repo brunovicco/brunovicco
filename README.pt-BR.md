@@ -15,6 +15,17 @@
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-brunovicco-0A66C2?style=flat&logo=linkedin&logoColor=white)](https://linkedin.com/in/brunovicco)
 [![Email](https://img.shields.io/badge/Email-bfvicco%40gmail.com-D14836?style=flat&logo=gmail&logoColor=white)](mailto:bfvicco@gmail.com)
 
+<br />
+
+<a href="https://www.credly.com/badges/3d9d178d-c69f-48ab-98f8-34e948356d21/public_url">
+  <img
+    src="assets/social/aws-certified-generative-ai-developer-professional.png"
+    alt="AWS Certified Generative AI Developer – Professional"
+    width="130"
+    height="130"
+  />
+</a>
+
 </div>
 
 ---
@@ -193,6 +204,7 @@ Essa experiência influencia diretamente a forma como projeto sistemas de IA: re
 
 <br>
 
+- [AWS Certified Generative AI Developer – Professional](https://www.credly.com/badges/3d9d178d-c69f-48ab-98f8-34e948356d21/public_url)
 - AWS Certified AI Practitioner
 - AWS Certified Cloud Practitioner
 - Microsoft Certified: Azure Fundamentals
