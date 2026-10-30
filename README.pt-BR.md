@@ -12,6 +12,8 @@
 
 📍 São Paulo, Brasil &nbsp;|&nbsp; 🌍 Aberto a oportunidades internacionais e relocação
 
+[![Technical articles](https://img.shields.io/badge/Artigos-EN_%2F_PT--BR-2465DB?style=flat&logo=readthedocs&logoColor=white)](https://brunovicco.github.io/technical-articles/)
+
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-brunovicco-0A66C2?style=flat&logo=linkedin&logoColor=white)](https://linkedin.com/in/brunovicco)
 [![Email](https://img.shields.io/badge/Email-bfvicco%40gmail.com-D14836?style=flat&logo=gmail&logoColor=white)](mailto:bfvicco@gmail.com)
 
@@ -157,19 +159,19 @@ O mesmo princípio vale para frameworks de agentes: **um runtime deve ser o owne
 
 ## Competências principais
 
-**Plataformas e Arquitetura de IA**  
+**Plataformas e Arquitetura de IA**
 Plataformas corporativas de IA · LLM gateways · sistemas distribuídos de IA · separação control plane/runtime · roteamento de modelos · abstração de provedores · fronteiras de runtime · execução durável · capacidades de plataforma · developer enablement
 
-**IA Generativa e Agêntica**  
+**IA Generativa e Agêntica**
 LLMs · RAG · LangGraph · Agno · CrewAI · máquinas de estado duráveis · sistemas multiagente · roteamento semântico · structured outputs · tool calling · MCP · A2A · DSPy
 
-**Segurança e Governança de IA**  
+**Segurança e Governança de IA**
 OAuth 2.1 · OIDC · menor privilégio · autorização fail-closed · fronteiras de ferramentas · human-in-the-loop · políticas de runtime · proveniência de evidências · auditabilidade · limites de autoridade diante de prompt injection
 
-**Avaliação, LLMOps e Observabilidade**  
+**Avaliação, LLMOps e Observabilidade**
 Golden datasets · avaliação de retrieval · qualidade de respostas · suporte de citações · avaliação de regressão · OpenTelemetry · W3C Trace Context · OTLP · Datadog · Langfuse · Grafana · Tempo · tracing distribuído · observabilidade de latência/tokens/custos
 
-**Cloud e Engenharia de Plataforma**  
+**Cloud e Engenharia de Plataforma**
 AWS · Azure · Amazon Bedrock · Azure OpenAI · Terraform · Docker · Kubernetes · CI/CD · GitHub Actions OIDC · IAM · sistemas event-driven · observabilidade · controles de custo
 
 <details>

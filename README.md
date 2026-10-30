@@ -12,6 +12,8 @@
 
 📍 São Paulo, Brazil &nbsp;|&nbsp; 🌍 Open to international opportunities and relocation
 
+[![Technical articles](https://img.shields.io/badge/Technical_articles-EN_%2F_PT--BR-2465DB?style=flat&logo=readthedocs&logoColor=white)](https://brunovicco.github.io/technical-articles/)
+
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-brunovicco-0A66C2?style=flat&logo=linkedin&logoColor=white)](https://linkedin.com/in/brunovicco)
 [![Email](https://img.shields.io/badge/Email-bfvicco%40gmail.com-D14836?style=flat&logo=gmail&logoColor=white)](mailto:bfvicco@gmail.com)
 
@@ -157,19 +159,19 @@ The same principle applies to agent frameworks: **one runtime should own global 
 
 ## Core expertise
 
-**AI Platforms & Architecture**  
+**AI Platforms & Architecture**
 Enterprise AI platforms · model gateways · distributed AI systems · control plane/runtime separation · model routing · provider abstraction · runtime boundaries · durable execution · platform capabilities · developer enablement
 
-**Generative & Agentic AI**  
+**Generative & Agentic AI**
 LLMs · RAG · LangGraph · Agno · CrewAI · durable state machines · multi-agent systems · semantic routing · structured outputs · tool calling · MCP · A2A · DSPy
 
-**AI Security & Governance**  
+**AI Security & Governance**
 OAuth 2.1 · OIDC · least privilege · fail-closed authorization · tool boundaries · human-in-the-loop · runtime policy · evidence provenance · auditability · prompt-injection authority boundaries
 
-**Evaluation, LLMOps & Observability**  
+**Evaluation, LLMOps & Observability**
 Golden datasets · retrieval evaluation · answer quality · citation support · regression evaluation · OpenTelemetry · W3C Trace Context · OTLP · Datadog · Langfuse · Grafana · Tempo · distributed tracing · latency/token/cost observability
 
-**Cloud & Platform Engineering**  
+**Cloud & Platform Engineering**
 AWS · Azure · Amazon Bedrock · Azure OpenAI · Terraform · Docker · Kubernetes · CI/CD · GitHub Actions OIDC · IAM · event-driven systems · observability · cost controls
 
 <details>
